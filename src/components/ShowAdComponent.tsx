@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 const ShowAdComponent = ({ primaryURL }: { primaryURL: string }) => {
-    const [seconds, setSeconds] = useState(50);
+    const [seconds, setSeconds] = useState(5);
 
     useEffect(() => {
         const timer = setInterval(() => {

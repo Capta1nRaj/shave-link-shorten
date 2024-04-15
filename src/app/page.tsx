@@ -9,6 +9,7 @@ import CrossIcon1 from "@/icons/CrossIcon1";
 import CopyIcon1 from "@/icons/CopyIcon1";
 import ShareIcon1 from "@/icons/ShareIcon1";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const [primaryURL, setprimaryURL] = useState<string>('');
@@ -71,9 +72,9 @@ export default function Home() {
 
   return (
     <>
-      <main className="main-box-section absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 max-w-[600px] lg:min-w-[600px] md:min-w-[80%] min-w-[90%]">
+      <main className="main-box-section absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 max-w-[600px] lg:min-w-[600px] md:min-w-[80%] min-w-[90%] h-fit">
 
-        <p className="uppercase text-6xl text-center font-bold mb-2">shave</p>
+        <Image width={1000} height={1000} className="w-[150px] h-auto mx-auto mb-2" src="/opengraph-image.png" alt="" />
 
         <div className="bg-primary-1 border rounded-lg drop-shadow-lg px-10 py-5 flex flex-col">
 
