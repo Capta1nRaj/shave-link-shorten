@@ -5,6 +5,7 @@ import CrossIcon1 from "@/icons/CrossIcon1";
 import ShareIcon1 from "@/icons/ShareIcon1";
 import { GetClicksCountFunction } from "@/server/GetClicksCountFunction";
 import { showToastSuccess } from "@/utils/ToastPopups";
+import Link from "next/link";
 import { useState, useCallback, useEffect } from "react";
 
 const ClicksCountPage = () => {
@@ -42,7 +43,15 @@ const ClicksCountPage = () => {
 
                 <div className="bg-primary-1 border rounded-lg drop-shadow-lg px-10 py-5 flex flex-col">
 
-                    <p className="font-bold text-3xl mb-4"> Get Clicks Count </p>
+                    <Link href={'/'} className="relative whitespace-nowrap sm:w-fit w-full h-fit flex -z-50">
+                        <button
+                            className="uppercase font-bold bg-primary-2 sm:w-fit w-full px-8 py-2 relative -top-1 -left-1 hover:top-0 hover:left-0 transition-all ease-in-out duration-200 rounded-full text-2xl">
+                            back
+                        </button>
+                        <div className="absolute top-0 left-0 -right-0 -bottom-0 border mx-auto -z-50 rounded-full"></div>
+                    </Link>
+
+                    <p className="font-bold text-3xl my-4"> Get Clicks Count </p>
 
                     <p className="font-bold mb-2"> Enter Alias </p>
 

@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const alias = searchParams.get('alias');
 
     //! Check if primaryURL is already present
-    const checkIfAliasExist = await LinksListModel.findOne({ alias }).select('-_id alias clicksCount');
+    const checkIfAliasExist = await LinksListModel.findOne({ alias }).select('-_id clicksCount');
 
     if (checkIfAliasExist) { return NextResponse.json({ message: `Total clicks: ${checkIfAliasExist.clicksCount}`, statusCode: 200 }, { status: 200 }); }
 
