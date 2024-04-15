@@ -6,7 +6,12 @@ const ShowAdComponent = ({ primaryURL }: { primaryURL: string }) => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setSeconds((prevSeconds) => prevSeconds - 1);
+            setSeconds((prevSeconds) => {
+                if (prevSeconds === 0) {
+                    clearInterval(timer); // Clear interval when seconds reach 0
+                }
+                return prevSeconds > 0 ? prevSeconds - 1 : 0; // Decrement seconds if greater than 0
+            });
         }, 1000);
 
         return () => clearInterval(timer);

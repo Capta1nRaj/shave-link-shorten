@@ -15,6 +15,7 @@ const ClicksCountPage = () => {
 
     const [showCount, setshowCount] = useState<boolean>(false);
     const [showMessage, setshowMessage] = useState<string>('');
+    const [buttonText, setbuttonText] = useState('get count');
 
     const manageInputButtonCSS = useCallback(() => {
         if (alias) { setinputCSS(true); return; }
@@ -29,7 +30,10 @@ const ClicksCountPage = () => {
 
     async function fetchCount(e: { preventDefault: () => void; }) {
         e.preventDefault();
+
+        setbuttonText('fetching')
         const { message, statusCode } = await GetClicksCountFunction(alias);
+        setbuttonText('get count')
 
         setshowMessage(message);
         setshowCount(true);
@@ -66,7 +70,7 @@ const ClicksCountPage = () => {
 
                         <section className="relative mx-auto whitespace-nowrap sm:w-fit w-full h-fit sm:mb-0 mb-2">
                             <button onClick={fetchCount} className="uppercase font-bold bg-primary-2 sm:w-fit w-full mx-auto px-8 py-2 relative -top-1 -left-1 hover:top-0 hover:left-0 transition-all ease-in-out duration-200 rounded-full"                            >
-                                get count
+                                {buttonText}
                             </button>
                             <div className="absolute top-0 left-0 -right-0 -bottom-0 border mx-auto -z-50 rounded-full"></div>
                         </section>
