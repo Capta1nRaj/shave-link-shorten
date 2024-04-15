@@ -1,113 +1,131 @@
-import Image from "next/image";
+'use client'
+
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { showToastError, showToastSuccess } from "@/utils/ToastPopups";
+import CrossIcon1 from "@/icons/CrossIcon1";
+import CopyIcon1 from "@/icons/CopyIcon1";
+import ShareIcon1 from "@/icons/ShareIcon1";
 
 export default function Home() {
+
+  const [primaryURL, setprimaryURL] = useState<string>('');
+  const [alias, setalias] = useState('');
+  const [toSupport, settoSupport] = useState(false);
+
+  function isValidURL(str: string) {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(str);
+  }
+
+  async function shaveURL(e: { preventDefault: any; }) {
+    e.preventDefault;
+
+    const isValid = isValidURL(primaryURL);
+
+    if (!primaryURL || !isValid) { return showToastError('Please enter valid URL!'); }
+
+    const { data: { message, statusCode, data: { alias } } } = await axios.post('/api/ShortLink', { primaryURL, toSupport })
+
+    setalias(alias);
+
+    showToastSuccess(message);
+  }
+
+  const [inputCSS, setinputCSS] = useState(false);
+  const manageInputButtonCSS = useCallback(() => {
+    if (primaryURL) { setinputCSS(true); return; }
+    setinputCSS(false);
+  }, [primaryURL, setinputCSS]);
+
+  useEffect(() => {
+    manageInputButtonCSS();
+    setalias('');
+  }, [manageInputButtonCSS, primaryURL])
+
+  function copyText(shortenLink: string) {
+    navigator.clipboard.writeText(shortenLink);
+    showToastSuccess('Link copied to clipboard.');
+  }
+
+  const shareLink = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Title of shared content',
+          text: 'Description of shared content',
+          url: `${process.env.DOMAIN_NAME || "https://trim.priyalraj.com"}/${alias}`,
+        });
+        console.log('Content shared successfully');
+      } else {
+        throw new Error('Web Share API not supported');
+      }
+    } catch (error) {
+      console.error('Error sharing content:', error);
+      // Fallback to some other sharing method if necessary
+    }
+  };
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <>
+      <main className="main-box-section absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 max-w-[600px] lg:min-w-[600px] md:min-w-[80%] min-w-[90%]">
+
+        <p className="uppercase text-6xl text-center font-bold mb-2">shave</p>
+
+        <div className="bg-primary-1 border rounded-lg drop-shadow-lg px-10 py-5 flex flex-col">
+
+          <p className="font-bold text-3xl mb-4"> Short a URL </p>
+
+          <p className="font-bold mb-2">Enter URL</p>
+
+          <section className="flex sm:flex-row flex-col sm:gap-4 gap-0">
+            <input
+              className={`w-full px-4 py-2 rounded-full bg-transparent border outline-none mb-4 ${inputCSS ? "opacity-100 border-2" : "opacity-30 focus:opacity-100"}`}
+              type="text"
+              value={primaryURL}
+              onChange={(e) => { setprimaryURL(e.target.value); }} placeholder="https://trim.priyalraj.com/"
             />
-          </a>
+
+            <section className="relative mx-auto whitespace-nowrap sm:w-fit w-full h-fit sm:mb-0 mb-2">
+              <button
+                className="uppercase font-bold bg-primary-2 sm:w-fit w-full mx-auto px-8 py-2 relative -top-1 -left-1 hover:top-0 hover:left-0 transition-all ease-in-out duration-200 rounded-full"
+                onClick={shaveURL}>
+                short it
+              </button>
+              <div className="absolute top-0 left-0 -right-0 -bottom-0 border mx-auto -z-50 rounded-full"></div>
+            </section>
+          </section>
+
+          <section className="relative w-fit group sm:m-0 mx-auto">
+            <div className="flex items-center gap-2">
+              <input type="checkbox" onChange={(event) => { settoSupport(event.target.checked) }} />
+              <p className="uppercase">support me?</p>
+            </div>
+            <p className="absolute w-72 top-[26px] sm:-right-[156px] -right-[82px] bg-gray-800 text-white text-xs rounded shadow p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              👀 Selecting this option means encountering ads when someone visits the link, which helps me out a bit. Thanks a bunch! 🙏 Rest assured, it won`t impact user experience.
+            </p>
+          </section>
+
         </div>
-      </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+        {alias &&
+          <>
+            <section className="bg-primary-2 text-center mt-5 rounded-lg pt-10 pb-9 drop-shadow-lg relative -z-10 px-4">
+              <p className="sm:text-3xl text-base"> {`${process.env.DOMAIN_NAME || "https://trim.priyalraj.com"}/${alias}`} </p>
+              <div className="absolute top-1 right-1 cursor-pointer" onClick={() => { setalias(''); setprimaryURL(''); }}> <CrossIcon1 width={20} height={20} /> </div>
+              <div onClick={() => { copyText(`${process.env.DOMAIN_NAME || "https://trim.priyalraj.com"}/${alias}`); }} className="absolute bottom-1 right-7 cursor-pointer"> <CopyIcon1 width={20} height={20} /> </div>
+              <div onClick={shareLink} className="absolute bottom-1 right-1 cursor-pointer"> <ShareIcon1 width={20} height={20} /> </div>
+            </section>
+          </>
+        }
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+      </main >
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <ToastContainer />
+    </>
   );
 }
