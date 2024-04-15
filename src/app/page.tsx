@@ -12,9 +12,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
+
   const [primaryURL, setprimaryURL] = useState<string>('');
   const [alias, setalias] = useState('');
   const [toSupport, settoSupport] = useState(false);
+  const [buttonText, setbuttonText] = useState('short it')
 
   function isValidURL(str: string) {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -28,7 +30,9 @@ export default function Home() {
 
     if (!primaryURL || !isValid) { return showToastError('Please enter valid URL!'); }
 
+    setbuttonText('shorting')
     const { data: { message, statusCode, data: { alias } } } = await axios.post('/api/ShortLink', { primaryURL, toSupport })
+    setbuttonText("shorted")
 
     setalias(alias);
 
@@ -44,6 +48,7 @@ export default function Home() {
   useEffect(() => {
     manageInputButtonCSS();
     setalias('');
+    setbuttonText("short it")
   }, [manageInputButtonCSS, primaryURL])
 
   function copyText(shortenLink: string) {
@@ -94,7 +99,7 @@ export default function Home() {
               <button
                 className="uppercase font-bold bg-primary-2 sm:w-fit w-full mx-auto px-8 py-2 relative -top-1 -left-1 hover:top-0 hover:left-0 transition-all ease-in-out duration-200 rounded-full"
                 onClick={shaveURL}>
-                short it
+                {buttonText}
               </button>
               <div className="absolute top-0 left-0 -right-0 -bottom-0 border mx-auto -z-50 rounded-full"></div>
             </section>
