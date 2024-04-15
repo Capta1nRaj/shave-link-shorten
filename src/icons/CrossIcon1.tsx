@@ -9,9 +9,9 @@ const CrossIcon1 = ({ width, height }: { width?: number, height?: number }) => {
                 viewBox="0 0 24 24"><path
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                     d="m4.5 19.5l15-15m-15 0l15 15" /></svg>
         </>
     )

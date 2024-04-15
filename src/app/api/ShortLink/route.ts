@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const { primaryURL, toSupport } = await request.json();
 
     //! Check if primaryURL is already present
-    const checkIfPrimaryURLExist = await LinksListModel.findOne({ primaryURL }).select('-_id alias');
+    const checkIfPrimaryURLExist = await LinksListModel.findOneAndUpdate({ primaryURL }, { toSupport }).select('-_id alias');
 
     if (checkIfPrimaryURLExist) { return NextResponse.json({ message: "URL already exist!", statusCode: 409, data: checkIfPrimaryURLExist }, { status: 200 }); }
 
