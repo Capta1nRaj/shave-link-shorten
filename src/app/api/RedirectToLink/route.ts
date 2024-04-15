@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const alias = searchParams.get('alias');
 
-    const data = await LinksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCounter: 1 } }).select('-_id primaryURL toSupport');
+    const data = await LinksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 1 } }).select('-_id primaryURL toSupport');
 
     if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404, }, { status: 200 }); }
 

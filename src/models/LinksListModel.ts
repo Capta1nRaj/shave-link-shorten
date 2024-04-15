@@ -10,7 +10,7 @@ const linksListModelSchema = new mongoose.Schema({
     alias: {
         type: String,
     },
-    clicksCounter: {
+    clicksCount: {
         type: Number,
         default: 0
     },

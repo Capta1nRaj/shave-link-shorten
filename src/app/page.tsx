@@ -8,6 +8,7 @@ import { showToastError, showToastSuccess } from "@/utils/ToastPopups";
 import CrossIcon1 from "@/icons/CrossIcon1";
 import CopyIcon1 from "@/icons/CopyIcon1";
 import ShareIcon1 from "@/icons/ShareIcon1";
+import Link from "next/link";
 
 export default function Home() {
   const [primaryURL, setprimaryURL] = useState<string>('');
@@ -98,18 +99,16 @@ export default function Home() {
             </section>
           </section>
 
-          <section className="relative w-fit group sm:m-0 mx-auto">
-            <div className="flex items-center gap-2">
+          <section className="relative w-fit group sm:m-0 mx-auto group z-50">
+            <div className="flex items-center gap-2 group-hover">
               <input type="checkbox" onChange={(event) => { settoSupport(event.target.checked) }} />
               <p className="uppercase">support me?</p>
             </div>
-            <p className="absolute w-72 top-[26px] sm:-right-[156px] -right-[82px] bg-gray-800 text-white text-xs rounded shadow p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              👀 Selecting this option means encountering ads when someone visits the link, which helps me out a bit. Thanks a bunch! 🙏 Rest assured, it won`t impact user experience.
+            <p className="absolute w-72 top-[26px] sm:-right-[156px] -right-[82px] bg-gray-800 text-white text-xs rounded shadow p-2 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              👀 Selecting this option means encountering a 5-second ads when someone visits the link, which helps me out a bit. Thanks a bunch! 🙏 Rest assured, it won`t impact users experience.
             </p>
           </section>
-
         </div>
-
 
         {alias &&
           <>
@@ -121,6 +120,14 @@ export default function Home() {
             </section>
           </>
         }
+
+        <Link href={'/clicks-counter'} className="relative mx-auto whitespace-nowrap sm:w-fit w-full h-fit sm:mb-0 mt-5 flex -z-50">
+          <button
+            className="uppercase font-bold bg-primary-2 sm:w-fit w-full mx-auto px-8 py-2 relative -top-1 -left-1 hover:top-0 hover:left-0 transition-all ease-in-out duration-200 rounded-full text-2xl">
+            get clicks count
+          </button>
+          <div className="absolute top-0 left-0 -right-0 -bottom-0 border mx-auto -z-50 rounded-full"></div>
+        </Link>
 
       </main >
 
