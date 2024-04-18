@@ -20,6 +20,7 @@ const linksListModelSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 
+linksListModelSchema.index({ userName: 1 })
 linksListModelSchema.index({ primaryURL: 1 })
 linksListModelSchema.index({ alias: 1 })
 

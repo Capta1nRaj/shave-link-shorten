@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 export default async function Page({ params }: { params: { slug: string } }) {
 
     async function getLink() {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/RedirectToLink?alias=${params.slug[0]}`, { cache: 'no-store' })
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/RedirectToLink?alias=${params.slug[0]}`, { cache: 'no-store' })
         return await response.json();
     }
 

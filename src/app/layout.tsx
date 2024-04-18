@@ -6,7 +6,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME}`),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}`),
   title: {
     default: "Shave - Short You Links",
     template: "%s - Shave - Short You Links"

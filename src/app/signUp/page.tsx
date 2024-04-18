@@ -118,7 +118,7 @@ const SignUpPage = () => {
     async function sessionCheck() {
         const { data: { status, message, userName } } = await axios.get('/api/EmailArmorAPIs/localSessionCheck');
 
-        if (status === 202) { router.push('/'); return; }
+        if (status === 202) { router.push(process.env.NEXT_PUBLIC_DOMAIN_NAME_2 || ""); return; }
     }
 
     useEffect(() => {

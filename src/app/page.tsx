@@ -62,7 +62,7 @@ export default function Home() {
         await navigator.share({
           title: 'Title of shared content',
           text: 'Description of shared content',
-          url: `${process.env.NEXT_PUBLIC_DOMAIN_NAME || "https://trim.priyalraj.com"}/${alias}`,
+          url: `${process.env.NEXT_PUBLIC_DOMAIN_NAME_1 || "https://trim.priyalraj.com"}/${alias}`,
         });
         console.log('Content shared successfully');
       } else {
@@ -119,9 +119,9 @@ export default function Home() {
         {alias &&
           <>
             <section className="bg-primary-2 text-center mt-5 rounded-lg pt-10 pb-9 drop-shadow-lg relative -z-10 px-4">
-              <p className="sm:text-3xl text-base"> {`${process.env.NEXT_PUBLIC_DOMAIN_NAME || "https://trim.priyalraj.com"}/${alias}`} </p>
+              <p className="sm:text-3xl text-base"> {`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1 || "https://trim.priyalraj.com"}/${alias}`} </p>
               <div className="absolute top-1 right-1 cursor-pointer" onClick={() => { setalias(''); setprimaryURL(''); }}> <CrossIcon1 width={20} height={20} /> </div>
-              <div onClick={() => { copyText(`${process.env.NEXT_PUBLIC_DOMAIN_NAME || "https://trim.priyalraj.com"}/${alias}`); }} className="absolute bottom-1 right-7 cursor-pointer"> <CopyIcon1 width={20} height={20} /> </div>
+              <div onClick={() => { copyText(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1 || "https://trim.priyalraj.com"}/${alias}`); }} className="absolute bottom-1 right-7 cursor-pointer"> <CopyIcon1 width={20} height={20} /> </div>
               <div onClick={shareLink} className="absolute bottom-1 right-1 cursor-pointer"> <ShareIcon1 width={20} height={20} /> </div>
             </section>
           </>
