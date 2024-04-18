@@ -1,5 +1,6 @@
 'use client'
 
+import { SessionCheck } from "@/utils/SessionCheck";
 import axios from "axios";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
@@ -39,7 +40,7 @@ const SignInPage = () => {
 
         e.preventDefault();
         try {
-            const { data: { status, message } } = await axios.post('/api/EmailArmorAPIs/signInAPI', formData);
+            const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, formData);
 
             if (status === 201 || status === 401) { setstatusCode(status); setotpScene(true); }
 
@@ -61,7 +62,7 @@ const SignInPage = () => {
         }
 
         try {
-            const { data: { status, message } } = await axios.put('/api/EmailArmorAPIs/signInAPI', { username: formData.username, OTP });
+            const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, { username: formData.username, OTP });
 
             if (status === 202) {
                 setTimeout(() => { router.push('/'); }, 1000);
@@ -81,7 +82,7 @@ const SignInPage = () => {
         if (!OTP) { setmessage("Please enter OTP!"); return; }
 
         try {
-            const { data: { status, message } } = await axios.put('/api/EmailArmorAPIs/signUpAPI', { userName: formData.username, OTP });
+            const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, { userName: formData.username, OTP });
 
             if (status === 202) {
                 setTimeout(() => {
@@ -100,7 +101,7 @@ const SignInPage = () => {
         const data = { userName: formData.username, method: statusCode === 201 ? 'oldUserVerification' : 'newUserVerification' };
 
         try {
-            const { data: { message } } = await axios.post('/api/EmailArmorAPIs/resendOTP', data);
+            const { data: { message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/resendOTP`, data);
 
             setmessage(message);
 
@@ -109,14 +110,8 @@ const SignInPage = () => {
         }
     }
 
-    async function sessionCheck() {
-        const { data: { status, message, userName } } = await axios.get('/api/EmailArmorAPIs/localSessionCheck');
-
-        if (status === 202) { router.push(process.env.NEXT_PUBLIC_DOMAIN_NAME_2 || ""); return; }
-    }
-
     useEffect(() => {
-        sessionCheck();
+        SessionCheck();
     }, [])
 
     return (

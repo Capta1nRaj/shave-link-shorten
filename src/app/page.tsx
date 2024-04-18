@@ -10,6 +10,7 @@ import CopyIcon1 from "@/icons/CopyIcon1";
 import ShareIcon1 from "@/icons/ShareIcon1";
 import Link from "next/link";
 import Image from "next/image";
+import { SessionCheck } from "@/utils/SessionCheck";
 
 export default function Home() {
 
@@ -31,7 +32,7 @@ export default function Home() {
     if (!primaryURL || !isValid) { return showToastError('Please enter valid URL!'); }
 
     setbuttonText('shorting')
-    const { data: { message, statusCode, data: { alias } } } = await axios.post('/api/ShortLink', { primaryURL, toSupport })
+    const { data: { message, statusCode, data: { alias } } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/ShortLink`, { primaryURL, toSupport })
     setbuttonText("shorted")
 
     setalias(alias);
@@ -74,6 +75,9 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    SessionCheck();
+  }, [])
 
   return (
     <>

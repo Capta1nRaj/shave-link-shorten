@@ -1,5 +1,6 @@
 'use client'
 
+import { SessionCheck } from "@/utils/SessionCheck";
 import axios from "axios";
 import { resendOTP } from "email-armor";
 import Link from "next/link";
@@ -58,7 +59,7 @@ const SignUpPage = () => {
         }
 
         try {
-            const { data: { status, message } } = await axios.post('/api/EmailArmorAPIs/signUpAPI', formData);
+            const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, formData);
 
             if (status === 201) {
                 setotpScene(true);
@@ -82,7 +83,7 @@ const SignUpPage = () => {
         }
 
         try {
-            const { data: { status, message } } = await axios.put('/api/EmailArmorAPIs/signUpAPI', { userName: formData.userName, OTP });
+            const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, { userName: formData.userName, OTP });
 
             if (status === 202) {
                 setTimeout(() => {
@@ -102,7 +103,7 @@ const SignUpPage = () => {
         const data = { userName: formData.userName, method: 'newUserVerification' }
 
         try {
-            const { data: { message } } = await axios.post('/api/EmailArmorAPIs/resendOTP', data);
+            const { data: { message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/resendOTP`, data);
 
             setmessage(message);
 
@@ -115,16 +116,9 @@ const SignUpPage = () => {
     const inputCSS = `bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`;
     const buttonCSS = `w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800`;
 
-    async function sessionCheck() {
-        const { data: { status, message, userName } } = await axios.get('/api/EmailArmorAPIs/localSessionCheck');
-
-        if (status === 202) { router.push(process.env.NEXT_PUBLIC_DOMAIN_NAME_2 || ""); return; }
-    }
-
     useEffect(() => {
-        sessionCheck();
+        SessionCheck();
     }, [])
-
 
     return (
         <>
