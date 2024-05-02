@@ -3,8 +3,6 @@ import { cookies } from 'next/headers'
 import { FetchUserIP } from "@/utils/FetchUserIP";
 import { serverSessionCheck } from "email-armor";
 
-console.clear();
-
 export async function GET(request: NextRequest) {
 
     const userAgent = request.headers.get('user-agent');

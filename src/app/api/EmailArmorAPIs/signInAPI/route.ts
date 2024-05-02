@@ -3,8 +3,6 @@ import { resendOTP, signIn, signInVerify } from 'email-armor'
 import { cookies } from 'next/headers'
 import { FetchUserIP } from "@/utils/FetchUserIP";
 
-console.clear();
-
 export async function POST(request: NextRequest) {
 
     const userAgent = request.headers.get('user-agent');
