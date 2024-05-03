@@ -3,7 +3,6 @@ import { cookies } from 'next/headers'
 import { forgotPassword, localSessionCheck, resendOTP } from "email-armor";
 import { FetchUserIP } from "@/utils/FetchUserIP";
 
-console.clear();
 
 export async function POST(request: NextRequest) {
 
