@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .transitionCSS {
+    @apply transition-all ease-in-out duration-500;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -18,7 +24,7 @@
 
 body {
   color: white;
-  background: #040406;
+  background: #1D1E2C;
 }
 
 @layer utilities {
@@ -26,3 +32,4 @@ body {
     text-wrap: balance;
   }
 }
+
