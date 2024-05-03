@@ -1,0 +1,27 @@
+[
+    {
+        "title": "home",
+        "link": "#",
+        "css": "uppercase text-base opacity-50"
+    },
+    {
+        "title": "features",
+        "link": "#features",
+        "css": "capitalize"
+    },
+    {
+        "title": "pricing",
+        "link": "#pricing",
+        "css": "capitalize"
+    },
+    {
+        "title": "about us",
+        "link": "/about-us",
+        "css": "capitalize"
+    },
+    {
+        "title": "contact us",
+        "link": "/contact-us",
+        "css": "capitalize"
+    }
+]

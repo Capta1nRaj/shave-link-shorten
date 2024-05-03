@@ -7,8 +7,8 @@ import { inter } from '@/fonts/Fonts'
 const NavBarLayout = () => {
     return (
         <>
-            <main className="NavBarLayout-section bg-primary-2">
-                <section className="max-width sm:px-10 px-4 py-4 mx-auto flex justify-between">
+            <nav className="NavBarLayout-section bg-primary-2">
+                <section className="max-width py-4 flex justify-between">
 
                     <div className="left-side">
                         <CompanyLogo1 customCSS='sm:w-16 w-14' />
@@ -23,7 +23,7 @@ const NavBarLayout = () => {
                     </div>
 
                 </section>
-            </main>
+            </nav>
         </>
     )
 }

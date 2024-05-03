@@ -1,5 +1,5 @@
 import ClicksListModel from '@/models/clicksListModel';
-import LinksListModel from '@/models/linksListModel';
+import linksListModel from '@/models/LinksListModel';
 import axios from 'axios';
 import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const alias = searchParams.get('alias');
 
-    const data = await LinksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 0 } }).select('-_id userName primaryURL toSupport appOpener');
+    const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 0 } }).select('-_id userName primaryURL toSupport appOpener');
 
     if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 

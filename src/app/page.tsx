@@ -1,19 +1,12 @@
-'use client'
-
-import { useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
-import { SessionCheck } from "@/utils/SessionCheck";
 import IntroLayout from "@/layouts/IntroLayout";
+import WhatWeOfferLayout from '@/layouts/WhatWeOfferLayout';
 
 export default function Home() {
-
-  useEffect(() => {
-    // SessionCheck();
-  }, [])
-
   return (
     <>
       <IntroLayout />
+      <WhatWeOfferLayout />
     </>
   );
 }

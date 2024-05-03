@@ -1,17 +1,17 @@
 [
     {
-        "title":"features",
-        "link":"#features",
-        "css":"sm:block hidden"
+        "title": "features",
+        "link": "#features",
+        "css": "sm:block hidden"
     },
     {
-        "title":"login",
-        "link":"/signIn",
-        "css":""
+        "title": "login",
+        "link": "/signIn",
+        "css": ""
     },
     {
-        "title":"sign up",
-        "link":"/signUp",
-        "css":"bg-primary-3 px-4 py-2 rounded-full transitionCSS hover:bg-primary-4 hover:text-primary-2"
+        "title": "sign up",
+        "link": "/signUp",
+        "css": "bg-primary-3 px-4 py-2 rounded-full buttonTransitionCSS"
     }
 ]
