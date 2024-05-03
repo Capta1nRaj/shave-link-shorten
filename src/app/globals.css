@@ -6,6 +6,10 @@
   .transitionCSS {
     @apply transition-all ease-in-out duration-500;
   }
+
+  .max-width {
+    @apply max-w-[1440px]
+  }
 }
 
 :root {
@@ -33,3 +37,6 @@ body {
   }
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
