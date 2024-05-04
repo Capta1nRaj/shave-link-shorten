@@ -5,7 +5,7 @@ import { raleway } from "@/fonts/Fonts";
 export default async function WhatWeOfferLayout() {
     return (
         <>
-            <section className="WhatWeOfferLayout-section bg-primary-2">
+            <section id='features' className="WhatWeOfferLayout-section bg-primary-2">
                 <section className="max-width py-8">
                     <h2 className={`titleCSS ${raleway.className} teeny:block hidden`}>
                         <span className="font-extrabold"> features  </span>
@@ -23,9 +23,7 @@ export default async function WhatWeOfferLayout() {
                     <section className="features-box-grid my-8 flex flex-wrap justify-center gap-8">
                         {WhatWeOfferConstants.map((item) => {
                             return (
-                                <>
-                                    <FeaturesWeOfferBox image={item.image} title={item.title} description={item.description} />
-                                </>
+                                <FeaturesWeOfferBox key={item.title} image={item.image} title={item.title} description={item.description} />
                             )
                         })}
                     </section>
