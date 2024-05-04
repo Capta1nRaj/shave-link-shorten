@@ -19,6 +19,7 @@ const tiers = [
             'And more',
             // 'App Opener',
         ],
+        buttonCSS: "",
         button: "Get started today"
     },
     {
@@ -30,13 +31,14 @@ const tiers = [
         features: [
             'Working on it - Fitz (Ref. Agents Of Shield)',
         ],
+        buttonCSS: "pointer-events-none opacity-50",
         button: "Coming soon"
     },
 ]
 
 export default function PricingLayout() {
     return (
-        <div id='pricing' className={"isolate overflow-hidden bg-gray-900"}>
+        <div id='pricing' className={"isolate overflow-hidden bg-primary-1"}>
             <div className="mx-auto max-width text-center sm:pt-32 pt-24 pb-96">
                 <div className="mx-auto max-w-4xl">
                     <h2 className={`titleCSS text-primary-4 ${raleway.className}`}>Pricing</h2>
@@ -60,14 +62,14 @@ export default function PricingLayout() {
                     </svg>
                 </div>
             </div>
-            <div className="flow-root bg-primary-2 pb-24 sm:pb-32">
+            <div className="flow-root pb-24 sm:pb-32">
                 <div className="-mt-80">
                     <div className="mx-auto max-width">
                         <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
                             {tiers.map((tier) => (
                                 <div
                                     key={tier.id}
-                                    className="flex flex-col justify-between rounded-3xl bg-primary-1 p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10"
+                                    className="flex flex-col justify-between rounded-3xl bg-primary-2 p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10"
                                 >
                                     <div>
                                         <h3 id={tier.id} className="text-base font-semibold leading-7 text-primary-3">
@@ -90,7 +92,7 @@ export default function PricingLayout() {
                                     <Link
                                         href={tier.href}
                                         aria-describedby={tier.id}
-                                        className={`defaultTransitionCSS mt-8 block rounded-md bg-primary-2 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                                        className={`${tier.buttonCSS} defaultTransitionCSS mt-8 block rounded-md bg-primary-1 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                                     >
                                         {tier.button}
                                     </Link>

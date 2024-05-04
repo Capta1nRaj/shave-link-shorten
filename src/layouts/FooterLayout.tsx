@@ -7,13 +7,13 @@ import { SocialMediaConstants } from "@/constants/SocialMediaConstants";
 export default function FooterLayout() {
     return (
         <>
-            <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-primary-1`}>
+            <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-primary-2`}>
                 <section className="max-width py-20">
 
                     <section className="flex sm:flex-row flex-col justify-between">
                         <div className={`left-side ${roboto.className} font-normal text-primary-4 sm:w-96 w-full flex flex-col justify-center sm:text-left text-center`}>
                             <CompanyLogo1 customCSS="sm:mx-0 mx-auto mb-2" />
-                            Shave Link Shortener is a tool for streamlined sharing. Create concise, custom links effortlessly. Track engagement seamlessly. Simplify your online presence with Shave Link Shortener.
+                            At ShaveLink Shortener, we streamline link sharing with advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing efforts, track performance, and effortlessly open apps based on your links.
                         </div>
 
                         <div className="right-side text-lg flex flex-col sm:text-left text-center justify-between sm:mt-0 mt-10">

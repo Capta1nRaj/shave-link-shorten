@@ -14,8 +14,16 @@ const NavBarLayout = () => {
                         <CompanyLogo1 customCSS='sm:w-16 w-14' />
                     </div>
 
+                    <div className={`middle-side flex items-center uppercase font-bold gap-6 lg:text-base sm:text-lg text-xs ${inter.className}`}>
+                        {NavBarConstants.slice(0, 2).map((item) => {
+                            return (
+                                <Link key={item.title} className={item.css} href={item.link}> {item.title} </Link>
+                            )
+                        })}
+                    </div>
+
                     <div className={`right-side flex items-center uppercase font-bold gap-6 lg:text-base sm:text-lg text-xs ${inter.className}`}>
-                        {NavBarConstants.map((item) => {
+                        {NavBarConstants.slice(2).map((item) => {
                             return (
                                 <Link key={item.title} className={item.css} href={item.link}> {item.title} </Link>
                             )

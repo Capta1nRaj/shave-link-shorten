@@ -5,6 +5,11 @@
         "css": "sm:block hidden"
     },
     {
+        "title": "pricing",
+        "link": "/#pricing",
+        "css": "sm:block hidden"
+    },
+    {
         "title": "login",
         "link": "/signIn",
         "css": ""

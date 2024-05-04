@@ -13,3 +13,6 @@ export { default as WWWIcon1 } from './FeaturesBoxImages/WWWIcon1';
 //! SocialMediaIcons
 export { default as LinkedinIcon1 } from './SocialMediaIcons/LinkedinIcon1';
 export { default as TwitterIcon1 } from './SocialMediaIcons/TwitterIcon1';
+
+//! TeamMembersPics
+export { default as PriyalRajImage1 } from './TeamMembersPics/PriyalRajImage1';
