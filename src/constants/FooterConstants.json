@@ -22,6 +22,6 @@
     {
         "title": "contact us",
         "link": "/contact-us",
-        "css": "capitalize pointer-events-none opacity-50 hover:text-primary-3 defaultTransitionCSS"
+        "css": "capitalize hover:text-primary-3 defaultTransitionCSS"
     }
 ]
