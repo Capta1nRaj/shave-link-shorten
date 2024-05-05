@@ -1,7 +1,7 @@
 [
     {
         "title": "home",
-        "link": "/#home",
+        "link": "/",
         "css": "uppercase text-base opacity-100 hover:text-primary-3 defaultTransitionCSS"
     },
     {
