@@ -2,7 +2,7 @@
 
 import { SessionCheck } from "@/utils/SessionCheck";
 import axios from "axios";
-import { resendOTP } from "email-armor";
+import { getCookies } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -123,7 +123,13 @@ const SignUpPage = () => {
             setLoading(data);
         };
 
-        checkSession();
+        const data = getCookies();
+        if (!data.id && !data.userName && !data.token) {
+            setLoading(false);
+            return;
+        } else {
+            checkSession();
+        }
     }, [])
 
     if (loading) {

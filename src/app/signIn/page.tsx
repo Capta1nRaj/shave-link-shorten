@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getCookies } from 'cookies-next';
 
 type FormData = {
     username: string;
@@ -117,7 +118,13 @@ const SignInPage = () => {
             setLoading(data);
         };
 
-        checkSession();
+        const data = getCookies();
+        if (!data.id && !data.userName && !data.token) {
+            setLoading(false);
+            return;
+        } else {
+            checkSession();
+        }
     }, [])
 
     if (loading) {
