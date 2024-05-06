@@ -66,7 +66,7 @@ const SignInPage = () => {
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, { username: formData.username, OTP });
 
             if (status === 202) {
-                setTimeout(() => { router.push('/'); }, 1000);
+                setTimeout(() => { router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}`); }, 1000);
             }
 
             setmessage(message);
