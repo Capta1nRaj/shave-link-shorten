@@ -1,17 +1,15 @@
-'use client'
-
-import { useEffect } from "react";
-import 'react-toastify/dist/ReactToastify.css';
-import { SessionCheck } from "@/utils/SessionCheck";
+import IntroLayout from "@/layouts/IntroLayout";
+import WhatWeOfferLayout from '@/layouts/WhatWeOfferLayout';
+import ScrollToTop from '@/components/ScrollToTop';
+import PricingLayout from '@/layouts/PricingLayout';
 
 export default function Home() {
-
-  useEffect(() => {
-    SessionCheck();
-  }, [])
-
   return (
     <>
+      <IntroLayout />
+      <WhatWeOfferLayout />
+      <PricingLayout />
+      <ScrollToTop />
     </>
   );
 }

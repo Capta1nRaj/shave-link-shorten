@@ -5,6 +5,8 @@ export async function SessionCheck() {
 
     if (status === 202) {
         window.location.href = `${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/dashboard` || "http://localhost:3001/dashboard";
-        return;
+        return true;
     }
+
+    return false;
 }

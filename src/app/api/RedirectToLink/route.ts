@@ -5,22 +5,20 @@ import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
-
     //! Connecting to MongoDB
     await connect2MongoDB();
 
     const searchParams = request.nextUrl.searchParams;
     const alias = searchParams.get('alias');
 
-    //! Get user IP Address & fetch their country
-    const ip = request.headers.get('X-Forwarded-For');
-
-    const response = await axios.get(`http://ip-api.com/json/${ip}`);
-    const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
-
     const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 0 } }).select('-_id userName primaryURL toSupport appOpener');
 
     if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
+
+    //! Get user IP Address & fetch their country
+    const ip = request.headers.get('X-Forwarded-For');
+    const response = await axios.get(`http://ip-api.com/json/${ip}`);
+    const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
     await new ClicksListModel({
         userName: data.userName, alias, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as

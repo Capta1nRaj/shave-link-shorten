@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from 'next/headers'
-import { forgotPassword, localSessionCheck, resendOTP } from "email-armor";
+import { forgotPassword } from "email-armor";
 import { FetchUserIP } from "@/utils/FetchUserIP";
 
 

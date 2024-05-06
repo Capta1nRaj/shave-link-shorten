@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .defaultTransitionCSS {
+    @apply transition-all ease-in-out duration-500;
+  }
+
+  .buttonTransitionCSS {
+    @apply hover:bg-primary-4 hover:text-primary-1 transition-all ease-in-out duration-500;
+  }
+
+  .max-width {
+    @apply max-w-[1440px] sm:px-10 px-4 mx-auto;
+  }
+
+  .titleCSS {
+    @apply lg:text-7xl md:text-6xl sm:text-5xl text-4xl text-center uppercase font-extrabold;
+  }
+
+  .titleDropShadowCSS {
+    @apply text-primary-3 drop-shadow-[0_1px_1px_rgba(0,171,240,1)];
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -18,11 +40,21 @@
 
 body {
   color: white;
-  background: #040406;
+  background: #1D1E2C;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Hide ScrollBar */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
 }
