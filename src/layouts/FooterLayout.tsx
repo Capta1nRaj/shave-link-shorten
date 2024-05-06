@@ -8,7 +8,7 @@ export default function FooterLayout() {
     return (
         <>
             <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-primary-2`}>
-                <section className="max-width py-20">
+                <section className="max-width py-24">
 
                     <section className="flex sm:flex-row flex-col justify-between">
                         <div className={`left-side ${roboto.className} font-normal text-primary-4 sm:w-96 w-full flex flex-col justify-center sm:text-left text-center`}>

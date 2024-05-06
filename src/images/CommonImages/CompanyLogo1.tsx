@@ -8,7 +8,7 @@ const CompanyLogo1 = ({ customCSS, width, height }: ImageInterface) => {
     return (
         <>
             <Link href={'/'}>
-                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/CommonImages/CompanyLogo1.png" alt="CompanyLogo1" />
+                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/CommonImages/CompanyLogo1.png" alt="CompanyLogo1" priority />
             </Link>
         </>
     );

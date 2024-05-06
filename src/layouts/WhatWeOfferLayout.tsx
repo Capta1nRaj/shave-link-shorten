@@ -6,7 +6,7 @@ export default async function WhatWeOfferLayout() {
     return (
         <>
             <section id='features' className="WhatWeOfferLayout-section bg-primary-2">
-                <section className="max-width py-8">
+                <section className="max-width py-24">
                     <h2 className={`titleCSS ${raleway.className} teeny:block hidden`}>
                         <span className="font-extrabold"> features  </span>
                         <span className="font-normal"> 〰 </span>

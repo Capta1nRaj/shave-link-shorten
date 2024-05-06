@@ -7,7 +7,7 @@ export const customTitleCSS = `titleCSS lg:leading-7xl md:leading-6xl sm:leading
 export default async function IntroLayout() {
     return (
         <>
-            <section id='home' className={`IntroLayout-section max-width ${raleway.className} font-extrabold py-[100px]`}>
+            <section id='home' className={`IntroLayout-section max-width ${raleway.className} font-extrabold py-24`}>
 
                 <div className={`${customTitleCSS}`}> short you <span className={`titleDropShadowCSS underline decoration-2 underline-offset-8`}> links </span> </div>
                 <div className={`${customTitleCSS}`}> <span className={`titleDropShadowCSS underline decoration-2 underline-offset-8`}> analyze </span> your reach </div>

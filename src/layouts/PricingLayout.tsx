@@ -39,7 +39,7 @@ const tiers = [
 export default function PricingLayout() {
     return (
         <div id='pricing' className={"isolate overflow-hidden bg-primary-1"}>
-            <div className="mx-auto max-width text-center sm:pt-32 pt-24 pb-96">
+            <div className="mx-auto max-width text-center pt-24 pb-96">
                 <div className={`mx-auto max-w-4xl ${raleway.className}`}>
                     <h2 className={`titleCSS text-primary-4`}>Pricing</h2>
                     <div className={`mt-2 font-bold tracking-tight text-white sm:text-5xl teeny:text-4xl text-3xl`}>
@@ -62,7 +62,7 @@ export default function PricingLayout() {
                     </svg>
                 </div>
             </div>
-            <div className="flow-root pb-24 sm:pb-32">
+            <div className="flow-root pb-24">
                 <div className="-mt-80">
                     <div className="mx-auto max-width">
                         <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
@@ -92,7 +92,7 @@ export default function PricingLayout() {
                                     <Link
                                         href={tier.href}
                                         aria-describedby={tier.id}
-                                        className={`${tier.buttonCSS} defaultTransitionCSS mt-8 block rounded-md bg-primary-1 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                                        className={`${tier.buttonCSS} defaultTransitionCSS mt-8 block rounded-md bg-primary-3 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                                     >
                                         {tier.button}
                                     </Link>
