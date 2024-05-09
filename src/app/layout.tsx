@@ -12,8 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}`),
   title: {
-    default: "Shave - Short You Links",
-    template: "%s - Shave - Short You Links"
+    default: "Shave - Short Your Links",
+    template: "%s - Shave - Short Your Links"
   },
   description: "Shorten URLs effortlessly for seamless sharing across all platforms with ease.",
   keywords: "url shortener, link manager, social media, web trimming, digital platform, streamlined, accessibility, customized, concise, efficient",

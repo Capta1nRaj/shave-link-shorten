@@ -2,17 +2,17 @@ import { raleway } from "@/fonts/Fonts";
 import { DashboardPreview1, JoinWaitlistIcon1 } from "@/images/ImagesExport";
 import Link from "next/link";
 
-export const customTitleCSS = `titleCSS lg:leading-7xl md:leading-6xl sm:leading-5xl leading-4xl`;
+export const customTitleCSS = `titleCSS lg:leading-7xl md:leading-6xl sm:leading-5xl leading-3xl`;
 
 export default async function IntroLayout() {
     return (
         <>
             <section id='home' className={`IntroLayout-section max-width ${raleway.className} font-extrabold py-24`}>
 
-                <div className={`${customTitleCSS}`}> short you <span className={`titleDropShadowCSS underline decoration-2 underline-offset-8`}> links </span> </div>
-                <div className={`${customTitleCSS}`}> <span className={`titleDropShadowCSS underline decoration-2 underline-offset-8`}> analyze </span> your reach </div>
+                <div className={`${customTitleCSS}`}> short your <span className={`titleDropShadowCSS underline decoration-2 sm:underline-offset-8 underline-offset-4`}>links</span> </div>
+                <div className={`${customTitleCSS}`}> <span className={`titleDropShadowCSS underline decoration-2 sm:underline-offset-8 underline-offset-4`}>analyze</span> your reach </div>
 
-                <p className="mt-3 mb-8 text-sm font-bold uppercase text-center">
+                <p className="mt-3 mb-8 text-sm font-bold uppercase text-center max-w-screen-md mx-auto">
 
                     &#34;shorten links <span className="text-primary-3 underline underline-offset-2">hassle-free</span> and & <span className="text-primary-3 underline underline-offset-2">detailed</span> analytics effortlessly for <span className="text-primary-3 underline underline-offset-2">free</span> .&#34;
 

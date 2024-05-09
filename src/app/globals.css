@@ -16,7 +16,7 @@
   }
 
   .titleCSS {
-    @apply lg:text-7xl md:text-6xl sm:text-5xl text-4xl text-center uppercase font-extrabold;
+    @apply lg:text-7xl md:text-6xl sm:text-5xl text-3xl text-center uppercase font-extrabold;
   }
 
   .titleDropShadowCSS {

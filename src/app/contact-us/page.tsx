@@ -34,7 +34,7 @@ export default function ContactUsPage() {
     return (
         <div className="isolate bg-primary-1 my-20 lg:px-8 px-4 relative">
 
-            <h2 className={`titleCSS titleDropShadowCSS text-primary-3 ${raleway.className} teeny:block hidden`}> contact us </h2>
+            <h2 className={`lg:text-7xl md:text-6xl text-5xl text-center uppercase font-extrabold titleDropShadowCSS text-primary-3 ${raleway.className}`}> contact us </h2>
 
             <form onSubmit={handleSubmit} className="mx-auto max-w-xl mt-10">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">

@@ -16,7 +16,7 @@ export default function FooterLayout() {
                             At ShaveLink Shortener, we streamline link sharing with advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing efforts, track performance, and effortlessly open apps based on your links.
                         </div>
 
-                        <div className="right-side text-lg flex flex-col sm:text-left text-center justify-between sm:mt-0 mt-10">
+                        <div className="right-side text-lg flex flex-col sm:text-left text-center justify-between sm:mt-0 mt-10 sm:gap-0 gap-y-2">
                             {FooterConstants.map((item) => {
                                 return (
                                     <Link key={item.title} className={item.css} href={item.link}> {item.title} </Link>
