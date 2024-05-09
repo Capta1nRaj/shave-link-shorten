@@ -4,14 +4,20 @@ import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-    //! Connecting to MongoDB
-    await connect2MongoDB();
+    try {
+        //! Connecting to MongoDB
+        await connect2MongoDB();
 
-    const { firstName, lastName, companyName, email, phoneNumber, message } = await request.json();
+        const { firstName, lastName, companyName, email, phoneNumber, message } = await request.json();
 
-    await sendConfirmationMailToUser(email, firstName + lastName);
+        if (!firstName || !lastName || !email || !phoneNumber || !message) { return NextResponse.json({ message: "Please fill in all required fields!.", status: 500 }, { status: 200 }); }
 
-    // await new contactUsListModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();
+        await sendConfirmationMailToUser(email, firstName + lastName);
 
-    return NextResponse.json({ message: "Mail sent.", status: 200 }, { status: 200 });
+        await new contactUsListModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();
+
+        return NextResponse.json({ message: "Mail sent.", status: 200 }, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
+    }
 }

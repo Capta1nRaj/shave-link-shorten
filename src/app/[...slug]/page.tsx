@@ -3,30 +3,23 @@ import { notFound, redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { slug: string } }) {
     async function getLink() {
+        try {
+            if (params.slug.length > 1) { return { statusCode: 404 }; }
 
-        if (params.slug.length > 1) {
-            return { statusCode: 404 };
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/RedirectToLink?alias=${params.slug[0]}`, { cache: 'no-store' })
+
+            const data = await response.json(); return data;
+
+        } catch (error) {
+            return { primaryURL: "" };
         }
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/RedirectToLink?alias=${params.slug[0]}`, { cache: 'no-store' })
-        const data = await response.json()
-        return data;
     }
 
-    const { primaryURL, toSupport } = await getLink()
+    const { primaryURL } = await getLink()
 
-    if (!primaryURL) {
-        notFound();
-        return;
-    }
+    if (!primaryURL) { notFound(); }
 
-    if (toSupport) {
-        return (
-            <ShowAdComponent
-                primaryURL={primaryURL}
-            />
-        );
-    }
+    if (primaryURL) { return (<ShowAdComponent primaryURL={primaryURL} />); }
 
     redirect(primaryURL);
 }

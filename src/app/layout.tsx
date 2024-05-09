@@ -4,6 +4,8 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import NavBarLayout from "@/layouts/NavBarLayout";
 import FooterLayout from "@/layouts/FooterLayout";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +36,7 @@ export default function RootLayout({
         {children}
         <FooterLayout />
         <GoogleAnalytics gaId={`G-R5X8FW71Y1`} />
+        <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
       </body>
     </html>
   );

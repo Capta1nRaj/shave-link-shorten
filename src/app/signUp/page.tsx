@@ -68,7 +68,7 @@ const SignUpPage = () => {
             setmessage(message);
 
         } catch (error) {
-            setmessage(error as string);
+            setmessage("Internal Server Error.");
         }
 
     };
@@ -94,7 +94,7 @@ const SignUpPage = () => {
             setmessage(message);
 
         } catch (error) {
-            setmessage(error as string);
+            setmessage("Internal Server Error.");
         }
     }
 
@@ -108,7 +108,7 @@ const SignUpPage = () => {
             setmessage(message);
 
         } catch (error) {
-            setmessage(error as string);
+            setmessage("Internal Server Error.");
         }
     }
 
@@ -119,8 +119,12 @@ const SignUpPage = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const checkSession = async () => {
-            const data = await SessionCheck();
-            setLoading(data);
+            try {
+                const data = await SessionCheck();
+                setLoading(data);
+            } catch (error) {
+                setLoading(false);
+            }
         };
 
         const data = getCookies();

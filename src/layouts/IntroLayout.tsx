@@ -21,9 +21,9 @@ export default async function IntroLayout() {
                 <DashboardPreview1 customCSS="w-full" />
                 <p className="text-xs font-normal text-center opacity-50 mt-3 mb-8">(Inspired by the image, our dashboard will look similar., creds: <Link className="underline underline-offset-4 decoration-primary-3 text-primary-3 font-bold" href={'https://twitter.com/RumanArif00'} target="_blank"> @RumanArif00 </Link>)</p>
 
-                <button className="flex items-center gap-2 mx-auto px-8 py-2 bg-primary-3 uppercase rounded-lg sm:text-2xl text-base buttonTransitionCSS">
+                <Link href={'/signUp'} className="w-fit flex items-center gap-2 mx-auto px-8 py-2 bg-primary-3 uppercase rounded-lg sm:text-2xl text-base buttonTransitionCSS">
                     join waitlist <JoinWaitlistIcon1 customCSS="sm:w-8 w-6 -mt-[6px]" />
-                </button>
+                </Link>
             </section>
         </>
     )

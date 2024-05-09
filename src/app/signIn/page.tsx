@@ -38,19 +38,17 @@ const SignInPage = () => {
     const [message, setmessage] = useState('');
 
     const signInUserFunction = async (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault();
+
         try {
             const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, formData);
 
             if (status === 201 || status === 401) { setstatusCode(status); setotpScene(true); }
 
             setmessage(message);
-
         } catch (error) {
-            setmessage(error as string);
+            setmessage("Internal Server Error.");
         }
-
     };
 
     const signInUserVerifyFunction = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +70,7 @@ const SignInPage = () => {
             setmessage(message);
 
         } catch (error) {
-            setmessage(error as string);
+            setmessage("Internal Server Error.");
         }
     }
 
@@ -94,7 +92,7 @@ const SignInPage = () => {
             setmessage(message);
 
         } catch (error) {
-            setmessage(error as string);
+            setmessage('Internal Server Error.');
         }
     }
 
@@ -107,24 +105,23 @@ const SignInPage = () => {
             setmessage(message);
 
         } catch (error) {
-            setmessage(error as string);
+            setmessage("Internal Server Error.");
         }
     }
 
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const checkSession = async () => {
-            const data = await SessionCheck();
-            setLoading(data);
+            try {
+                const data = await SessionCheck();
+                setLoading(data);
+            } catch (error) { setLoading(false); }
         };
 
         const data = getCookies();
         if (!data.id && !data.userName && !data.token) {
-            setLoading(false);
-            return;
-        } else {
-            checkSession();
-        }
+            setLoading(false); return;
+        } else { checkSession(); }
     }, [])
 
     if (loading) {
