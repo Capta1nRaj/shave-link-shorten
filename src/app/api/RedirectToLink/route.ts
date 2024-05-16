@@ -1,5 +1,5 @@
-import ClicksListModel from '@/models/clicksListModel';
-import linksListModel from '@/models/LinksListModel';
+import clicksListModel from '@/models/clicksListModel';
+import linksListModel from '@/models/linksListModel';
 import axios from 'axios';
 import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
         const response = await axios.get(`http://ip-api.com/json/${ip}`);
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
-        await new ClicksListModel({ userName: data.userName, alias, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as }).save();
+        await new clicksListModel({ userName: data.userName, alias, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as }).save();
 
         return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, primaryURL: data.primaryURL, toSupport: data.toSupport, appOpener: data.appOpener }, { status: 200 });
     } catch (error) {

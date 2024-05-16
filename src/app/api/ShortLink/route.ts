@@ -1,4 +1,4 @@
-import linksListModel from '@/models/LinksListModel';
+import linksListModel from '@/models/linksListModel';
 import RandomStringGenerator from '@/utils/RandomStringGenerator';
 import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';

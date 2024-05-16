@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
         const username = cookieStore.get('userName')
         const jwtToken = cookieStore.get('token')
 
-        if (!username || !jwtToken) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+        if (!username || !jwtToken) { cookies().delete('id'); cookies().delete('userName'); cookies().delete('token'); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
         const response = await localSessionCheck(username.value, jwtToken.value, userAgent);
 
@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ status, message, userName }, { status: 200 });
     } catch (error) {
+        cookies().delete('id'); cookies().delete('userName'); cookies().delete('token');
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }
 }

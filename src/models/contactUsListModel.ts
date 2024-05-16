@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const { mongoose } = require("mongoose");
 
 const ContactUsListSchema = new mongoose.Schema({
     firstName: { type: String },
@@ -7,7 +7,7 @@ const ContactUsListSchema = new mongoose.Schema({
     email: { type: String },
     phoneNumber: { type: String },
     message: { type: String },
-    status: { type: String, default: 'Pending' }
-});
+    status: { type: String, default: 'pending' }
+}, { timestamps: true });
 
 export default mongoose.models.ContactUsList || mongoose.model('ContactUsList', ContactUsListSchema);

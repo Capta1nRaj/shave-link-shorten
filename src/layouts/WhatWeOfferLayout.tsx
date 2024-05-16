@@ -11,13 +11,13 @@ export default async function WhatWeOfferLayout() {
                         <span className="font-extrabold"> features  </span>
                         <span className="font-normal"> 〰 </span>
                         <span className="font-normal"> we </span>
-                        <span className="titleDropShadowCSS underline decoration-4 underline-offset-8"> offer </span>
+                        <span className="titleDropShadowCSS underline decoration-4 underline-offset-8">offer</span>
                     </h2>
 
                     <h2 className={`titleCSS ${raleway.className} teeny:hidden block`}>
                         <div className="font-extrabold"> features  </div>
                         <span className="font-normal"> we </span>
-                        <span className="titleDropShadowCSS underline decoration-4 underline-offset-8"> offer </span>
+                        <span className="titleDropShadowCSS underline decoration-4 underline-offset-8">offer</span>
                     </h2>
 
                     <section className="features-box-grid my-8 flex flex-wrap justify-center gap-8">

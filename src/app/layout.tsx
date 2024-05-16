@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
+
 import NavBarLayout from "@/layouts/NavBarLayout";
 import FooterLayout from "@/layouts/FooterLayout";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AllInOneAnalytics } from "@/analytics/AllInOneAnalytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,18 +25,14 @@ export const metadata: Metadata = {
     images: './opengraph-image.png',
   },
 };
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <NavBarLayout />
         {children}
         <FooterLayout />
-        <GoogleAnalytics gaId={`G-R5X8FW71Y1`} />
+        <AllInOneAnalytics />
         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
       </body>
     </html>
