@@ -18,5 +18,10 @@
         "title": "sign up",
         "link": "/signUp",
         "css": "bg-primary-3 px-4 py-2 rounded-full buttonTransitionCSS"
+    },
+    {
+        "title": "dashboard",
+        "link": "",
+        "css": "bg-primary-3 px-4 py-2 rounded-full buttonTransitionCSS"
     }
 ]

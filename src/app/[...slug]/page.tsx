@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { RedirectSSR } from '@/server/RedirectSSR';
 import { notFound, useRouter } from 'next/navigation';
 import ShowAdComponent from '@/components/ShowAdComponent';
 import axios from 'axios';
@@ -14,7 +13,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
     const [formData, setFormData] = useState({ primaryURL: '', toSupport: false, appOpener: false, status: false, statusCode: 200 })
 
     async function redirectLink() {
-        const { data: { primaryURL, toSupport, appOpener, status, statusCode } } = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/RedirectToLink?alias=${params.slug[0]}`);
+        const { data: { primaryURL, toSupport, appOpener, status, statusCode } } = await axios.get(`/api/RedirectToLink?alias=${params.slug[0]}`);
         if (!formData.toSupport && !formData.appOpener && primaryURL) { router.push(primaryURL); return; }
         setFormData({ primaryURL, toSupport, appOpener, status, statusCode });
         setloading(false);
