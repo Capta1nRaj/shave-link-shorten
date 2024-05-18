@@ -1,8 +1,8 @@
 const { mongoose } = require("mongoose");
 
 const ClicksListSchema = new mongoose.Schema({
-    userName: { type: mongoose.Schema.Types.ObjectId, ref: process.env.ACCOUNTS_MODEL_NAME || "accounts" },
-    alias: { type: mongoose.Schema.Types.ObjectId, ref: "linksList" },
+    userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
+    alias: { type: mongoose.Schema.Types.ObjectId, ref: "LinksList" },
     ip: { type: String },
     country: { type: String },
     countryCode: { type: String },

@@ -30,9 +30,9 @@ const ShowAdComponent = ({ primaryURL }: { primaryURL: string }) => {
             <div className="flex justify-center items-center h-screen flex-col">
                 <div className={`${adCSS} mb-4`}> ad here </div>
 
-                <p className='font-bold mb-2 text-2xl'>Redirecting in</p>
+                <p className='font-bold mb-2 text-2xl'> Redirecting in </p>
                 <div className="bg-primary-1 text-primary-2 p-10 rounded-full min-w-[116px] max-w-[116px] text-center border border-primary-3">
-                    <h1 className="text-3xl font-bold">
+                    <h1 className="text-3xl font-bold text-primary-4">
                         {seconds}
                     </h1>
                 </div>

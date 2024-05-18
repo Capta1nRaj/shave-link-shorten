@@ -1,5 +1,6 @@
 import clicksListModel from '@/models/clicksListModel';
 import linksListModel from '@/models/linksListModel';
+import { FetchUserIP } from '@/utils/FetchUserIP';
 import axios from 'axios';
 import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
@@ -12,18 +13,18 @@ export async function GET(request: NextRequest) {
         const searchParams = request.nextUrl.searchParams;
         const alias = searchParams.get('alias');
 
-        const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 0 } }).select('-_id userName primaryURL toSupport appOpener');
-
+        const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 1 } }).select('userName primaryURL toSupport appOpener appType status');
         if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 
         //! Get user IP Address & fetch their country
-        const ip = request.headers.get('X-Forwarded-For');
+        const ip = await FetchUserIP();
+
         const response = await axios.get(`http://ip-api.com/json/${ip}`);
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
-        await new clicksListModel({ userName: data.userName, alias, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as }).save();
+        await new clicksListModel({ userName: data.userName, alias: data._id, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as }).save();
 
-        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, primaryURL: data.primaryURL, toSupport: data.toSupport, appOpener: data.appOpener }, { status: 200 });
+        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, primaryURL: data.primaryURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }

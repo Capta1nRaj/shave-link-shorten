@@ -1,14 +1,15 @@
-const { mongoose } = require("mongoose");
+import mongoose from "mongoose";
 
 const LinksListModelSchema = new mongoose.Schema({
-    userName: { type: mongoose.Schema.Types.ObjectId, ref: process.env.ACCOUNTS_MODEL_NAME || "accounts" },
+    userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     primaryURL: { type: String },
     alias: { type: String },
     clicksCount: { type: Number, default: 0 },
     toSupport: { type: Boolean, default: false },
     appOpener: { type: Boolean, default: false },
     appType: { type: String, default: "" },
-    tags: [{ type: String }]
+    tags: [{ type: String }],
+    status: { type: Boolean, default: true }
 }, { timestamps: true });
 
 LinksListModelSchema.index({ userName: 1 })
