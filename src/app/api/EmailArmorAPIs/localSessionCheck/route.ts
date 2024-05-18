@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from 'next/headers'
 import { localSessionCheck } from "email-armor";
+import { DeleteCookie } from "@/utils/DeleteCookie";
 
 export async function GET(request: NextRequest) {
     try {
@@ -11,15 +12,12 @@ export async function GET(request: NextRequest) {
         const username = cookieStore.get('userName')
         const jwtToken = cookieStore.get('token')
 
-        if (!username || !jwtToken) { cookies().delete('id'); cookies().delete('userName'); cookies().delete('token'); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+        if (!username || !jwtToken) { DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
         const response = await localSessionCheck(username.value, jwtToken.value, userAgent);
 
         const { status, message, userName } = response;
 
         return NextResponse.json({ status, message, userName }, { status: 200 });
-    } catch (error) {
-        cookies().delete('id'); cookies().delete('userName'); cookies().delete('token');
-        return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
-    }
+    } catch (error) { DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 }

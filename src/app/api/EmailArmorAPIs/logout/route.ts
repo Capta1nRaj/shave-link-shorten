@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from 'next/headers'
 import { logoutOnce } from "email-armor";
+import { DeleteCookie } from "@/utils/DeleteCookie";
 
 export async function GET(request: NextRequest) {
     try {
@@ -12,9 +13,7 @@ export async function GET(request: NextRequest) {
         const username = cookieStore.get('userName');
         const jwtToken = cookieStore.get('token');
 
-        cookies().delete('id');
-        cookies().delete('userName');
-        cookies().delete('token');
+        DeleteCookie();
 
         if (!id || !username || !jwtToken) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
