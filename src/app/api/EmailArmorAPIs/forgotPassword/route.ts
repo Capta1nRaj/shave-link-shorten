@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
         const { username } = await request.json();
 
         const response = await forgotPassword(username, userAgent, '', '', userIP);
+
         if (!response) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
         const { status, message, userName } = response;
