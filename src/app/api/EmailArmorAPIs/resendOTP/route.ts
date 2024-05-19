@@ -11,11 +11,11 @@ export async function POST(request: NextRequest) {
         const { userName, method } = await request.json();
 
         const cookieStore = cookies();
-        const id = cookieStore.get('id') || "";
+        let id = cookieStore.get('id')?.value || "";
 
-        if (!userAgent || (method !== "forgotPassword" && !id)) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+        if (!userAgent) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
-        const response = await resendOTP(userName, method, userAgent, '', userIP);
+        const response = await resendOTP(userName, method, userAgent, id || "", userIP);
 
         if (!response) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
