@@ -2,6 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { signup, signUpVerify } from 'email-armor'
 import { cookies } from 'next/headers'
 import { FetchUserIP } from "@/utils/FetchUserIP";
+import websiteStatsModel from "@/models/websiteStatsModel";
+import { getWeekNumber, getMonthNumber, getYearNumber } from "@/utils/DateFunctions";
 
 export async function POST(request: NextRequest) {
     try {
@@ -36,6 +38,12 @@ export async function PUT(request: NextRequest) {
         const { message, status } = response;
 
         if ([400, 500].includes(status)) { return NextResponse.json({ status, message }, { status: 200 }); }
+
+        //! Increment active users count for current week, month, & year
+        const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { activeUsers: 1 } });
+        if (updateWebsiteStats.matchedCount === 0) {
+            await websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), activeUsers: 1 }).save();
+        }
 
         return NextResponse.json({ status, message }, { status: 200 });
     } catch (error) {

@@ -1,5 +1,7 @@
 import clicksListModel from '@/models/clicksListModel';
 import linksListModel from '@/models/linksListModel';
+import websiteStatsModel from '@/models/websiteStatsModel';
+import { getMonthNumber, getWeekNumber, getYearNumber } from '@/utils/DateFunctions';
 import { FetchUserIP } from '@/utils/FetchUserIP';
 import axios from 'axios';
 import { connect2MongoDB } from 'connect2mongodb';
@@ -16,13 +18,20 @@ export async function GET(request: NextRequest) {
         const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 1 } }).select('userName primaryURL toSupport appOpener appType status');
         if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 
-        //! Get user IP Address & fetch their country
+        // //! Get user IP Address & fetch their country
         const ip = await FetchUserIP();
 
         const response = await axios.get(`http://ip-api.com/json/${ip}`);
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
         await new clicksListModel({ userName: data.userName, alias: data._id, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as }).save();
+
+        //! Increment link click count for current week, month, & year
+        const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { linksClicksCount: 1 } });
+
+        if (updateWebsiteStats.matchedCount === 0) {
+            await websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), linksClicksCount: 1 }).save();
+        }
 
         return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, primaryURL: data.primaryURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
     } catch (error) {

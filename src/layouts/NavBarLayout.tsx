@@ -14,6 +14,7 @@ const NavBarLayout = () => {
 
     async function checkSession() {
         const data = await SessionCheck(false);
+        setisLogin(data);
         setloading(false);
     }
 
@@ -40,7 +41,7 @@ const NavBarLayout = () => {
                         })}
                     </div>
 
-                    {isLogin ?
+                    {!isLogin ?
                         <div className={`${loading ? "invisible" : "visible"} right-side flex items-center uppercase font-bold gap-6 lg:text-base sm:text-lg text-xs ${inter.className}`}>
                             {NavBarConstants.slice(2, 4).map((item) => {
                                 return (
