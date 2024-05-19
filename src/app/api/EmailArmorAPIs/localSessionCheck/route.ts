@@ -12,12 +12,12 @@ export async function GET(request: NextRequest) {
         const username = cookieStore.get('userName')
         const jwtToken = cookieStore.get('token')
 
-        if (!username || !jwtToken) { DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+        if (!username || !jwtToken) { await DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
         const response = await localSessionCheck(username.value, jwtToken.value, userAgent);
 
         const { status, message, userName } = response;
 
         return NextResponse.json({ status, message, userName }, { status: 200 });
-    } catch (error) { DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+    } catch (error) { await DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 }

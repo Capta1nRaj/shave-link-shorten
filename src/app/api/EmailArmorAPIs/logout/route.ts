@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
         const username = cookieStore.get('userName');
         const jwtToken = cookieStore.get('token');
 
-        DeleteCookie();
+        await DeleteCookie();
 
         if (!id || !username || !jwtToken) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
