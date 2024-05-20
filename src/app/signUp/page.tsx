@@ -1,5 +1,6 @@
 'use client'
 
+import LoadingSceneComponent from "@/components/LoadingSceneComponent";
 import { SessionCheck } from "@/utils/SessionCheck";
 import axios from "axios";
 import { getCookies } from "cookies-next";
@@ -47,6 +48,7 @@ const SignUpPage = () => {
 
     const [OTP, setOTP] = useState('');
     const [otpScene, setotpScene] = useState(false);
+    const [isLoading, setisLoading] = useState(false);
 
     const signUpUserFunction = async (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -59,6 +61,8 @@ const SignUpPage = () => {
         }
 
         try {
+            setisLoading(true);
+
             const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, formData);
 
             if (status === 201) {
@@ -67,6 +71,7 @@ const SignUpPage = () => {
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -83,6 +88,8 @@ const SignUpPage = () => {
         }
 
         try {
+            setisLoading(true);
+
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, { userName: formData.userName, OTP });
 
             if (status === 202) {
@@ -93,6 +100,7 @@ const SignUpPage = () => {
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -103,10 +111,13 @@ const SignUpPage = () => {
         const data = { userName: formData.userName, method: 'newUserVerification' }
 
         try {
+            setisLoading(true);
+
             const { data: { message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/resendOTP`, data);
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -213,6 +224,10 @@ const SignUpPage = () => {
                         </div>
                     </div>
                 </section>
+            }
+
+            {isLoading &&
+                <LoadingSceneComponent />
             }
         </>
     );

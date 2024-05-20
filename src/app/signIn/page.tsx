@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getCookies } from 'cookies-next';
+import LoadingSceneComponent from "@/components/LoadingSceneComponent";
 
 type FormData = {
     username: string;
@@ -36,16 +37,21 @@ const SignInPage = () => {
     const [otpScene, setotpScene] = useState(false);
     const [statusCode, setstatusCode] = useState();
     const [message, setmessage] = useState('');
+    const [isLoading, setisLoading] = useState(false);
+
 
     const signInUserFunction = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
+            setisLoading(true);
             const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, formData);
 
             if (status === 201 || status === 401) { setstatusCode(status); setotpScene(true); }
 
             setmessage(message);
+
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -61,6 +67,8 @@ const SignInPage = () => {
         }
 
         try {
+            setisLoading(true);
+
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, { username: formData.username, OTP });
 
             if (status === 202) {
@@ -69,6 +77,7 @@ const SignInPage = () => {
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -81,6 +90,8 @@ const SignInPage = () => {
         if (!OTP) { setmessage("Please enter OTP!"); return; }
 
         try {
+            setisLoading(true);
+
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, { userName: formData.username, OTP });
 
             if (status === 202) {
@@ -91,6 +102,7 @@ const SignInPage = () => {
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage('Internal Server Error.');
         }
@@ -100,10 +112,13 @@ const SignInPage = () => {
         const data = { userName: formData.username, method: statusCode === 201 ? 'oldUserVerification' : 'newUserVerification' };
 
         try {
+            setisLoading(true);
+
             const { data: { message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/resendOTP`, data);
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -121,7 +136,9 @@ const SignInPage = () => {
         const data = getCookies();
         if (!data.id && !data.userName && !data.token) {
             setLoading(false); return;
-        } else { checkSession(); }
+        } else {
+            checkSession();
+        }
     }, [])
 
     if (loading) {
@@ -192,6 +209,10 @@ const SignInPage = () => {
                         </div>
                     </div>
                 </section>
+            }
+
+            {isLoading &&
+                <LoadingSceneComponent />
             }
         </>
     )

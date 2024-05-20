@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getCookies } from 'cookies-next';
+import LoadingSceneComponent from "@/components/LoadingSceneComponent";
 
 type FormData = {
     username: string;
@@ -37,16 +38,21 @@ const ForgotPasswordPage = () => {
     const [statusCode, setstatusCode] = useState();
     const [message, setmessage] = useState('');
     const [userNewPassword, setuserNewPassword] = useState('');
+    const [isLoading, setisLoading] = useState(false);
 
     const sendOTPToUserFunction = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
+            setisLoading(true);
+
             const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/forgotPassword`, formData);
 
             if (status === 201 || status === 401) { setstatusCode(status); setotpScene(true); }
 
             setmessage(message);
+
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -60,6 +66,8 @@ const ForgotPasswordPage = () => {
         if (!userOTP) { setmessage("Please enter OTP!"); return; }
 
         try {
+            setisLoading(true);
+
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/forgotPassword`, { username: formData.username, userOTP, userNewPassword });
             console.log(status)
             if (status === 200) {
@@ -70,6 +78,7 @@ const ForgotPasswordPage = () => {
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage('Internal Server Error.');
         }
@@ -79,10 +88,13 @@ const ForgotPasswordPage = () => {
         const data = { userName: formData.username, method: 'forgotPassword' };
 
         try {
+            setisLoading(true);
+
             const { data: { message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/resendOTP`, data);
 
             setmessage(message);
 
+            setisLoading(false);
         } catch (error) {
             setmessage("Internal Server Error.");
         }
@@ -169,6 +181,10 @@ const ForgotPasswordPage = () => {
                         </div>
                     </div>
                 </section>
+            }
+
+            {isLoading &&
+                <LoadingSceneComponent />
             }
         </>
     )
