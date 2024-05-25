@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 
-const ShowAdComponent = ({ primaryURL }: { primaryURL: string }) => {
+const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
     const [seconds, setSeconds] = useState(5);
 
     useEffect(() => {
@@ -19,9 +19,9 @@ const ShowAdComponent = ({ primaryURL }: { primaryURL: string }) => {
 
     useEffect(() => {
         if (seconds === 0) {
-            window.location.href = primaryURL;
+            window.location.href = destinationURL;
         }
-    }, [seconds, primaryURL]);
+    }, [seconds, destinationURL]);
 
     const adCSS = `w-[250px] h-[250px] bg-primary-3 text-primary-1 flex justify-center items-center uppercase font-bold text-2xl`;
 
@@ -43,3 +43,30 @@ const ShowAdComponent = ({ primaryURL }: { primaryURL: string }) => {
 };
 
 export default ShowAdComponent;
+
+//! This will redirect them to YouYube app
+// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+// if (/android/i.test(userAgent)) {
+//     window.location.href = "intent://www.youtube.com/watch?v=sSFM_hCFgko#Intent;package=com.google.android.youtube;scheme=https;end";
+// } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+//     window.location.href = "vnd.youtube://www.youtube.com/watch?v=sSFM_hCFgko";
+// } else {
+//     window.location.href = "https://www.youtube.com/watch?v=sSFM_hCFgko";
+// }
+
+// return;
+
+//! For Twitter
+// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+// var twitterUrl = "https://x.com/RVCJ_FB/status/1793359412993937498";
+
+// if (/android/i.test(userAgent)) {
+//     window.location.href = "twitter://status?id=1793359412993937498";
+// } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+//     window.location.href = "twitter://status?id=1793359412993937498";
+// } else {
+//     window.location.href = twitterUrl;
+// }
+
+// return;

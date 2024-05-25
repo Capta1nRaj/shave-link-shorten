@@ -8,16 +8,16 @@ export async function POST(request: NextRequest) {
         //! Connecting to MongoDB
         await connect2MongoDB();
 
-        const { primaryURL, toSupport } = await request.json();
+        const { destinationURL, toSupport } = await request.json();
 
-        //! Check if primaryURL is already present
-        const checkIfPrimaryURLExist = await linksListModel.findOneAndUpdate({ primaryURL }, { toSupport }).select('-_id alias');
+        //! Check if destinationURL is already present
+        const checkIfdestinationURLExist = await linksListModel.findOneAndUpdate({ destinationURL }, { toSupport }).select('-_id alias');
 
-        if (checkIfPrimaryURLExist) { return NextResponse.json({ message: "URL already exist!", statusCode: 409, data: checkIfPrimaryURLExist }, { status: 200 }); }
+        if (checkIfdestinationURLExist) { return NextResponse.json({ message: "URL already exist!", statusCode: 409, data: checkIfdestinationURLExist }, { status: 200 }); }
 
         const alias = await generateAndCheckAlias();
 
-        const data = await new linksListModel({ primaryURL, alias, toSupport }).save();
+        const data = await new linksListModel({ destinationURL, alias, toSupport }).save();
         const responseData = { alias: data.alias };
 
         return NextResponse.json({ message: "URL shortened.", statusCode: 200, data: responseData }, { status: 200 });

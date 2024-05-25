@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
         const searchParams = request.nextUrl.searchParams;
         const alias = searchParams.get('alias');
 
-        const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 1 } }).select('userName primaryURL toSupport appOpener appType status');
+        const data = await linksListModel.findOneAndUpdate({ alias }, { $inc: { clicksCount: 1 } }).select('userName destinationURL toSupport appOpener appType status');
         if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 
         // //! Get user IP Address & fetch their country
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
             await websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), linksClicksCount: 1 }).save();
         }
 
-        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, primaryURL: data.primaryURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
+        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: data.destinationURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }

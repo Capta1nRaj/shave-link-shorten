@@ -162,7 +162,7 @@ const SignInPage = () => {
                                     </div>
                                     <div>
                                         <label htmlFor="name" className={labelCSS}>Password</label>
-                                        <input className={inputCSS} type="text" placeholder="••••••••" value={formData.userpassword} onChange={handleChange('userpassword')} />
+                                        <input className={inputCSS} type="password" placeholder="••••••••" value={formData.userpassword} onChange={handleChange('userpassword')} />
                                     </div>
                                     <div className="flex items-center justify-end">
                                         <Link href="/forgotPassword" className="text-sm font-medium text-primary-600 hover:underline text-primary-500">Forgot password?</Link>
