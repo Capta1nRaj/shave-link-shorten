@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
         const response = await axios.get(`http://ip-api.com/json/${ip}`);
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
-        await new clicksListModel({ userName: data.userName, alias: data._id, ip: query, country, countryCode, region, regionName, city, zip, timezone, isp, org, as }).save();
+        await new clicksListModel({ userName: data.userName, alias: data._id, ip: query, countryName: country, countryCode, stateCode: region, stateName: regionName, cityName: city, zip, timezone, isp, org, as }).save();
 
         //! Increment link click count for current week, month, & year
         const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { linksClicksCount: 1 } });
@@ -35,6 +35,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: data.destinationURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
     } catch (error) {
+
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }
 }

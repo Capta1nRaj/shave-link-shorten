@@ -1,7 +1,10 @@
+//! Client & Admin side model
+//* This model is used to store the all the links & stats of a user
+
 import mongoose from "mongoose";
 require('./linksListModel')
 
-const userLinksListModel = new mongoose.Schema({
+const userLinksDataModel = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     totalLinksList: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -15,6 +18,6 @@ const userLinksListModel = new mongoose.Schema({
     timestamps: true
 });
 
-userLinksListModel.index({ totalLinksCount: 1 }); // Creating an index on totalLinksCount
+userLinksDataModel.index({ totalLinksCount: 1 }); // Creating an index on totalLinksCount
 
-export default mongoose.models.userLinksList || mongoose.model('userLinksList', userLinksListModel);
+export default mongoose.models.userLinksData || mongoose.model('userLinksData', userLinksDataModel);

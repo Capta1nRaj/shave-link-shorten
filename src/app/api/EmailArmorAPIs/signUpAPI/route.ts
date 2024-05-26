@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { FetchUserIP } from "@/utils/FetchUserIP";
 import { getWeekNumber, getMonthNumber, getYearNumber } from "@/utils/DateFunctions";
 import userAccountsModel from "@/models/userAccountsModel";
-import userLinksListModel from "@/models/userLinksListModel";
+import userLinksDataModel from "@/models/userLinksDataModel";
 import websiteStatsModel from "@/models/websiteStatsModel";
 
 export async function POST(request: NextRequest) {
@@ -42,14 +42,14 @@ export async function PUT(request: NextRequest) {
         if ([400, 500].includes(status)) { return NextResponse.json({ status, message }, { status: 200 }); }
 
         const getUserId = await userAccountsModel.findOne({ userName }).select("_id");
-        await new userLinksListModel({
+        await new userLinksDataModel({
             userName: getUserId._id
         }).save();
 
         //! Increment active users count for current week, month, & year
-        const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { activeUsers: 1 } });
+        const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { newUsers: 1 } });
         if (updateWebsiteStats.matchedCount === 0) {
-            await new websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), activeUsers: 1 }).save();
+            await new websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), newUsers: 1 }).save();
         }
 
         return NextResponse.json({ status, message }, { status: 200 });
