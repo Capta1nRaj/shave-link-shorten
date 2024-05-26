@@ -5,9 +5,12 @@ const userLinksListModel = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     totalLinksList: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "LinksList"
+        ref: "LinksList",
+        required: true
     }],
-    totalLinksCount: { type: Number, default: 0 }
+    totalLinksCount: { type: Number, default: 0 },
+    lifetimelinksCount: { type: Number, default: 0 },
+    lifetimelinksDeleted: { type: Number, default: 0 }
 }, {
     timestamps: true
 });

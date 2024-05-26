@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
         const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { linksClicksCount: 1 } });
 
         if (updateWebsiteStats.matchedCount === 0) {
-            await websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), linksClicksCount: 1 }).save();
+            await new websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), linksClicksCount: 1 }).save();
         }
 
         return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: data.destinationURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });

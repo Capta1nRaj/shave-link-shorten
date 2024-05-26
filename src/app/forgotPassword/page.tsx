@@ -69,7 +69,7 @@ const ForgotPasswordPage = () => {
             setisLoading(true);
 
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/forgotPassword`, { username: formData.username, userOTP, userNewPassword });
-            console.log(status)
+
             if (status === 200) {
                 setTimeout(() => {
                     router.push('/');

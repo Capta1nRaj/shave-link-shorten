@@ -35,7 +35,7 @@ export default async function sendConfirmationMailToUser(userEmail: string, user
 
     try {
         await auth.sendMail(receiver);
-        console.log('Email sent successfully');
+        console.log('%c Email sent successfully', 'background: #222; color: #bada55');
     } catch (error) {
         console.error('Error sending email:', error);
     }

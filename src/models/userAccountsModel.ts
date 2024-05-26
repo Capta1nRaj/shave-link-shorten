@@ -1,3 +1,6 @@
+//! Client & Admin side model
+//* This model is used to store the user accounts data.
+
 import mongoose from "mongoose";
 require('./linksListModel')
 

@@ -1,8 +1,11 @@
-const { mongoose } = require("mongoose");
+//! Client side Model
+//* This schema will capture all the data of the user when the visit any link
+
+import mongoose from "mongoose";
 
 const ClicksListSchema = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
-    alias: { type: mongoose.Schema.Types.ObjectId, ref: "LinksList" },
+    alias: { type: mongoose.Schema.Types.ObjectId, ref: "linksList", required: true },
     ip: { type: String },
     country: { type: String },
     countryCode: { type: String },

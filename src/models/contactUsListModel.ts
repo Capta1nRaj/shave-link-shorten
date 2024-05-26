@@ -1,4 +1,7 @@
-const { mongoose } = require("mongoose");
+//! Client side Model
+//* This will send user message to admin mail, & a thanks for contacting mail to the user
+
+import mongoose from "mongoose";
 
 const ContactUsListSchema = new mongoose.Schema({
     firstName: { type: String },
