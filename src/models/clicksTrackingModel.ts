@@ -3,7 +3,7 @@
 
 import mongoose from "mongoose";
 
-const ClicksListSchema = new mongoose.Schema({
+const ClicksTrackingSchema = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     alias: { type: mongoose.Schema.Types.ObjectId, ref: "linksList", required: true },
     ip: { type: String },
@@ -19,11 +19,11 @@ const ClicksListSchema = new mongoose.Schema({
     as: { type: String },
 }, { timestamps: true })
 
-ClicksListSchema.index({ userName: 1 })
-ClicksListSchema.index({ alias: 1 })
-ClicksListSchema.index({ countryName: 1 })
-ClicksListSchema.index({ stateName: 1 })
-ClicksListSchema.index({ cityName: 1 })
-ClicksListSchema.index({ timezone: 1 })
+ClicksTrackingSchema.index({ userName: 1 })
+ClicksTrackingSchema.index({ alias: 1 })
+ClicksTrackingSchema.index({ countryName: 1 })
+ClicksTrackingSchema.index({ stateName: 1 })
+ClicksTrackingSchema.index({ cityName: 1 })
+ClicksTrackingSchema.index({ timezone: 1 })
 
-export default mongoose.models.ClicksList || mongoose.model('ClicksList', ClicksListSchema);
+export default mongoose.models.clicksTracking || mongoose.model('clicksTracking', ClicksTrackingSchema);

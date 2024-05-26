@@ -1,4 +1,4 @@
-import clicksListModel from '@/models/clicksListModel';
+import clicksTrackingModel from '@/models/clicksTrackingModel';
 import linksListModel from '@/models/linksListModel';
 import websiteStatsModel from '@/models/websiteStatsModel';
 import { getMonthNumber, getWeekNumber, getYearNumber } from '@/utils/DateFunctions';
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
         const response = await axios.get(`http://ip-api.com/json/${ip}`);
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
-        await new clicksListModel({ userName: data.userName, alias: data._id, ip: query, countryName: country, countryCode, stateCode: region, stateName: regionName, cityName: city, zip, timezone, isp, org, as }).save();
+        await new clicksTrackingModel({ userName: data.userName, alias: data._id, ip: query, countryName: country, countryCode, stateCode: region, stateName: regionName, cityName: city, zip, timezone, isp, org, as }).save();
 
         //! Increment link click count for current week, month, & year
         const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { linksClicksCount: 1 } });
