@@ -6,16 +6,21 @@ import React, { useEffect, useState } from 'react'
 import NavBarConstants from '@/constants/NavBarConstants.json'
 import { inter } from '@/fonts/Fonts'
 import { SessionCheck } from '@/utils/SessionCheck'
+import { usePathname } from 'next/navigation'
 
 const NavBarLayout = () => {
+
+    const pathname = usePathname();
 
     const [loading, setloading] = useState(true);
     const [isLogin, setisLogin] = useState<boolean | null>(null)
 
     async function checkSession() {
-        const data = await SessionCheck(false);
-        setisLogin(data);
-        setloading(false);
+        if (pathname.length === 1) {
+            const data = await SessionCheck(false);
+            setisLogin(data);
+            setloading(false);
+        }
     }
 
     useEffect(() => {
