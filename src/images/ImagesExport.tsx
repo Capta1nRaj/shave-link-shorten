@@ -2,6 +2,7 @@
 export { default as ArrowIcon1 } from './CommonImages/ArrowIcon1';
 export { default as ClickIcon1 } from './CommonImages/ClickIcon1';
 export { default as CompanyLogo1 } from './CommonImages/CompanyLogo1';
+export { default as CompanyLogo2 } from './CommonImages/CompanyLogo2';
 export { default as DashboardPreview1 } from './CommonImages/DashboardPreview1';
 export { default as DownFinger3DIcon1 } from './CommonImages/DownFinger3DIcon1';
 export { default as JoinWaitlistIcon1 } from './CommonImages/JoinWaitlistIcon1';
@@ -17,4 +18,5 @@ export { default as LinkedinIcon1 } from './SocialMediaIcons/LinkedinIcon1';
 export { default as TwitterIcon1 } from './SocialMediaIcons/TwitterIcon1';
 
 //! TeamMembersPics
+export { default as AkshatBhargavImage1 } from './TeamMembersPics/AkshatBhargavImage1';
 export { default as PriyalRajImage1 } from './TeamMembersPics/PriyalRajImage1';

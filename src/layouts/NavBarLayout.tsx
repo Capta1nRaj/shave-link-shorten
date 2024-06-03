@@ -1,6 +1,6 @@
 'use client'
 
-import { CompanyLogo1 } from '@/images/ImagesExport'
+import { CompanyLogo1, CompanyLogo2 } from '@/images/ImagesExport'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import NavBarConstants from '@/constants/NavBarConstants.json'
@@ -34,8 +34,8 @@ const NavBarLayout = () => {
             <nav className="NavBarLayout-section bg-primary-2">
                 <section className="max-width py-4 flex justify-between">
 
-                    <div className="left-side">
-                        <CompanyLogo1 customCSS='sm:w-16 w-14' />
+                    <div className="left-side flex items-center">
+                        <CompanyLogo2 customCSS='sm:w-32 w-20' />
                     </div>
 
                     <div className={`middle-side flex items-center uppercase font-bold gap-6 lg:text-base sm:text-lg text-xs ${inter.className}`}>
