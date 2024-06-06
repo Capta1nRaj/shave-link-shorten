@@ -4,9 +4,13 @@
 import mongoose from "mongoose";
 
 const ReferHistorySchema = new mongoose.Schema({
-    userName: { type: String },
-    points: { type: Number },
-    reason: { type: String }
+    userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
+    points: {
+        type: Number,
+    },
+    reason: {
+        type: String,
+    }
 }, {
     timestamps: true
 });

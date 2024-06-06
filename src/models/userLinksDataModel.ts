@@ -12,7 +12,7 @@ const userLinksDataModel = new mongoose.Schema({
         required: true
     }],
     totalLinksCount: { type: Number, default: 0 },
-    lifetimelinksCount: { type: Number, default: 0 },
+    lifetimelinksCreated: { type: Number, default: 0 },
     lifetimelinksDeleted: { type: Number, default: 0 }
 }, {
     timestamps: true
