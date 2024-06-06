@@ -58,7 +58,7 @@ const NavBarLayout = () => {
                         <div className={`${loading ? "invisible" : "visible"} right-side flex items-center uppercase font-bold gap-6 lg:text-base sm:text-lg text-xs ${inter.className}`}>
                             {NavBarConstants.slice(4).map((item) => {
                                 return (
-                                    <Link key={item.title} className={item.css} href={`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/dashboard`}> {item.title} </Link>
+                                    <Link key={item.title} className={item.css} href={`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`}> {item.title} </Link>
                                 )
                             })}
                         </div>

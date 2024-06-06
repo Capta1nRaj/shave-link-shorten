@@ -6,12 +6,15 @@ import mongoose from "mongoose";
 const LinksListModelSchema = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     destinationURL: { type: String },
+    domainName: { type: String },
     alias: { type: String },
+    comment: { type: String },
+    description: { type: String },
     clicksCount: { type: Number, default: 0 },
     tags: [{ type: String }],
     status: { type: Boolean, default: true },
     passwordProtection: { type: Boolean, default: false },
-    password: { type: String }
+    password: { type: String, default: '' }
 }, { timestamps: true });
 
 LinksListModelSchema.index({ userName: 1 })

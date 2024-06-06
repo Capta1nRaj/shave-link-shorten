@@ -6,7 +6,7 @@ export async function SessionCheck(redirect: boolean = true) {
 
         if (status === 202) {
             if (redirect) {
-                window.location.href = `${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/dashboard` || "http://localhost:3001/dashboard";
+                window.location.href = `${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links` || "http://localhost:3001/links";
             }
             return true;
         }
