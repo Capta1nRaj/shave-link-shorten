@@ -16,7 +16,7 @@
     "axios": "^1.6.8",
     "connect2mongodb": "^1.1.27",
     "cookies-next": "^4.1.1",
-    "email-armor": "^0.0.88-beta.0",
+    "email-armor": "^0.0.89-beta.0",
     "mongoose": "^8.4.1",
     "next": "14.2.1",
     "nodemailer": "^6.9.13",
