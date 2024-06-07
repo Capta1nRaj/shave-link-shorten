@@ -6,7 +6,8 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mainSync": "git checkout main && git pull origin dev && git push && git checkout dev"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
