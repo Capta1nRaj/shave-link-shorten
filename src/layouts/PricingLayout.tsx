@@ -10,13 +10,11 @@ const tiers = [
         priceMonthly: '$0',
         description: 'Open Doors to Opportunity with Our Free Offering.',
         features: [
-            '25 new links/month',
-            'Unlimited links clicks',
+            '50 new links/month',
+            'Unlimited tracked clicks',
+            'Unlimited QR Codes',
             '30 days analytics retention',
-            '5 QR Codes/month',
-            '1 Custom Logo',
-            'And more',
-            // 'App Opener',
+            'And more coming soon',
         ],
         buttonCSS: "",
         button: "Get started today"
@@ -25,7 +23,7 @@ const tiers = [
         name: 'Coming soon',
         id: 'tier-team',
         href: '#',
-        priceMonthly: '$1-99',
+        priceMonthly: 'In Transit',
         description: 'Take Your Business to the Next Level with Our Professional Paid Plan.',
         features: [
             'Working on it - Fitz (Ref. Agents Of Shield)',

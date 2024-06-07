@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image"
   },
   openGraph: {
-    images: './opengraph-image.png',
+    images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/CompanyLogo1.png',
   },
 };
 

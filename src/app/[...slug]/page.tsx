@@ -32,13 +32,13 @@ export async function generateMetadata({ params }: { params: { slug: [string, st
                 type: 'website',
                 title: data.ogTitle || "Shave - Short Your Links",
                 description: data.ogDescription || "Shorten URLs effortlessly for seamless sharing across all platforms with ease.",
-                images: data.ogImage || "1"
+                images: data.ogImage || "https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/CompanyLogo1.png"
             },
             twitter: {
                 card: "summary_large_image",
                 title: data.ogTitle || "Shave - Short Your Links",
                 description: data.ogDescription || "Shorten URLs effortlessly for seamless sharing across all platforms with ease.",
-                images: data.ogImage || "../opengraph-image.png"
+                images: data.ogImage || "https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/CompanyLogo1.png"
             },
         }
     } else {

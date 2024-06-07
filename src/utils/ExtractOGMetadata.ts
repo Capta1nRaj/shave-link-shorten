@@ -19,7 +19,7 @@ export const ExtractOGMetadata = async (url: string | URL | Request) => {
         return {
             ogTitle: 'Shave - Short Your Links',
             ogDescription: 'Shorten URLs effortlessly for seamless sharing across all platforms with ease.',
-            ogImage: '../opengraph-image.png'
+            ogImage: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/CompanyLogo1.png'
         };
     }
 };
