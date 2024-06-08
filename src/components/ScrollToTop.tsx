@@ -16,7 +16,7 @@ const ScrollToTop = () => {
             const scrollPercentage = (scrollY / (scrollHeight - windowHeight)) * 100;
 
             // Set visibility based on scroll percentage
-            if (scrollPercentage > 50) {
+            if (scrollPercentage > 20) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
