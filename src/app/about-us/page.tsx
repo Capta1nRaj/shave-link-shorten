@@ -9,7 +9,7 @@ const team = [
     },
     {
         name: 'Akshat Bhargav',
-        role: 'Intern Graphic Designer',
+        role: 'Intern, Graphic Designer',
         imageUrl: <AkshatBhargavImage1 customCSS="w-full rounded-2xl object-cover" />,
         location: 'New Delhi, Delhi',
     }
@@ -37,9 +37,9 @@ export default function Example() {
                 {/* Header section */}
                 <div className="lg:px-8 px-6 pt-10">
                     <div className="mx-auto max-w-2xl text-center">
-                        <h2 className="text-4xl font-bold tracking-tight text-primary-4 sm:text-6xl"> About ShaveLink </h2>
+                        <h2 className="text-4xl font-bold tracking-tight text-primary-4 sm:text-6xl"> About ShaveLinks </h2>
                         <p className="mt-6 text-lg leading-8 text-primary-4">
-                            Shave Link Shortener is a tool for streamlined sharing. Create concise, custom links effortlessly. Track engagement seamlessly. Simplify your online presence with Shave Link Shortener.
+                            ShaveLinks is a link shortener tool for streamlined sharing. Create concise, custom links effortlessly. Track engagement seamlessly. Simplify your online presence with ShaveLinks Shortener.
                         </p>
                     </div>
                 </div>

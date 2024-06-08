@@ -13,7 +13,7 @@ export default function FooterLayout() {
                     <section className="flex sm:flex-row flex-col justify-between">
                         <div className={`left-side ${roboto.className} font-normal text-primary-4 sm:w-96 w-full flex flex-col justify-center sm:text-left text-center`}>
                             <CompanyLogo2 customCSS="sm:mx-0 mx-auto mb-2 sm:w-32 w-20" />
-                            At ShaveLink Shortener, we streamline link sharing with advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing efforts, track performance, and effortlessly open apps based on your links.
+                            At ShaveLinks Shortener, we streamline link sharing with advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing efforts, track performance, and effortlessly open apps based on your links.
                         </div>
 
                         <div className="right-side text-lg flex flex-col sm:text-left text-center justify-between sm:mt-0 mt-10 sm:gap-0 gap-y-2">
@@ -38,7 +38,7 @@ export default function FooterLayout() {
                         </div>
 
 
-                        <p className="font-normal text-center text-xs"> © 2024 ShaveLink. All rights reserved. </p>
+                        <p className="font-normal text-center text-xs"> © 2024 ShaveLinks. All rights reserved. </p>
 
                     </section>
 
