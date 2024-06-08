@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "mainSync": "git checkout main && git pull origin dev && git push && git checkout dev"
+    "mainSync": "git checkout main && git pull origin dev && git push && git checkout dev",
+    "softResetBranch": "git checkout main && git reset --soft HEAD~2 && git commit -m \"MicrosoftClarity code updated\" && git push --force && git checkout dev && git reset --hard origin/main && git push --force"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

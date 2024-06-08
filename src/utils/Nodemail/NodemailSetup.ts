@@ -16,7 +16,7 @@ const auth = nodemailer.createTransport({
 });
 
 function getEmailTemplate() {
-    const filePath = path.join(process.cwd(), 'src', 'utils', 'Nodemail', './NodemailTemplate.html');
+    const filePath = path.join(process.cwd(), 'src', 'utils', 'Nodemail', './ContactUsEmailTemplate.html');
     return fs.readFileSync(filePath, 'utf-8');
 }
 
