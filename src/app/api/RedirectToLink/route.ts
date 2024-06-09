@@ -25,6 +25,7 @@ export async function GET(request: NextRequest) {
         const ip = await FetchUserIP();
 
         const response = await axios.get(`http://ip-api.com/json/${ip}`);
+
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
 
         if (status) {

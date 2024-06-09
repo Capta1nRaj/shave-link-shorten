@@ -1,12 +1,12 @@
 'use client'
 
-import { SessionCheck } from "@/utils/SessionCheck";
 import axios from "axios";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getCookies } from 'cookies-next';
 import LoadingSceneComponent from "@/components/LoadingSceneComponent";
+import { SessionCheck } from "@/states/SessionCheck";
 
 type FormData = {
     username: string;
@@ -124,21 +124,24 @@ const SignInPage = () => {
         }
     }
 
+    const { isLoggedIn, checkSession } = SessionCheck();
     const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const data = await SessionCheck();
-                setLoading(data);
-            } catch (error) { setLoading(false); }
-        };
 
+    useEffect(() => {
         const data = getCookies();
         if (!data.id && !data.userName && !data.token) {
-            setLoading(false); return;
+            setLoading(false);
+            return;
         } else {
-            checkSession();
+            checkSession().then((data) => {
+                if (data.isLoggedIn) {
+                    router.push('/');
+                    return;
+                }
+                setLoading(false)
+            })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (loading) {

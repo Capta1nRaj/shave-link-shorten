@@ -1,7 +1,7 @@
 'use client'
 
 import LoadingSceneComponent from "@/components/LoadingSceneComponent";
-import { SessionCheck } from "@/utils/SessionCheck";
+import { SessionCheck } from "@/states/SessionCheck";
 import axios from "axios";
 import { getCookies } from "cookies-next";
 import Link from "next/link";
@@ -127,24 +127,24 @@ const SignUpPage = () => {
     const inputCSS = `bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500`;
     const buttonCSS = `w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800`;
 
+    const { isLoggedIn, checkSession } = SessionCheck();
     const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const data = await SessionCheck();
-                setLoading(data);
-            } catch (error) {
-                setLoading(false);
-            }
-        };
 
+    useEffect(() => {
         const data = getCookies();
         if (!data.id && !data.userName && !data.token) {
             setLoading(false);
             return;
         } else {
-            checkSession();
+            checkSession().then((data) => {
+                if (data.isLoggedIn) {
+                    router.push('/');
+                    return;
+                }
+                setLoading(false)
+            })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (loading) {

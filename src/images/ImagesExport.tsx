@@ -6,6 +6,7 @@ export { default as CompanyLogo2 } from './CommonImages/CompanyLogo2';
 export { default as DashboardPreview1 } from './CommonImages/DashboardPreview1';
 export { default as DownFinger3DIcon1 } from './CommonImages/DownFinger3DIcon1';
 export { default as JoinWaitlistIcon1 } from './CommonImages/JoinWaitlistIcon1';
+export { default as LoadingGIF1 } from './CommonImages/LoadingGIF1';
 export { default as PricingIcon1 } from './CommonImages/PricingIcon1';
 
 //! FeaturesBoxImages

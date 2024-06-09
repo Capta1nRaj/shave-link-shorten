@@ -22,6 +22,6 @@
     {
         "title": "dashboard",
         "link": "",
-        "css": "bg-primary-3 px-4 py-2 rounded-full buttonTransitionCSS"
+        "css": "bg-primary-3 px-[34px] py-2 rounded-full buttonTransitionCSS"
     }
 ]
