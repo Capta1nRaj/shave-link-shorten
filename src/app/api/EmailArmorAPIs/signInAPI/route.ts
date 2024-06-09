@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
 
         if ([400, 401, 403].includes(status) || !userName) { return NextResponse.json({ status, message }, { status: 200 }); }
 
-        cookies().set("userName", userName, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}` });
-        cookies().set("id", id, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}` });
+        cookies().set("userName", userName, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
+        cookies().set("id", id, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
 
         return NextResponse.json({ status, message }, { status: 200 });
 
@@ -49,7 +49,7 @@ export async function PUT(request: NextRequest) {
 
         if ([400, 401].includes(status) || !signedJWTToken) { return NextResponse.json({ status, message }, { status: 200 }); }
 
-        cookies().set("token", signedJWTToken, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}` });
+        cookies().set("token", signedJWTToken, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
 
         return NextResponse.json({ status, message }, { status: 200 });
 
