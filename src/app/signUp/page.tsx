@@ -3,7 +3,7 @@
 import LoadingSceneComponent from "@/components/LoadingSceneComponent";
 import { SessionCheck } from "@/states/SessionCheck";
 import axios from "axios";
-import { getCookies } from "cookies-next";
+import { deleteCookie, getCookies } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -73,6 +73,7 @@ const SignUpPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage("Internal Server Error.");
         }
 
@@ -102,6 +103,7 @@ const SignUpPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage("Internal Server Error.");
         }
     }
@@ -119,6 +121,7 @@ const SignUpPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage("Internal Server Error.");
         }
     }
@@ -133,6 +136,7 @@ const SignUpPage = () => {
     useEffect(() => {
         const data = getCookies();
         if (!data.id && !data.userName && !data.token) {
+            deleteCookie("id"); deleteCookie("userName"); deleteCookie("token");
             setLoading(false);
             return;
         } else {

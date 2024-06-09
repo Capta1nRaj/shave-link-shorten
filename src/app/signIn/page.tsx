@@ -4,7 +4,7 @@ import axios from "axios";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getCookies } from 'cookies-next';
+import { deleteCookie, getCookies } from 'cookies-next';
 import LoadingSceneComponent from "@/components/LoadingSceneComponent";
 import { SessionCheck } from "@/states/SessionCheck";
 
@@ -53,6 +53,7 @@ const SignInPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage("Internal Server Error.");
         }
     };
@@ -79,6 +80,7 @@ const SignInPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage("Internal Server Error.");
         }
     }
@@ -104,6 +106,7 @@ const SignInPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage('Internal Server Error.');
         }
     }
@@ -120,6 +123,7 @@ const SignInPage = () => {
 
             setisLoading(false);
         } catch (error) {
+            console.error(error);
             setmessage("Internal Server Error.");
         }
     }
@@ -130,6 +134,7 @@ const SignInPage = () => {
     useEffect(() => {
         const data = getCookies();
         if (!data.id && !data.userName && !data.token) {
+            deleteCookie("id"); deleteCookie("userName"); deleteCookie("token");
             setLoading(false);
             return;
         } else {

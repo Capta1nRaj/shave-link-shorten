@@ -22,5 +22,9 @@ export async function GET(request: NextRequest) {
         if (status === 400) { await DeleteCookie(); }
 
         return NextResponse.json({ status, message, userName }, { status: 200 });
-    } catch (error) { await DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+    } catch (error) {
+        console.error(error);
+        await DeleteCookie();
+        return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
+    }
 }

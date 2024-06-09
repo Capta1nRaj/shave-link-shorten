@@ -6,6 +6,7 @@ export async function FetchWebsiteStats() {
         const { usersCount, linksCreatedCount, linksTrackedCount } = await response.json();
         return { usersCount, linksCreatedCount, linksTrackedCount };
     } catch (error) {
+        console.error(error);
         return { usersCount: 0, linksCreatedCount: 0, linksTrackedCount: 0 };
     }
 }

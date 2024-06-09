@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ usersCount, linksCreatedCount, linksTrackedCount, message: "Website stats fetched successfully.", status: 200 }, { status: 200 });
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }
 }

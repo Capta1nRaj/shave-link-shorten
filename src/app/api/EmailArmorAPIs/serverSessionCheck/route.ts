@@ -20,6 +20,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ status, message, userName }, { status: 200 });
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }
 }
@@ -29,6 +30,7 @@ export async function POST(request: NextRequest) {
         const data = await request.json();
         return NextResponse.json({ message: "Hello" }, { status: 200 });
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }
 }

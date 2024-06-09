@@ -7,7 +7,7 @@ import NavBarConstants from '@/constants/NavBarConstants.json'
 import { inter } from '@/fonts/Fonts'
 import { usePathname } from 'next/navigation'
 import { SessionCheck } from '@/states/SessionCheck'
-import { getCookies } from 'cookies-next'
+import { deleteCookie, getCookies } from 'cookies-next'
 
 const loggedInButtonCSS = `flex items-center uppercase font-bold lg:text-base sm:text-lg text-xs ${inter.className}`
 
@@ -33,6 +33,7 @@ export default function NavBarLayout() {
         if (!isSessionChecked) {
             const data = getCookies();
             if (!data.id && !data.userName && !data.token) {
+                deleteCookie("id"); deleteCookie("userName"); deleteCookie("token");
                 setloading(false);
                 return;
             }

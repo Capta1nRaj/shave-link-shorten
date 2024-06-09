@@ -60,6 +60,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: data.destinationURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
     }
 }

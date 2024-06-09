@@ -23,6 +23,7 @@ export default function ContactUsPage() {
             if (status !== 200) { toast.error(message); return; }
             resetForm(); toast.success(message)
         } catch (error) {
+            console.error(error);
             toast.error("Internal Server Error.");
         }
     };
