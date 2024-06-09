@@ -6,6 +6,7 @@ import { getWeekNumber, getMonthNumber, getYearNumber } from "@/utils/DateFuncti
 import userAccountsModel from "@/models/userAccountsModel";
 import userLinksDataModel from "@/models/userLinksDataModel";
 import websiteStatsModel from "@/models/websiteStatsModel";
+const expireIn365Days = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
 
 export async function POST(request: NextRequest) {
     try {
@@ -32,14 +33,17 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
     try {
+
+        const userAgent = request.headers.get('user-agent');
+        if (!userAgent) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+
         const { userName, OTP } = await request.json();
 
-        const response = await signUpVerify(userName, OTP);
+        const response = await signUpVerify(userName, OTP, userAgent);
         if (!response) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
-        const { message, status } = response;
-
-        if ([400, 500].includes(status)) { return NextResponse.json({ status, message }, { status: 200 }); }
+        // id, userName, signedJWTToken,
+        if ([400, 500].includes(response.status)) { return NextResponse.json({ status: response.status, message: response.message }, { status: 200 }); }
 
         const getUserId = await userAccountsModel.findOne({ userName }).select("_id");
         await new userLinksDataModel({
@@ -52,7 +56,13 @@ export async function PUT(request: NextRequest) {
             await new websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), newUsers: 1 }).save();
         }
 
-        return NextResponse.json({ status, message }, { status: 200 });
+        //! Expire cookies in 365 days
+        cookies().set("userName", userName, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: expireIn365Days });
+        cookies().set("id", response.id, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: expireIn365Days });
+        //@ts-ignore because signedJWTToken will be sent otherwise check the package for the issue
+        cookies().set("token", response.signedJWTToken, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: expireIn365Days });
+
+        return NextResponse.json({ status: response.status, message: response.message }, { status: 200 });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });

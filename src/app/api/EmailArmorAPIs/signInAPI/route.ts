@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { resendOTP, signIn, signInVerify } from 'email-armor'
 import { cookies } from 'next/headers'
 import { FetchUserIP } from "@/utils/FetchUserIP";
+const expireIn365Days = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
 
 if (!process.env.COOKIE_DOMAIN) {
     throw new Error("COOKIE_DOMAIN env is not defined!")
@@ -21,8 +22,9 @@ export async function POST(request: NextRequest) {
 
         if ([400, 401, 403].includes(status) || !userName) { return NextResponse.json({ status, message }, { status: 200 }); }
 
-        cookies().set("userName", userName, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
-        cookies().set("id", id, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
+        //! Expire cookies in 365 days
+        cookies().set("userName", userName, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: expireIn365Days });
+        cookies().set("id", id, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: expireIn365Days });
 
         return NextResponse.json({ status, message }, { status: 200 });
 
@@ -49,7 +51,8 @@ export async function PUT(request: NextRequest) {
 
         if ([400, 401].includes(status) || !signedJWTToken) { return NextResponse.json({ status, message }, { status: 200 }); }
 
-        cookies().set("token", signedJWTToken, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) });
+        //! Expire cookies in 365 days
+        cookies().set("token", signedJWTToken, { path: "/", domain: `${process.env.COOKIE_DOMAIN || "localhost"}`, expires: expireIn365Days });
 
         return NextResponse.json({ status, message }, { status: 200 });
 

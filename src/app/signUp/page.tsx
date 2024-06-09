@@ -94,9 +94,7 @@ const SignUpPage = () => {
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, { userName: formData.userName, OTP });
 
             if (status === 202) {
-                setTimeout(() => {
-                    router.push('/');
-                }, 1000);
+                window.location.href = process.env.NEXT_PUBLIC_DOMAIN_NAME_2 + '/links' || "http://localhost:3001/links";
             }
 
             setmessage(message);
