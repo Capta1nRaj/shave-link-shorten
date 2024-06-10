@@ -18,20 +18,25 @@ export async function GET(request: NextRequest) {
         const searchParams = request.nextUrl.searchParams;
         const alias = searchParams.get('alias');
 
-        const data = await linksListModel.findOne({ alias }).select('userName destinationURL toSupport appOpener appType status');
-        if (!data) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
+        const aliasData = await linksListModel.findOne({ alias }).select('userName destinationURL toSupport appOpener appType status');
+        if (!aliasData) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 
-        // //! Get user IP Address & fetch their country
+        //! If link status is inactive, then, return to homepage
+        if (!aliasData.status) {
+            return NextResponse.json({ message: "Link is disabled!", statusCode: 404 }, { status: 200 });
+        }
+
+        //! Get user IP Address & fetch their location
         const ip = await FetchUserIP();
+        const ipData = await axios.get(`http://ip-api.com/json/${ip}`);
 
-        const response = await axios.get(`http://ip-api.com/json/${ip}`);
+        const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = ipData;
 
-        const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = response;
-
+        //! If IP status is true, then, Save clicks tracking data, & updateing clicks count for link & website stats
         if (status) {
             await new clicksTrackingModel({
-                userName: data.userName,
-                alias: data._id,
+                userName: aliasData.userName,
+                alias: aliasData._id,
                 ip: query,
                 countryName: country,
                 countryCode,
@@ -58,7 +63,7 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: data.destinationURL, toSupport: data.toSupport, appOpener: data.appOpener, status: data.status }, { status: 200 });
+        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: aliasData.destinationURL, toSupport: aliasData.toSupport, appOpener: aliasData.appOpener, status: aliasData.status }, { status: 200 });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });

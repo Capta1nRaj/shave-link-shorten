@@ -15,8 +15,8 @@ const RedirectPageBySlugData = () => {
 
     async function redirectLink() {
         const { data: { destinationURL, status, statusCode } } = await axios.get(`/api/RedirectToLink?alias=${params.slug[0]}`);
-        if (statusCode === 200 && destinationURL) { router.push(destinationURL); return; }
         setFormData({ destinationURL, status, statusCode });
+        if (status && statusCode === 200 && destinationURL) { router.push(destinationURL); return; }
         setloading(false);
     }
 
@@ -32,7 +32,7 @@ const RedirectPageBySlugData = () => {
         )
     }
 
-    if (formData.statusCode === 404) {
+    if (!formData.status || formData.statusCode === 404) {
         window.location.href = process.env.NEXT_PUBLIC_DOMAIN_NAME_1 || ' http://localhost:3000';
         return (
             <section className='fixed top-0 left-0 right-0 bottom-0 bg-primary-1'></section>
