@@ -8,7 +8,7 @@ const QRCodeIcon1 = ({ customCSS, width, height }: ImageInterface) => {
     return (
         <>
             <Link href={'/'}>
-                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/FeaturesBoxImages/QRCodeIcon1.png" alt="QRCodeIcon1" />
+                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/FeaturesBoxImages/QRCodeIcon1.png" title='QRCodeIcon1' alt="QRCodeIcon1" />
             </Link>
         </>
     );

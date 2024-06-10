@@ -8,7 +8,7 @@ const WWWIcon1 = ({ customCSS, width, height }: ImageInterface) => {
     return (
         <>
             <Link href={'/'}>
-                <Image className={`${customCSS}`} width={width || 70} height={height || 70} src="/images/FeaturesBoxImages/WWWIcon1.png" alt="WWWIcon1" />
+                <Image className={`${customCSS}`} width={width || 70} height={height || 70} src="/images/FeaturesBoxImages/WWWIcon1.png" title='WWWIcon1' alt="WWWIcon1" />
             </Link>
         </>
     );

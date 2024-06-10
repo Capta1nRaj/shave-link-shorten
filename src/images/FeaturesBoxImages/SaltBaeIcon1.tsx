@@ -8,7 +8,7 @@ const SaltBaeIcon1 = ({ customCSS, width, height }: ImageInterface) => {
     return (
         <>
             <Link href={'/'}>
-                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/FeaturesBoxImages/SaltBaeIcon1.png" alt="SaltBaeIcon1" />
+                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/FeaturesBoxImages/SaltBaeIcon1.png" title='SaltBaeIcon1' alt="SaltBaeIcon1" />
             </Link>
         </>
     );

@@ -13,17 +13,20 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}`),
   title: {
-    default: "Shave - Short Your Links",
+    default: "Shave - Short Your Links with Worldwide Tracking Analytics",
     template: ""
   },
-  description: "Shorten URLs effortlessly for seamless sharing across all platforms with ease.",
-  keywords: "url shortener, link manager, social media, web trimming, digital platform, streamlined, accessibility, customized, concise, efficient",
+  description: "Effortlessly shorten links with our URL shortener. Access free, advanced analytics, customized features, and efficient link management for streamlined digital platform integration and global tracking.",
+  keywords: "links, features, free ,analytics, pricing, url shortener, link manager, social media, web trimming, digital platform, streamlined, accessibility, customized, concise, efficient",
   twitter: {
     card: "summary_large_image"
   },
   openGraph: {
     images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
   },
+  alternates: {
+    canonical: './',
+  }
 };
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
