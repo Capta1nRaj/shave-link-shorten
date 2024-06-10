@@ -73,7 +73,7 @@ const SignInPage = () => {
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, { username: formData.username, OTP });
 
             if (status === 202) {
-                setTimeout(() => { router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`); }, 1000);
+                router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`);
             }
 
             setmessage(message);
@@ -97,9 +97,7 @@ const SignInPage = () => {
             const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signUpAPI`, { userName: formData.username, OTP });
 
             if (status === 202) {
-                setTimeout(() => {
-                    router.push('/');
-                }, 1000);
+                router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`);
             }
 
             setmessage(message);
