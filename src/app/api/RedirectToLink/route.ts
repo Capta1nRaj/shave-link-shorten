@@ -26,9 +26,7 @@ export async function GET(request: NextRequest) {
         if (!aliasData) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 
         //! If link status is inactive, then, return to homepage
-        if (!aliasData.status) {
-            return NextResponse.json({ message: "Link is disabled!", statusCode: 404 }, { status: 200 });
-        }
+        if (!aliasData.status) { return NextResponse.json({ message: "Link is disabled!", statusCode: 404 }, { status: 200 }); }
 
         //! Get user IP Address & fetch their location
         const ip = await FetchUserIP();

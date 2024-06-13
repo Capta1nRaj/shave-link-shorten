@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
-    const [seconds, setSeconds] = useState(5);
+    const [seconds, setSeconds] = useState(1);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -19,19 +19,47 @@ const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
 
     useEffect(() => {
         if (seconds === 0) {
-            console.log("44")
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (destinationURL.includes('youtube.com') || destinationURL.includes('youtu.be')) {
 
-if (/android/i.test(userAgent)) {
-    window.location.href = "intent://www.youtube.com/watch?v=sSFM_hCFgko#Intent;package=com.google.android.youtube;scheme=https;end";
-} else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    window.location.href = "vnd.youtube://www.youtube.com/watch?v=sSFM_hCFgko";
-} else {
-    window.location.href = "https://www.youtube.com/watch?v=sSFM_hCFgko";
-}
+                if (/android/i.test(userAgent)) {
+                    window.location.href = `intent://${destinationURL.split('https://')[1]}#Intent;package=com.google.android.youtube;scheme=https;end`;
+                } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    window.location.href = `vnd.youtube://${destinationURL.split('https://')[1]}`;
+                } else {
+                    window.location.href = destinationURL;
+                }
 
-            window.location.href = destinationURL;
+            } else if (destinationURL.includes("x.com")) {
+
+                const twitterStatusId = destinationURL.split("/status/")[1];
+                const userId = destinationURL.split('x.com/')[1];
+
+                if (twitterStatusId) {
+
+                    if (/android/i.test(userAgent)) {
+                        window.location.href = `x://status?id=${twitterStatusId}`;
+                    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                        window.location.href = `x://status?id=${twitterStatusId}`;
+                    } else {
+                        window.location.href = destinationURL;
+                    }
+
+                } else if (userId) {
+
+                    if (/android/i.test(userAgent)) {
+                        window.location.href = `x://user?screen_name=${userId}`;
+                    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                        window.location.href = `x://user?screen_name=${userId}`;
+                    } else {
+                        window.location.href = destinationURL;
+                    }
+
+                }
+            } else {
+                window.location.href = destinationURL;
+            }
         }
     }, [seconds, destinationURL]);
 
@@ -40,7 +68,7 @@ if (/android/i.test(userAgent)) {
     return (
         <>
             <div className="flex justify-center items-center h-screen flex-col">
-               <div className={`${adCSS} mb-4`}> ad here </div>
+                <div className={`${adCSS} mb-4`}> ad here </div>
 
                 <p className='font-bold mb-2 text-2xl'> Redirecting in </p>
                 <div className="bg-primary-1 text-primary-2 p-10 rounded-full min-w-[116px] max-w-[116px] text-center border border-primary-3">
@@ -60,11 +88,11 @@ export default ShowAdComponent;
 // var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
 // if (/android/i.test(userAgent)) {
-//     window.location.href = "intent://www.youtube.com/watch?v=sSFM_hCFgko#Intent;package=com.google.android.youtube;scheme=https;end";
+// window.location.href = "intent://www.youtube.com/watch?v=sSFM_hCFgko#Intent;package=com.google.android.youtube;scheme=https;end";
 // } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-//     window.location.href = "vnd.youtube://www.youtube.com/watch?v=sSFM_hCFgko";
+// window.location.href = "vnd.youtube://www.youtube.com/watch?v=sSFM_hCFgko";
 // } else {
-//     window.location.href = "https://www.youtube.com/watch?v=sSFM_hCFgko";
+// window.location.href = "https://www.youtube.com/watch?v=sSFM_hCFgko";
 // }
 
 // return;
@@ -74,11 +102,11 @@ export default ShowAdComponent;
 // var twitterUrl = "https://x.com/RVCJ_FB/status/1793359412993937498";
 
 // if (/android/i.test(userAgent)) {
-//     window.location.href = "twitter://status?id=1793359412993937498";
+// window.location.href = "twitter://status?id=1793359412993937498";
 // } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-//     window.location.href = "twitter://status?id=1793359412993937498";
+// window.location.href = "twitter://status?id=1793359412993937498";
 // } else {
-//     window.location.href = twitterUrl;
+// window.location.href = twitterUrl;
 // }
 
 // return;

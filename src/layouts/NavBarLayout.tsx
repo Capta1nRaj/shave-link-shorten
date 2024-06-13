@@ -14,7 +14,7 @@ const loggedInButtonCSS = `flex items-center uppercase font-bold lg:text-base sm
 export default function NavBarLayout() {
 
     const pathname = usePathname();
-    const pathNamesList = ['/signIn', '/signUp', '/forgotPassword', '/contact-us']
+    const pathNamesList = ['/', '/signIn', '/signUp', '/forgotPassword', '/contact-us'];
 
     const [loading, setloading] = useState(true);
     const [isSessionChecked, setisSessionChecked] = useState(false);

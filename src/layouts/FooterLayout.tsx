@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 export default function FooterLayout() {
 
     const pathname = usePathname();
-    const pathNamesList = ['/signIn', '/signUp', '/forgotPassword', '/contact-us']
+    const pathNamesList = ['/', '/signIn', '/signUp', '/forgotPassword', '/contact-us'];
 
     return (
         <>

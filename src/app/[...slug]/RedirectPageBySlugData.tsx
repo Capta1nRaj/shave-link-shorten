@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import { notFound, useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import ShowAdComponent from "@/components/ShowAdComponent";
 import axios from "axios";
 
@@ -11,19 +11,25 @@ const RedirectPageBySlugData = () => {
 
     const [loading, setloading] = useState(true);
     const [formData, setFormData] = useState(
-        { destinationURL: "", status: false, statusCode: 200, toSupport: false }
+        { statusCode: 200, destinationURL: "", toSupport: false, isApp: false, status: false }
     );
 
     async function redirectLink() {
         const { data: { statusCode, destinationURL, toSupport, status, isApp } } = await axios.get(`/api/RedirectToLink?alias=${params.slug[0]}`);
 
-        // Checking the conditions, if toSupport is false, isApp is false, link status is active/true, statusCode === 200, & destinationURL exist, then, redirect user to the page
-        if (!toSupport && !isApp && status && statusCode === 200 && destinationURL) {
+        // Checking the conditions
+        // If statusCode === 200
+        // If destinationURL exist
+        // If toSupport is false
+        // If isApp is false
+        // If link status is active/true
+        // Then redirect user to the page
+        if (statusCode === 200 && destinationURL && !toSupport && !isApp && status) {
             router.push(destinationURL);
             return;
         }
 
-        setFormData({ destinationURL, status, statusCode, toSupport });
+        setFormData({ statusCode, destinationURL, toSupport, isApp, status });
 
         setloading(false);
     }
@@ -39,7 +45,7 @@ const RedirectPageBySlugData = () => {
         );
     }
 
-    if (!formData.status || formData.statusCode === 404) {
+    if (formData.statusCode === 404) {
         window.location.href = process.env.NEXT_PUBLIC_DOMAIN_NAME_1 || "http://localhost:3000";
         return (
             <section className="fixed top-0 left-0 right-0 bottom-0 bg-primary-1"></section>
