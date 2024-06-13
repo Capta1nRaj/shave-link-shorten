@@ -14,7 +14,9 @@ const LinksListModelSchema = new mongoose.Schema({
     tags: [{ type: String }],
     status: { type: Boolean, default: true },
     passwordProtection: { type: Boolean, default: false },
-    password: { type: String, default: '' }
+    password: { type: String, default: '' },
+    toSupport: { type: Boolean, default: false },
+    isApp: { type: Boolean, default: false },
 }, { timestamps: true });
 
 LinksListModelSchema.index({ userName: 1 })
