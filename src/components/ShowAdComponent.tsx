@@ -20,43 +20,37 @@ const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
     useEffect(() => {
         if (seconds === 0) {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(userAgent);
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-            if (destinationURL.includes('youtube.com') || destinationURL.includes('youtu.be')) {
-
-                if (/android/i.test(userAgent)) {
+            const handleYouTubeRedirection = () => {
+                if (isAndroid) {
                     window.location.href = `intent://${destinationURL.split('https://')[1]}#Intent;package=com.google.android.youtube;scheme=https;end`;
-                } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                } else if (isIOS) {
                     window.location.href = `vnd.youtube://${destinationURL.split('https://')[1]}`;
                 } else {
                     window.location.href = destinationURL;
                 }
+            };
 
+            const handleXRedirection = (twitterStatusId: string | undefined, userId: string | undefined) => {
+                if (twitterStatusId) {
+                    const xUrl = `x://status?id=${twitterStatusId}`;
+                    window.location.href = isAndroid || isIOS ? xUrl : destinationURL;
+                } else if (userId) {
+                    const xUrl = `x://user?screen_name=${userId}`;
+                    window.location.href = isAndroid || isIOS ? xUrl : destinationURL;
+                } else {
+                    window.location.href = destinationURL;
+                }
+            };
+
+            if (destinationURL.includes('youtube.com') || destinationURL.includes('youtu.be')) {
+                handleYouTubeRedirection();
             } else if (destinationURL.includes("x.com")) {
-
                 const twitterStatusId = destinationURL.split("/status/")[1];
                 const userId = destinationURL.split('x.com/')[1];
-
-                if (twitterStatusId) {
-
-                    if (/android/i.test(userAgent)) {
-                        window.location.href = `x://status?id=${twitterStatusId}`;
-                    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                        window.location.href = `x://status?id=${twitterStatusId}`;
-                    } else {
-                        window.location.href = destinationURL;
-                    }
-
-                } else if (userId) {
-
-                    if (/android/i.test(userAgent)) {
-                        window.location.href = `x://user?screen_name=${userId}`;
-                    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                        window.location.href = `x://user?screen_name=${userId}`;
-                    } else {
-                        window.location.href = destinationURL;
-                    }
-
-                }
+                handleXRedirection(twitterStatusId, userId);
             } else {
                 window.location.href = destinationURL;
             }
@@ -83,30 +77,3 @@ const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
 };
 
 export default ShowAdComponent;
-
-//! This will redirect them to YouYube app
-// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-// if (/android/i.test(userAgent)) {
-// window.location.href = "intent://www.youtube.com/watch?v=sSFM_hCFgko#Intent;package=com.google.android.youtube;scheme=https;end";
-// } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-// window.location.href = "vnd.youtube://www.youtube.com/watch?v=sSFM_hCFgko";
-// } else {
-// window.location.href = "https://www.youtube.com/watch?v=sSFM_hCFgko";
-// }
-
-// return;
-
-//! For Twitter
-// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-// var twitterUrl = "https://x.com/RVCJ_FB/status/1793359412993937498";
-
-// if (/android/i.test(userAgent)) {
-// window.location.href = "twitter://status?id=1793359412993937498";
-// } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-// window.location.href = "twitter://status?id=1793359412993937498";
-// } else {
-// window.location.href = twitterUrl;
-// }
-
-// return;
