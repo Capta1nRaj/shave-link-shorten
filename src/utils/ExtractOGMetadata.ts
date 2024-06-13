@@ -7,7 +7,7 @@ import { GetDomainFromUrl } from './GetDomainFromUrl';
 // Define the function to extract Open Graph metadata from a URL
 export const ExtractOGMetadata = async (url: string | URL | Request) => {
     // Clear console for debugging purposes
-    console.clear();
+
     try {
         // Fetch HTML content from the provided URL
         const response = await fetch(url);

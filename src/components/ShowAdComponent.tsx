@@ -19,6 +19,18 @@ const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
 
     useEffect(() => {
         if (seconds === 0) {
+            console.log("44")
+
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+if (/android/i.test(userAgent)) {
+    window.location.href = "intent://www.youtube.com/watch?v=sSFM_hCFgko#Intent;package=com.google.android.youtube;scheme=https;end";
+} else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    window.location.href = "vnd.youtube://www.youtube.com/watch?v=sSFM_hCFgko";
+} else {
+    window.location.href = "https://www.youtube.com/watch?v=sSFM_hCFgko";
+}
+
             window.location.href = destinationURL;
         }
     }, [seconds, destinationURL]);
@@ -28,7 +40,7 @@ const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
     return (
         <>
             <div className="flex justify-center items-center h-screen flex-col">
-                <div className={`${adCSS} mb-4`}> ad here </div>
+               <div className={`${adCSS} mb-4`}> ad here </div>
 
                 <p className='font-bold mb-2 text-2xl'> Redirecting in </p>
                 <div className="bg-primary-1 text-primary-2 p-10 rounded-full min-w-[116px] max-w-[116px] text-center border border-primary-3">

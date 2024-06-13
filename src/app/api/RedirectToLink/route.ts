@@ -15,10 +15,14 @@ export async function GET(request: NextRequest) {
         //! Connecting to MongoDB
         await connect2MongoDB();
 
+        //! Get alias value from URL
         const searchParams = request.nextUrl.searchParams;
         const alias = searchParams.get('alias');
 
-        const aliasData = await linksListModel.findOne({ alias }).select('userName destinationURL toSupport appOpener appType status');
+        //! Get link data from alias
+        const aliasData = await linksListModel.findOne({ alias }).select('userName destinationURL status toSupport isApp');
+
+        //! If link not found, then, return to homepage
         if (!aliasData) { return NextResponse.json({ message: "Link not found!", statusCode: 404 }, { status: 200 }); }
 
         //! If link status is inactive, then, return to homepage
@@ -43,27 +47,33 @@ export async function GET(request: NextRequest) {
                 stateCode: region,
                 stateName: regionName,
                 cityName: city,
-                zip,
-                timezone,
-                isp,
-                org,
-                as,
+                zip, timezone, isp, org, as,
                 browser: browser.name,
                 os: os.name,
                 device: device.type || "Windows"
             }).save();
 
+            //! Increment link click count
             await linksListModel.updateMany({ alias }, { $inc: { clicksCount: 1 } });
 
             //! Increment link click count for current week, month, & year
             const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { linksClicksCount: 1 } });
 
+            //! If current week, month, & year not found, then, create new record
             if (updateWebsiteStats.matchedCount === 0) {
                 await new websiteStatsModel({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber(), linksClicksCount: 1 }).save();
             }
         }
 
-        return NextResponse.json({ message: "Link fetched successfully.", statusCode: 200, destinationURL: aliasData.destinationURL, toSupport: aliasData.toSupport, appOpener: aliasData.appOpener, status: aliasData.status }, { status: 200 });
+        return NextResponse.json({
+            message: "Link fetched successfully.",
+            statusCode: 200,
+            destinationURL: aliasData.destinationURL,
+            toSupport: aliasData.toSupport,
+            status: aliasData.status,
+            isApp: aliasData.isApp,
+        }, { status: 200 });
+
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 });
