@@ -13,6 +13,7 @@ type FormData = {
     userpassword: string;
 };
 
+//! Reuse CSS
 const labelCSS = `block mb-2 text-sm font-medium text-white`;
 const inputCSS = `bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500`;
 const buttonCSS = `w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800`;
@@ -21,11 +22,13 @@ const SignInPage = () => {
 
     const router = useRouter();
 
+    //! Initial input fields
     const [formData, setFormData] = useState<FormData>({
         username: '',
         userpassword: '',
     });
 
+    //! Detect onChange values
     const handleChange = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData((prevState: any) => ({
             ...prevState,
@@ -39,7 +42,7 @@ const SignInPage = () => {
     const [message, setmessage] = useState('');
     const [isLoading, setisLoading] = useState(false);
 
-
+    //! Sign In user api call
     const signInUserFunction = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -58,6 +61,7 @@ const SignInPage = () => {
         }
     };
 
+    //! Sgin In user verification api call
     const signInUserVerifyFunction = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
@@ -85,6 +89,7 @@ const SignInPage = () => {
         }
     }
 
+    //! If user is not verified, then, it will ask user to to verify their account first
     const signUpUserVerifyFunction = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
@@ -109,6 +114,7 @@ const SignInPage = () => {
         }
     }
 
+    //! Resend OTP to the user
     const resendOTP = async () => {
         const data = { userName: formData.username, method: statusCode === 201 ? 'oldUserVerification' : 'newUserVerification' };
 
@@ -126,7 +132,7 @@ const SignInPage = () => {
         }
     }
 
-    const { isLoggedIn, checkSession } = SessionCheck();
+    const { checkSession } = SessionCheck();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -147,12 +153,14 @@ const SignInPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    //! Initial loading screen
     if (loading) {
         return <div className="absolute top-0 left-0 right-0 bottom-0 bg-primary-1"></div>
     }
 
     return (
         <>
+            {/* Initial Scene */}
             {!otpScene ?
                 <section className="bg-gray-900">
                     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -190,6 +198,7 @@ const SignInPage = () => {
 
                 :
 
+                //! If user email exist, then, send OTP, & show this screen
                 <section className="bg-gray-900">
                     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                         <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">

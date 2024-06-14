@@ -1,3 +1,4 @@
+//! Function to generate the week in numbers
 export function getWeekNumber(): number {
     // Copy date so don't modify original
     const today = new Date();
@@ -12,11 +13,13 @@ export function getWeekNumber(): number {
     // Return week number
 }
 
+//! Function to generate the month in numbers
 export function getMonthNumber(): number {
     const today = new Date();
     return today.getMonth() + 1; // Months are zero-indexed, so January is 0, February is 1, etc.
 }
 
+//! Function to generate the year in numbers
 export function getYearNumber(): number {
     const today = new Date();
     return today.getFullYear();

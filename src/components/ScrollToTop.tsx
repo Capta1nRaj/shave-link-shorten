@@ -4,8 +4,11 @@ import { ArrowIcon1 } from '@/images/ImagesExport';
 import React, { useState, useEffect } from 'react';
 
 const ScrollToTop = () => {
+
+    //! set button as invisible at initial phase
     const [isVisible, setIsVisible] = useState(false);
 
+    //! If page scrolled more than 20%, then show the button
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight = window.innerHeight;
@@ -25,10 +28,11 @@ const ScrollToTop = () => {
 
         window.addEventListener('scroll', handleScroll);
 
-        // Cleanup
+        //! Cleanup the code to prevent memory leaks and unwanted side effects
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    //! If onClick on the button, then, scroll to top
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -37,10 +41,8 @@ const ScrollToTop = () => {
     };
 
     return (
-        <section
-            className={`-rotate-90 cursor-pointer arrow-button fixed bottom-6 right-6 bg-primary-3 rounded-full p-2 defaultTransitionCSS ${isVisible ? 'opacity-100 z-10' : 'opacity-0 -z-10'}`}
-            onClick={scrollToTop}
-        >
+        <section className={`-rotate-90 cursor-pointer arrow-button fixed bottom-6 right-6 bg-primary-3 rounded-full p-2 defaultTransitionCSS ${isVisible ? 'opacity-100 z-10' : 'opacity-0 -z-10'}`}
+            onClick={scrollToTop}>
             <ArrowIcon1 customCSS='w-5 h-5' />
         </section>
     );

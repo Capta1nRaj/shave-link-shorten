@@ -1,3 +1,5 @@
+//! Extract Domain name from the URL
+
 export function GetDomainFromUrl(url: string) {
     var domain;
     // find & remove protocol (http, ftp, etc.) and get domain

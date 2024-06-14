@@ -1,4 +1,5 @@
-// Generating Random String Using randomString Module
+//! Generating Random String Using randomString Module
+
 import randomstring from "randomstring";
 
 async function RandomStringGenerator(length: number) {

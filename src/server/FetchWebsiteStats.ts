@@ -1,5 +1,6 @@
 "use server";
 
+//! Fetching website stats every 24 hours
 export async function FetchWebsiteStats() {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/CommonAPI/FetchWebsiteStats`, { next: { revalidate: 86400 } });

@@ -21,10 +21,7 @@ export default function Example() {
         <div className="bg-primary-1 pb-10">
             <main className="relative isolate">
                 {/* Background */}
-                <div
-                    className="absolute inset-x-0 top-4 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"
-                    aria-hidden="true"
-                >
+                <div className="absolute inset-x-0 top-4 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl" aria-hidden="true">
                     <div
                         className="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-25"
                         style={{
@@ -49,10 +46,7 @@ export default function Example() {
                     <div className="mx-auto max-w-2xl lg:mx-0">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our team</h2>
                     </div>
-                    <ul
-                        role="list"
-                        className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 xl:grid-cols-4"
-                    >
+                    <ul role="list" className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 xl:grid-cols-4">
                         {team.map((person) => (
                             <li key={person.name}>
                                 {person.imageUrl}
