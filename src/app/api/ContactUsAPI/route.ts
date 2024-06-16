@@ -5,13 +5,14 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
     try {
-        //! Connecting to MongoDB
-        await connect2MongoDB();
-
         const { firstName, lastName, companyName, email, phoneNumber, message } = await request.json();
 
         if (!firstName || !lastName || !email || !phoneNumber || !message) { return NextResponse.json({ message: "Please fill in all required fields!.", status: 500 }, { status: 200 }); }
 
+        //! Connecting to MongoDB
+        await connect2MongoDB();
+
+        //! Send a confirmation mail to the recipient
         await sendConfirmationMailToUser(email, firstName + lastName);
 
         await new contactUsListModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();

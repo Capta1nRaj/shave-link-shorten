@@ -16,7 +16,8 @@ export const metadata: Metadata = {
     default: "Shave - Short Your Links with Worldwide Tracking Analytics",
     template: ""
   },
-  description: "Effortlessly shorten links with our URL shortener. Access free, advanced analytics, customized features, and efficient link management for streamlined digital platform integration and global tracking.",
+  description: "Shorten links with ease using our URL shortener. Access free, advanced analytics, custom features, and efficient link management for global tracking.",
+  // description: "Effortlessly shorten links with our URL shortener. Access free, advanced analytics, customized features, and efficient link management for streamlined digital platform integration and global tracking.",
   keywords: "links, features, free ,analytics, pricing, url shortener, link manager, social media, web trimming, digital platform, streamlined, accessibility, customized, concise, efficient",
   twitter: {
     card: "summary_large_image"

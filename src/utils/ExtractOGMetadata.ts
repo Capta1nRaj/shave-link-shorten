@@ -1,4 +1,7 @@
 'use server'
+
+//! Function to extract the metadata for the URL
+
 // Import necessary modules and functions
 import MetadataDefaultValuesJSON from '@/constants/MetadataDefaultValuesJSON.json'; // Import default values for metadata
 import { JSDOM } from 'jsdom'; // Import JSDOM for HTML parsing

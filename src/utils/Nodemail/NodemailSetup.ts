@@ -15,17 +15,22 @@ const auth = nodemailer.createTransport({
     },
 });
 
+//! Fetch contact us email template
 function getEmailTemplate() {
     const filePath = path.join(process.cwd(), 'src', 'utils', 'Nodemail', './ContactUsEmailTemplate.html');
     return fs.readFileSync(filePath, 'utf-8');
 }
 
+//! Send email to the user
 export default async function sendConfirmationMailToUser(userEmail: string, userName: string) {
 
+    //! Fetcj the Email HTML template code
     const htmlContent = getEmailTemplate();
 
+    //! Replacing the values in the code
     const replacedHtml = htmlContent.replace(/{{username}}/g, userName);
 
+    //! Sending the mail to the user
     const receiver = {
         from: process.env.NODEMAILER_MAIL_FROM + "<" + process.env.NODEMAILER_USERNAME + ">",
         to: userEmail,

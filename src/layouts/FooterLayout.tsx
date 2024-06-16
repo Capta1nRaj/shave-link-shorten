@@ -6,15 +6,15 @@ import Link from "next/link";
 import FooterConstants from '@/constants/FooterConstants.json'
 import { SocialMediaConstants } from "@/constants/SocialMediaConstants";
 import { usePathname } from "next/navigation";
+import { PathNamesList } from "@/constants/PathNamesList";
 
 export default function FooterLayout() {
 
     const pathname = usePathname();
-    const pathNamesList = ['/', '/signIn', '/signUp', '/forgotPassword', '/contact-us'];
 
     return (
         <>
-            {pathNamesList.includes(pathname) &&
+            {PathNamesList.includes(pathname) &&
                 <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-primary-2`}>
                     <section className="max-width py-32">
 
@@ -44,7 +44,6 @@ export default function FooterLayout() {
                                     </Link>
                                 ))}
                             </div>
-
 
                             <p className="font-normal text-center text-xs"> © 2024 ShaveLinks. All rights reserved. </p>
 

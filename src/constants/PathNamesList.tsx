@@ -1,0 +1,1 @@
+export const PathNamesList = ['/', '/signIn', '/signUp', '/forgotPassword', '/contact-us'];

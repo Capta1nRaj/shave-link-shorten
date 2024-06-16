@@ -4,6 +4,7 @@ export default async function WebsiteStatsLayout() {
 
   const { usersCount, linksCreatedCount, linksTrackedCount } = await FetchWebsiteStats();
 
+  //! Formatting values to show in "k" instead of numbers
   function formatNumber(value: number) {
     if (value >= 1000) {
       return (value / 1000).toFixed(1) + 'k+';

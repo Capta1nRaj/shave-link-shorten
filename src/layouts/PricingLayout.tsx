@@ -38,7 +38,7 @@ export default function PricingLayout() {
         <div id='pricing' className={"isolate overflow-hidden bg-primary-1"}>
             <div className="mx-auto max-width text-center pt-24 pb-96">
                 <div className={`mx-auto max-w-4xl ${raleway.className}`}>
-                    <h2 className={`titleCSS flex items-center justify-center text-primary-4 gap-x-1`}>Pricing </h2>
+                    <h2 className={`titleCSS flex items-center justify-center text-primary-4 gap-x-1`}> Pricing </h2>
                     <div className={`mt-2 font-bold tracking-tight text-white sm:text-5xl teeny:text-4xl text-2xl`}>
                         <p className={`flex items-center justify-center gap-x-2`}> Your <span className='underline underline-offset-4 text-primary-3 whitespace-nowrap tracking-[0.8px]'>Perfect Plan</span> Awaits </p>
                         <p className={`mt-2 flex justify-center items-center text-xl gap-x-1 font-normal `}> Find it Here  </p>

@@ -10,14 +10,15 @@ import { NextResponse, type NextRequest, userAgent } from 'next/server';
 export async function GET(request: NextRequest) {
     try {
 
+        //! Getting user browser details
         const { browser, os, device, isBot } = userAgent(request)
-
-        //! Connecting to MongoDB
-        await connect2MongoDB();
 
         //! Get alias value from URL
         const searchParams = request.nextUrl.searchParams;
         const alias = searchParams.get('alias');
+
+        //! Connecting to MongoDB
+        await connect2MongoDB();
 
         //! Get link data from alias
         const aliasData = await linksListModel.findOne({ alias }).select('userName destinationURL status toSupport isApp');
@@ -32,6 +33,7 @@ export async function GET(request: NextRequest) {
         const ip = await FetchUserIP();
         const ipData = await axios.get(`http://ip-api.com/json/${ip}`);
 
+        //! User IP response
         const { data: { query, status, country, countryCode, region, regionName, city, zip, timezone, isp, org, as } } = ipData;
 
         //! If IP status is true, then, Save clicks tracking data, & updateing clicks count for link & website stats

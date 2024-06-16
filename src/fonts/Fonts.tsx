@@ -1,6 +1,5 @@
 import { Inter, Raleway, Montserrat, Roboto } from 'next/font/google'
 
-
 export const inter = Inter({
     subsets: ['latin'],
     display: 'swap',

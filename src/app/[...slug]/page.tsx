@@ -6,6 +6,7 @@ import { ExtractOGMetadata } from "@/utils/ExtractOGMetadata";
 
 async function getDestinationURL(alias: string) {
     'use server'
+    //! Fetching alias data from DB
     if (alias !== '_next') {
         await connect2MongoDB();
         const fetchAliasData = await linksListModel.findOne({ alias: alias }).select('destinationURL');
@@ -13,6 +14,7 @@ async function getDestinationURL(alias: string) {
     }
 }
 
+//! Fetching Metadata of user URL
 export async function generateMetadata({ params }: { params: { slug: [string, string] } }): Promise<Metadata> {
     if (params.slug[0] !== "_next") {
         const url = await getDestinationURL(params.slug[0]);

@@ -15,9 +15,9 @@ export default function IntroLayout() {
                 <span className={`titleDropShadowCSS underline decoration-2 sm:underline-offset-8 underline-offset-4`}>analyze</span> your reach
             </h2>
 
-            <p className="mt-3 mb-8 text-sm font-bold uppercase text-center max-w-screen-md mx-auto">
+            <h3 className="mt-3 mb-8 text-sm font-bold uppercase text-center max-w-screen-md mx-auto">
                 &#34;shorten links <span className="text-primary-3 underline underline-offset-2">hassle-free</span> and & <span className="text-primary-3 underline underline-offset-2">detailed</span> analytics effortlessly for <span className="text-primary-3 underline underline-offset-2">free</span> .&#34;
-            </p>
+            </h3>
 
             <DashboardPreview1 customCSS="w-full" />
 

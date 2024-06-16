@@ -1,5 +1,7 @@
 'use server'
 
+//! Fetching the user ip function
+
 import { headers } from 'next/headers';
 
 export async function FetchUserIP() {

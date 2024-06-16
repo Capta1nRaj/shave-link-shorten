@@ -8,13 +8,13 @@ import { inter } from '@/fonts/Fonts'
 import { usePathname } from 'next/navigation'
 import { SessionCheck } from '@/states/SessionCheck'
 import { deleteCookie, getCookies } from 'cookies-next'
+import { PathNamesList } from '@/constants/PathNamesList'
 
 const loggedInButtonCSS = `flex items-center uppercase font-bold lg:text-base sm:text-lg text-xs ${inter.className}`
 
 export default function NavBarLayout() {
 
     const pathname = usePathname();
-    const pathNamesList = ['/', '/signIn', '/signUp', '/forgotPassword', '/contact-us'];
 
     const [loading, setloading] = useState(true);
     const [isSessionChecked, setisSessionChecked] = useState(false);
@@ -22,7 +22,7 @@ export default function NavBarLayout() {
     const { isLoggedIn, checkSession } = SessionCheck();
 
     async function verifySession() {
-        if (pathname.length === 1 || pathNamesList.includes(pathname)) {
+        if (pathname.length === 1 || PathNamesList.includes(pathname)) {
             await checkSession();
             setloading(false);
             setisSessionChecked(true);
@@ -45,7 +45,7 @@ export default function NavBarLayout() {
 
     return (
         <>
-            {pathNamesList.includes(pathname) &&
+            {PathNamesList.includes(pathname) &&
                 <nav className="NavBarLayout-section bg-primary-2">
                     <section className="max-width py-4 flex justify-between">
 
