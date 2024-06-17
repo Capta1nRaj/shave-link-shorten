@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
                 zip, timezone, isp, org, as,
                 browser: browser.name,
                 os: os.name,
-                device: device.type || "Windows"
+                device: device.type || "Desktop"
             }).save();
 
             //! Increment link click count
