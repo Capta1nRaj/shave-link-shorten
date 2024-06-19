@@ -58,3 +58,18 @@ body::-webkit-scrollbar {
 html {
   scroll-behavior: smooth;
 }
+
+/* spricing layout page scroll bar */
+.pricing-layout-page::-webkit-scrollbar {
+  height: 0px; /* height of the entire scrollbar */
+}
+
+.pricing-layout-page::-webkit-scrollbar-track {
+  background: #24263A;  /* color of the tracking area */
+}
+
+.pricing-layout-page::-webkit-scrollbar-thumb {
+  background-color: #FBEDCA;  /* color of the scroll thumb */
+  border-radius: 6px; /* roundness of the scroll thumb */
+  border: 3px solid #00ABF0;  /* creates padding around scroll thumb */
+}

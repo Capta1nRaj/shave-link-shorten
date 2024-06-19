@@ -15,7 +15,7 @@ const team = [
     }
 ]
 
-export default function Example() {
+export default function AboutUsPage() {
 
     return (
         <div className="bg-primary-1 pb-10">

@@ -1,8 +1,8 @@
 import IntroLayout from "@/layouts/IntroLayout";
 import WhatWeOfferLayout from '@/layouts/WhatWeOfferLayout';
 import ScrollToTop from '@/components/ScrollToTop';
-import PricingLayout from '@/layouts/PricingLayout';
 import WebsiteStatsLayout from "@/layouts/WebsiteStatsLayout";
+import PricingLayout from "@/layouts/PricingLayout";
 
 export default function Home() {
   return (

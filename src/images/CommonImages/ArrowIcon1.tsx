@@ -1,6 +1,5 @@
 import { ImageInterface } from '@/interfaces/Interfaces';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 
