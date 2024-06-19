@@ -147,7 +147,7 @@ const SignUpPage = () => {
         } else {
             checkSession().then((data) => {
                 if (data.isLoggedIn) {
-                    router.push('/');
+                    router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`);
                     return;
                 }
                 setLoading(false)
