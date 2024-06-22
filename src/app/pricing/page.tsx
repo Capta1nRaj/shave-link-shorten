@@ -29,7 +29,7 @@ const sections = [
             { name: 'Tags', tiers: { "Free Forever": '5', Startup: '20', Professional: '200', Enterprise: 'Custom' } },
             { name: 'Link expiration by date', tiers: { "Free Forever": true, Startup: true, Professional: true, Enterprise: true } },
             { name: 'Link expiration by clicks', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'Custom Branding For QR', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
+            { name: 'Custom QR Branding', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
             { name: 'Password protected links', tiers: { "Free Forever": false, Startup: false, Professional: true, Enterprise: true } },
         ],
     },
@@ -177,7 +177,7 @@ export default function Example() {
                                             className={`${tier.featured
                                                 ? 'bg-primary-3 border border-primary-3 text-white shadow-sm hover:bg-primary-1 hover:border-primary-3'
                                                 : 'text-primary-3 hover:bg-primary-5 ring-1 ring-inset ring-primary-4 hover:ring-primary-3'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>
-                                            {tier.name === 'Enterprise' ? 'contact us' : (tier.name === 'Free Forever' ? 'get started' : 'buy plan')}
+                                            {tier.name === 'Enterprise' ? 'contact us' : (tier.name === 'Free Forever' ? 'get started' : 'coming soon')}
                                         </Link>
                                     </div>
                                     <div className="mt-8 flow-root sm:mt-10">

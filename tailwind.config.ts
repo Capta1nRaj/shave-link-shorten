@@ -7,6 +7,7 @@ const config: Config = {
     "./src/constants/**/*.{js,ts,jsx,tsx,mdx,json}",
     "./src/images/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/layouts/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     screens: {
@@ -30,7 +31,8 @@ const config: Config = {
           2: "#24263A",
           3: "#00ABF0",
           4: "#F2F2F2",
-          5: "#040406"
+          5: "#040406",
+          6: "#FF3258"
         },
       },
     },

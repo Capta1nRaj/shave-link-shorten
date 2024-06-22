@@ -16,7 +16,7 @@ export default function FooterLayout() {
         <>
             {PathNamesList.includes(pathname) &&
                 <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-primary-2`}>
-                    <section className="max-width py-32">
+                    <section className="max-width xl:py-20 py-10">
 
                         <section className="flex sm:flex-row flex-col justify-between">
                             <div className={`left-side ${roboto.className} font-normal text-primary-4 sm:w-96 w-full flex flex-col justify-center sm:text-left text-center`}>
@@ -24,12 +24,24 @@ export default function FooterLayout() {
                                 At ShaveLinks Shortener, we streamline link sharing with advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing efforts, track performance, and effortlessly open apps based on your links.
                             </div>
 
-                            <div className="right-side text-lg flex flex-col sm:text-left text-center justify-between sm:mt-0 mt-10 sm:gap-0 gap-y-2">
-                                {FooterConstants.map((item) => {
-                                    return (
-                                        <Link key={item.title} className={item.css} href={item.link}> {item.title} </Link>
-                                    )
-                                })}
+                            <div className="right-side text-lg flex text-left justify-between sm:mt-0 mt-10 gap-x-10">
+                                <div className="box-1 flex flex-col gap-y-2">
+                                    <h2 className="uppercase text-xl text-primary-3"> home </h2>
+                                    {FooterConstants.slice(1, 5).map((item) => {
+                                        return (
+                                            <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link}> {item.title} </Link>
+                                        )
+                                    })}
+                                </div>
+
+                                <div className="box-1 flex flex-col gap-y-2">
+                                    <h2 className="uppercase text-xl text-primary-3"> legal </h2>
+                                    {FooterConstants.slice(5).map((item) => {
+                                        return (
+                                            <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link}> {item.title} </Link>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </section>
 
