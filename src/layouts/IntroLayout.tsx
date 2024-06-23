@@ -16,7 +16,7 @@ export default function IntroLayout() {
             </h2>
 
             <h3 className="mt-3 mb-8 text-sm font-bold uppercase text-center max-w-screen-md mx-auto">
-                &#34;shorten links <span className="text-primary-3 underline underline-offset-2">hassle-free</span> and & <span className="text-primary-3 underline underline-offset-2">detailed</span> analytics effortlessly for <span className="text-primary-3 underline underline-offset-2">free</span> .&#34;
+                &#34;shorten links <span className="text-primary-3 underline underline-offset-2">hassle-free</span> and <span className="text-primary-3 underline underline-offset-2">detailed</span> analytics effortlessly for <span className="text-primary-3 underline underline-offset-2">free</span> .&#34;
             </h3>
 
             <DashboardPreview1 customCSS="w-full" />

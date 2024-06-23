@@ -40,6 +40,7 @@ export async function PUT(request: NextRequest) {
         const { userName, OTP } = await request.json();
 
         const response = await signUpVerify(userName, OTP, userAgent);
+        console.log(response)
         if (!response) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
         // id, userName, signedJWTToken,
@@ -49,7 +50,7 @@ export async function PUT(request: NextRequest) {
         await new userLinksDataModel({
             userName: getUserId._id
         }).save();
-
+        console.log(getUserId)
         //! Increment active users count for current week, month, & year
         const updateWebsiteStats = await websiteStatsModel.updateOne({ weekNumber: getWeekNumber(), monthNumber: getMonthNumber(), yearNumber: getYearNumber() }, { $inc: { newUsers: 1 } });
         if (updateWebsiteStats.matchedCount === 0) {

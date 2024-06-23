@@ -28,6 +28,13 @@ const ShippingAndReturnPolicyPage = () => {
                 </p>
             </section>
 
+            <section className="mb-6">
+                <h2 className={`${legalH2CSS}`}>Pricing Policy:</h2>
+                <p className={`${legalPCSS}`}>
+                    ShaveLinks reserves the right to change pricing for our services at any time. However, any pricing changes will not affect your current monthly or annual subscription plan until the end of your current billing cycle.
+                </p>
+            </section>
+
             <section>
                 <h2 className={`${legalH2CSS}`}>Additional Information:</h2>
                 <p className={`${legalPCSS}`}>

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: ["Applebot", "Bingbot", "Googlebot", "Slurp", "DuckDuckBot", "Baiduspider", "Yandex"],
             allow: ["/"],
-            disallow: ["/api/"],
+            disallow: ["/api/*"],
         },
         sitemap: `https://shavelinks.com/sitemap.xml`,
     }
