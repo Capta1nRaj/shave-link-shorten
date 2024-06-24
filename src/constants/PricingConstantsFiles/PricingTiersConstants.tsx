@@ -20,7 +20,7 @@ export const PricingTiersConstants: PricingInterface[] = [
     {
         name: 'Startup',
         id: 'tier-startup',
-        href: '#',
+        href: `${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/payment?tier=Startup`,
         price: { monthly: '$9', annually: '$84', annualEquivalent: '$7' },
         priceInr: { monthly: '₹800', annually: '₹1920', annualEquivalent: '₹640' },
         description: 'For startups & small businesses launching & scaling.',
@@ -36,7 +36,7 @@ export const PricingTiersConstants: PricingInterface[] = [
     {
         name: 'Professional',
         id: 'tier-professional',
-        href: '#',
+        href: `${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/payment?tier=Professional`,
         price: { monthly: '$29', annually: '$278', annualEquivalent: '$23' },
         priceInr: { monthly: '₹2400', annually: '₹23040', annualEquivalent: '₹1920' },
         description: 'Ideal for growing teams and expanding businesses.',
