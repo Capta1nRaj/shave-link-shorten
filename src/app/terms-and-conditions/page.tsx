@@ -7,6 +7,8 @@ const TermsAndConditionsPage = () => {
         <section className={`${legalMainDivCSS}`}>
             <h1 className={`${legalH1CSS}`}>Terms and Conditions</h1>
 
+            <h3 className='text-center text-primary-4'> This website is operated by <span className='font-bold text-primary-3'> Priyal Raj </span>. </h3>
+
             <section className="mt-6 mb-6">
                 <h2 className={`${legalH2CSS}`}>Acceptance of Terms:</h2>
                 <p className={`${legalPCSS}`}>
