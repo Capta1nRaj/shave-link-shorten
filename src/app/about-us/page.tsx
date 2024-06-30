@@ -36,7 +36,7 @@ export default function AboutUsPage() {
                     <div className="mx-auto max-w-2xl text-center">
                         <h2 className="text-4xl font-bold tracking-tight text-primary-4 sm:text-6xl"> About ShaveLinks </h2>
                         <p className="mt-6 text-lg leading-8 text-primary-4">
-                            ShaveLinks is a link shortener tool for streamlined sharing. Create concise, custom links effortlessly. Track engagement seamlessly. Simplify your online presence with ShaveLinks Shortener.
+                            ShaveLinks is a link shortener tool for effortless sharing. Create concise, custom links, track engagement seamlessly, and simplify your online presence with advanced analytics and customizable QR codes.
                         </p>
                     </div>
                 </div>

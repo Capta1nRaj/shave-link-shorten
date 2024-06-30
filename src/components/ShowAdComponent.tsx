@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
-    const [seconds, setSeconds] = useState(3);
+    const [seconds, setSeconds] = useState(3000);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -45,23 +45,75 @@ const ShowAdComponent = ({ destinationURL }: { destinationURL: string }) => {
                 }
             };
 
-            if (destinationURL.includes('youtube.com') || destinationURL.includes('youtu.be')) {
-                handleYouTubeRedirection();
-            } else if (destinationURL.includes("x.com")) {
-                const twitterStatusId = destinationURL.split("/status/")[1];
-                const userId = destinationURL.split('x.com/')[1];
-                handleXRedirection(twitterStatusId, userId);
-            } else {
-                window.location.href = destinationURL;
+            const handleInstagramRedirection = () => {
+                const instagramPath = destinationURL.split('https://www.instagram.com/')[1];
+
+                if (isAndroid) {
+                    if (instagramPath.startsWith('reels/')) {
+                        // For Instagram reels
+                        window.location.href = `intent://www.instagram.com/reels/C8Ykp_SP6dM/#Intent;package=com.instagram.android;scheme=https;end`;
+                    } else if (instagramPath.startsWith('p/')) {
+                        // For Instagram posts
+                        window.location.href = `intent://instagram.com/_u/${instagramPath}#Intent;package=com.instagram.android;scheme=https;end`;
+                    } else {
+                        // For user profiles
+                        window.location.href = `intent://instagram.com/_u/${instagramPath}#Intent;package=com.instagram.android;scheme=https;end`;
+                    }
+                } else if (isIOS) {
+                    if (instagramPath.startsWith('reels/')) {
+                        // For Instagram reels
+                        window.location.href = `instagram://reel?id=${instagramPath.split('/')[1]}`;
+                    } else if (instagramPath.startsWith('p/')) {
+                        // For Instagram posts
+                        window.location.href = `instagram://media?id=${instagramPath.split('/')[1]}`;
+                    } else {
+                        // For user profiles
+                        window.location.href = `instagram://user?username=${instagramPath}`;
+                    }
+                } else {
+                    window.location.href = destinationURL;
+                }
+            };
+
+            const urlCase = (url: string) => {
+                if (url.includes('youtube.com') || url.includes('youtu.be')) return 'youtube';
+                if (url.includes('x.com')) return 'x';
+                // Add additional cases here
+                if (url.includes('instagram.com')) return 'instagram';
+                return 'default';
+            };
+
+            switch (urlCase(destinationURL)) {
+                case 'youtube':
+                    handleYouTubeRedirection();
+                    break;
+                case 'x':
+                    const twitterStatusId = destinationURL.split("/status/")[1];
+                    const userId = destinationURL.split('x.com/')[1];
+                    handleXRedirection(twitterStatusId, userId);
+                    break;
+                // Add additional cases here
+                case 'instagram':
+                    handleInstagramRedirection()
+                    break;
+                default:
+                    window.location.href = destinationURL;
             }
         }
     }, [seconds, destinationURL]);
 
+
+
     const adCSS = `w-[250px] h-[250px] bg-primary-3 text-primary-1 flex justify-center items-center uppercase font-bold text-2xl`;
+
+    async function asdf() {
+        window.open('intent://www.instagram.com/reels/C8Ykp_SP6dM/#Intent;package=com.instagram.android;scheme=https;end')
+    }
 
     return (
         <>
-            <div className="flex justify-center items-center h-screen flex-col">
+            <button onClick={asdf}>asdasd</button>
+            <div className="flex justify-center items-center flex-col py-10">
                 <div className={`${adCSS} mb-4`}> ad here </div>
 
                 <p className='font-bold mb-2 text-2xl'> Redirecting in </p>

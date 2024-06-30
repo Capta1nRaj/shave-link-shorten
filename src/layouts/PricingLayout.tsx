@@ -18,15 +18,18 @@ export default function PricingLayout() {
 
     return (
         <>
-            <div className="bg-primary-1 py-24 sm:py-32" id='pricing'>
+            <div className="bg-primary-1 py-16 blurToView" id='pricing'>
                 <div className="max-width">
                     <div className={`mx-auto max-w-4xl text-center ${raleway.className}`}>
                         <h2 className={`titleCSS flex items-center justify-center text-primary-4 gap-x-1`}> Pricing </h2>
-                        <div className={`mt-2 font-bold tracking-tight text-white sm:text-5xl teeny:text-4xl text-2xl`}>
+
+                        <div className={`font-bold tracking-tight text-white sm:text-5xl teeny:text-4xl text-2xl`}>
                             <p className={`flex items-center justify-center gap-x-2`}> Your <span className='underline underline-offset-4 text-primary-3 whitespace-nowrap tracking-[0.8px]'>Perfect Plan</span> Awaits </p>
-                            <p className={`mt-2 flex justify-center items-center text-xl gap-x-1 font-normal `}> Find it Here  </p>
                         </div>
+
+                        <p className={`mt-2 flex justify-center items-center text-xl gap-x-1 font-normal`}> Find it Here  </p>
                     </div>
+
                     <div className="mt-8 flex justify-center">
                         <fieldset aria-label="Payment frequency">
                             <RadioGroup value={frequency} onChange={setFrequency}
@@ -42,6 +45,7 @@ export default function PricingLayout() {
                             </RadioGroup>
                         </fieldset>
                     </div>
+
                     <div className="mt-4 flex justify-center">
                         <RadioGroup value={country} onChange={setCountry} className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200">
                             {CountriesListConstants.map((option) => (
@@ -55,6 +59,7 @@ export default function PricingLayout() {
                             ))}
                         </RadioGroup>
                     </div>
+
                     <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
                         {PricingTiersConstants.map((tier, index) => (
                             <div key={tier.id}
@@ -103,11 +108,31 @@ export default function PricingLayout() {
                         ))}
                     </div>
 
-                    <Link href={'/pricing'} className={`${raleway.className} font-bold md:text-2xl text-base flex mt-10 bg-primary-3 text-primary-4 w-fit mx-auto px-20 py-4 rounded-full drop-shadow-none hover:drop-shadow-[0_0px_5px_rgba(255,255,255,0.25)] border border-primary-3 hover:bg-primary-5 capitalize defaultTransitionCSS`}>
+                    <Link href={'/pricing'} className={`blurToView animate-bounce ${raleway.className} font-bold md:text-2xl text-base flex mt-10 bg-primary-3 text-primary-4 w-fit mx-auto px-20 py-4 rounded-full drop-shadow-none hover:drop-shadow-[0_0px_5px_rgba(255,255,255,0.25)] border border-primary-3 hover:bg-primary-5 capitalize defaultTransitionCSS`}>
                         compare plans
                     </Link>
                 </div>
             </div>
+
+            <style jsx>{`
+                #pricing div div {
+                  position: relative;
+                  animation: pricingL2R;
+                  animation-timeline: view(50% auto);
+                  animation-fill-mode: forwards;
+                }
+                
+                @keyframes pricingL2R {
+                  0% {
+                    opacity: 0;
+                    left: -250px;
+                  } 
+                  25% {
+                    opacity: 1;
+                    left: 0;
+                  }
+                }
+            `}</style>
         </>
     )
 }

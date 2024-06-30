@@ -16,12 +16,12 @@ export default function FooterLayout() {
         <>
             {PathNamesList.includes(pathname) &&
                 <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-primary-2`}>
-                    <section className="max-width xl:py-20 py-10">
+                    <section className="max-width py-14">
 
                         <section className="flex sm:flex-row flex-col justify-between">
                             <div className={`left-side ${roboto.className} font-normal text-primary-4 sm:w-96 w-full flex flex-col justify-center sm:text-left text-center`}>
                                 <CompanyLogo2 customCSS="sm:mx-0 mx-auto mb-2 sm:w-32 w-20" />
-                                At ShaveLinks Shortener, we streamline link sharing with advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing efforts, track performance, and effortlessly open apps based on your links.
+                                At ShaveLinks, we simplify link sharing with our link shortener, advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing, track performance, and guide users to shared websites effortlessly.
                             </div>
 
                             <div className="right-side text-lg flex text-left justify-between sm:mt-0 mt-10 gap-x-10">

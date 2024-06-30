@@ -13,12 +13,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}`),
   title: {
-    default: "Shave - Short Your Links with Worldwide Tracking Analytics",
+    default: "ShaveLinks - Shorten and Track Links Easily",
     template: ""
   },
   description: "Shorten links with ease using our URL shortener. Access free, advanced analytics, custom features, and efficient link management for global tracking.",
-  // description: "Effortlessly shorten links with our URL shortener. Access free, advanced analytics, customized features, and efficient link management for streamlined digital platform integration and global tracking.",
-  keywords: "links, features, free ,analytics, pricing, url shortener, link manager, social media, web trimming, digital platform, streamlined, accessibility, customized, concise, efficient",
+  keywords: "links, features, free, analytics, pricing, URL shortener, link manager, social media, web trimming, digital platform, streamlined, accessibility, customized, concise, efficient, shave links, custom short links, link tracking, global tracking, advanced analytics",
   twitter: {
     card: "summary_large_image"
   },

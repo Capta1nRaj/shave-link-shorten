@@ -199,7 +199,7 @@ export default function DarkModeCodeBackup() {
             </div>
 
             <div className="relative bg-primary-2 lg:pt-14">
-                <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+                <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
                     {/* Feature comparison (up to lg) */}
                     <section aria-labelledby="mobile-comparison-heading" className="lg:hidden">
                         <h2 id="mobile-comparison-heading" className="sr-only">
