@@ -52,7 +52,7 @@ export default function Example() {
     const [country, setCountry] = useState<CountryInterface>(CountriesListConstants[0])
 
     return (
-        <div className="isolate overflow-hidden">
+        <div id='pricing-compare-plans' className="isolate overflow-hidden">
             <div className="flow-root bg-primary-1 pb-16 pt-24 sm:pt-32 lg:pb-0">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="relative z-10">
@@ -215,7 +215,7 @@ export default function Example() {
                 </div>
             </div>
             <div className="relative bg-primary-4 lg:pt-14">
-                <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+                <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
                     {/* Feature comparison (up to lg) */}
                     <section aria-labelledby="mobile-comparison-heading" className="lg:hidden">
                         <h2 id="mobile-comparison-heading" className="sr-only">

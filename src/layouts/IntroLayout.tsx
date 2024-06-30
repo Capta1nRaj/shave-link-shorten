@@ -6,7 +6,7 @@ export const customTitleCSS = `titleCSS lg:leading-7xl md:leading-6xl sm:leading
 
 export default function IntroLayout() {
     return (
-        <section id="home" className={`IntroLayout-section max-width ${raleway.className} font-extrabold py-32`}>
+        <section id="home" className={`IntroLayout-section max-width ${raleway.className} font-extrabold py-16`}>
             <h1 className={`${customTitleCSS}`}>
                 shorten your <span className={`titleDropShadowCSS underline decoration-2 sm:underline-offset-8 underline-offset-4`}>links</span>
             </h1>
@@ -25,7 +25,7 @@ export default function IntroLayout() {
                 (UI color schema is inspired by <Link className="underline underline-offset-4 decoration-primary-3 text-primary-3 font-bold" href={'https://shavelinks.com/RumanArif00'} target="_blank">@RumanArif00</Link>)
             </p>
 
-            <Link href={'/signUp'} className="w-fit flex items-center gap-2 mx-auto px-8 py-2 bg-primary-3 uppercase rounded-lg sm:text-2xl text-base buttonTransitionCSS">
+            <Link href={'/signUp'} className="blurToView w-fit flex items-center gap-2 mx-auto px-8 py-2 bg-primary-3 uppercase rounded-lg sm:text-2xl text-base buttonTransitionCSS">
                 get started <JoinWaitlistIcon1 customCSS="sm:w-8 w-6 -mt-[6px]" />
             </Link>
         </section>

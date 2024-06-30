@@ -41,6 +41,7 @@
 body {
   color: white;
   background: #1D1E2C;
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -72,4 +73,38 @@ html {
   background-color: #FBEDCA;  /* color of the scroll thumb */
   border-radius: 6px; /* roundness of the scroll thumb */
   border: 3px solid #00ABF0;  /* creates padding around scroll thumb */
+}
+
+/* Features section animation */
+#features section {
+  position: relative;
+  animation: pricingL2R;
+  animation-timeline: view(auto auto);
+  animation-fill-mode: forwards;
+}
+
+@keyframes pricingL2R {
+  0% {
+    opacity: 0;
+    left: -250px;
+  } 
+  25% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+/* Blur component animation */
+.blurToView {
+  animation: blurToViewAnimation;
+  animation-timeline: view(auto auto);
+}
+
+@keyframes blurToViewAnimation {
+  0% {
+    filter: blur(4px);
+  }
+  25% {
+    filter: blur(0px);
+  }
 }
