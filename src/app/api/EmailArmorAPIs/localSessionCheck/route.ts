@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { cookies, headers } from 'next/headers'
+import { headers } from 'next/headers'
 import { localSessionCheck } from "email-armor";
 import { DeleteCookie } from "@/utils/DeleteCookie";
 

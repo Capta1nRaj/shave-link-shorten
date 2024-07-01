@@ -23,6 +23,7 @@ const ClicksTrackingSchema = new mongoose.Schema({
     browser: { type: String, default: "Unknown" },
     os: { type: String, default: "Unknown" },
     device: { type: String, default: "Desktop" },
+    referrer: { type: String, default: "direct" }
 }, { timestamps: true })
 
 ClicksTrackingSchema.index({ userName: 1 })
