@@ -19,7 +19,7 @@
     "axios": "^1.6.8",
     "connect2mongodb": "^1.1.29",
     "cookies-next": "^4.1.1",
-    "email-armor": "^0.0.92-beta.0",
+    "email-armor": "^0.0.94-beta.0",
     "jsdom": "^24.1.0",
     "mongoose": "^8.4.3",
     "next": "14.2.1",

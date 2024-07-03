@@ -2,7 +2,6 @@
 //* This model is used to store the user accounts data.
 
 import mongoose from "mongoose";
-require('./linksListModel')
 
 const userAccountsSchema = new mongoose.Schema({
     userFullName: { type: String, required: true },
@@ -12,8 +11,10 @@ const userAccountsSchema = new mongoose.Schema({
     userMobileNumber: { type: String, },
     userProfilePic: { type: String, default: "" },
     userReferralCode: { type: String, required: true, unique: true, },
-    userReferrals: { type: [String], default: [], },
-    userReferredBy: { type: String, default: "", },
+    // userReferrals: { type: [mongoose.Schema.Types.ObjectId], ref: "userAccounts", default: [] },
+    userReferrals: { type: [mongoose.Schema.Types.Mixed], ref: "userAccounts", default: [] },
+    // userReferredBy: { type: mongoose.Schema.Types.ObjectId, ref: "userAccounts", required: false, },
+    userReferredBy: { type: mongoose.Schema.Types.Mixed, ref: "userAccounts", required: false, },
     userVerified: { type: Boolean, default: false, },
     userBanned: { type: Boolean, default: false, },
     points: { type: Number, default: 0, },
