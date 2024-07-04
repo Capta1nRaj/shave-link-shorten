@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
         const { userFullName, userName, userEmail, userPassword, userReferredBy } = await request.json();
 
-        const response = await signup(userFullName, userName, userEmail, userPassword, userReferredBy, userAgent, userIP, 'merchant');
+        const response = await signup(userFullName, userName, userEmail, userPassword, userReferredBy, userAgent, userIP, 'Free Forever');
 
         const { message, status } = response;
 

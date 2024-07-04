@@ -46,7 +46,7 @@ export default function PricingLayout() {
                         </fieldset>
                     </div>
 
-                    <div className="mt-4 flex justify-center">
+                    {/* <div className="mt-4 flex justify-center">
                         <RadioGroup value={country} onChange={setCountry} className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200">
                             {CountriesListConstants.map((option) => (
                                 <RadioGroup.Option key={option.value} value={option}
@@ -58,7 +58,7 @@ export default function PricingLayout() {
                                 </RadioGroup.Option>
                             ))}
                         </RadioGroup>
-                    </div>
+                    </div> */}
 
                     <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
                         {PricingTiersConstants.map((tier, index) => (

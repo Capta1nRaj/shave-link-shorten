@@ -104,44 +104,6 @@ export default function ContactUsPage() {
                     </div>
                 </form>
             </div>
-
-            <div className="bg-primary-4">
-                <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-                    <div className="mx-auto max-w-lg md:grid md:max-w-none md:grid-cols-1 md:gap-8">
-                        <div>
-                            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight"> Contact Us </h2>
-                            <div className="mt-3">
-                            </div>
-                            <div className="mt-9">
-                                <div className="flex">
-                                    <div className="flex-shrink-0">
-                                        <MapPinIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-                                    </div>
-                                    <div className="ml-3 text-base text-gray-500">
-                                        <p> Warisaliganj, Nawada, Warisaliganj, Mafi, Warisaliganj, Bihar, India, 805130 </p>
-                                    </div>
-                                </div>
-                                <div className="mt-6 flex">
-                                    <div className="flex-shrink-0">
-                                        <EnvelopeIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-                                    </div>
-                                    <div className="ml-3 text-base text-gray-500">
-                                        <p> contact@priyalraj.com </p>
-                                    </div>
-                                </div>
-                                <div className="mt-6 flex">
-                                    <div className="flex-shrink-0">
-                                        <PhoneIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-                                    </div>
-                                    <div className="ml-3 text-base text-gray-500">
-                                        <p> +91 8709688090 </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </>
     )
 }

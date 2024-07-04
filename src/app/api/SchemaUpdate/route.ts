@@ -3,15 +3,20 @@ import websiteStatsModel from '@/models/websiteStatsModel';
 import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     try {
+        const { secretPassword } = await request.json();
 
-        if (request.headers.get('Authorization') !== `Bearer ${process.env.SECRET_CODE_FOR_PRIVATE_APIS}`) {
-            return NextResponse.json({ message: "Unauthorized", status: 500 }, { status: 401 });
+        if (secretPassword !== process.env.SECRET_CODE_FOR_PRIVATE_APIS) {
+            return NextResponse.json({ message: "Just A POST call in /api/SchemaUpdate.", status: 401 }, { status: 200 });
         }
+
+        //! Connecting to MongoDB
+        await connect2MongoDB();
 
         await renameFields();
         await renameUserReferralsToId();
+        await renameUserAccountsRole();
 
         //! Sending response to the client
         return NextResponse.json({ message: "Schema updated!", status: 200 }, { status: 200 });
@@ -22,8 +27,6 @@ export async function GET(request: NextRequest) {
 }
 
 async function renameFields() {
-    await connect2MongoDB();
-
     const getAccountsList = await userAccountsModel.find({}).select('userName userReferrals userReferredBy');
 
     for (let i = 0; i < getAccountsList.length; i++) {
@@ -31,8 +34,9 @@ async function renameFields() {
             await getAccountsList[i].updateOne({ userReferredBy: null }, [{ $set: { userReferredBy: null } }]);
         } else if (typeof getAccountsList[i].userReferredBy === 'string') {
             const referralId = await userAccountsModel.findOne({ userName: getAccountsList[i].userReferredBy }).select('_id');
-            console.log(referralId)
-            await getAccountsList[i].updateOne({ userReferredBy: referralId._id }, [{ $set: { userReferredBy: referralId._id } }]);
+            if (referralId) {
+                await getAccountsList[i].updateOne({ userReferredBy: referralId._id }, [{ $set: { userReferredBy: referralId._id } }]);
+            }
         }
     }
 
@@ -40,8 +44,6 @@ async function renameFields() {
 }
 
 async function renameUserReferralsToId() {
-    await connect2MongoDB();
-
     const getAccountsList = await userAccountsModel.find({}).select('userReferrals');
 
     for (let i = 0; i < getAccountsList.length; i++) {
@@ -62,4 +64,8 @@ async function renameUserReferralsToId() {
     }
 
     console.log('User referrals updated successfully.');
+}
+
+async function renameUserAccountsRole() {
+    await userAccountsModel.updateMany({ userRole: { $nin: ["Startup", "Professional", "Enterprise"] } }, { $set: { userRole: "Free Forever" } });
 }
