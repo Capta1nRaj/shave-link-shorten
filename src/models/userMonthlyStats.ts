@@ -1,4 +1,4 @@
-//! Admin side model
+//! Client & Admin side model
 //* This model will capture the monthly stats of the user
 
 import mongoose from "mongoose";

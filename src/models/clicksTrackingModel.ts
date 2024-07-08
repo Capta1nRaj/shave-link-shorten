@@ -28,7 +28,7 @@ const ClicksTrackingSchema = new mongoose.Schema({
 
 ClicksTrackingSchema.index({ userName: 1 })
 ClicksTrackingSchema.index({ alias: 1 })
-ClicksTrackingSchema.index({ countryName: 1 })
+ClicksTrackingSchema.index({ countryCode: 1 })
 ClicksTrackingSchema.index({ stateName: 1 })
 ClicksTrackingSchema.index({ cityName: 1 })
 ClicksTrackingSchema.index({ browser: 1 })

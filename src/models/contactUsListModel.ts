@@ -13,4 +13,7 @@ const ContactUsListSchema = new mongoose.Schema({
     status: { type: String, default: 'pending' }
 }, { timestamps: true });
 
+ContactUsListSchema.index({ status: 1 });
+ContactUsListSchema.index({ createdAt: 1 });
+
 export default mongoose.models.ContactUsList || mongoose.model('ContactUsList', ContactUsListSchema);

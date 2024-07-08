@@ -13,11 +13,4 @@ const websiteStatsSchema = new mongoose.Schema({
     linksClicksCount: { type: Number, default: 0 }
 }, { timestamps: true })
 
-websiteStatsSchema.index({ weekNumber: 1 })
-websiteStatsSchema.index({ monthNumber: 1 })
-websiteStatsSchema.index({ yearNumber: 1 })
-websiteStatsSchema.index({ newUsers: 1 })
-websiteStatsSchema.index({ linksCreated: 1 })
-websiteStatsSchema.index({ linksClicksCount: 1 })
-
 export default mongoose.models.websiteStats || mongoose.model('websiteStats', websiteStatsSchema);

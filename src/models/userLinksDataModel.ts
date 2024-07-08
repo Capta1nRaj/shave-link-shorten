@@ -18,6 +18,7 @@ const userLinksDataModel = new mongoose.Schema({
     timestamps: true
 });
 
+userLinksDataModel.index({ userName: 1 });
 userLinksDataModel.index({ totalLinksCount: 1 }); // Creating an index on totalLinksCount
 
 export default mongoose.models.userLinksData || mongoose.model('userLinksData', userLinksDataModel);

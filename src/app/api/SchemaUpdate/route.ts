@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
     try {
-        const { secretPassword } = await request.json();
+        const { secretPassword, toChange } = await request.json();
 
         if (secretPassword !== process.env.SECRET_CODE_FOR_PRIVATE_APIS) {
             return NextResponse.json({ message: "Just A POST call in /api/SchemaUpdate.", status: 401 }, { status: 200 });
@@ -13,6 +13,14 @@ export async function POST(request: NextRequest) {
 
         //! Connecting to MongoDB
         await connect2MongoDB();
+
+        if (!toChange) {
+            const getAccountsList = await userAccountsModel.find({}).select('userName userReferrals userReferredBy');
+            for (let i = 0; i < getAccountsList.length; i++) {
+                console.log(!getAccountsList[i].userReferredBy)
+            }
+            return NextResponse.json({ getAccountsList, message: "Status Check Done", status: 200 }, { status: 200 });
+        }
 
         await renameFields();
         await renameUserReferralsToId();
