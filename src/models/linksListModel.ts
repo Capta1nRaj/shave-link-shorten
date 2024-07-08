@@ -17,9 +17,12 @@ const LinksListModelSchema = new mongoose.Schema({
     password: { type: String, default: '' },
     toSupport: { type: Boolean, default: false },
     isApp: { type: Boolean, default: false },
+    expiryDate: { type: String, default: "" }
 }, { timestamps: true });
 
 LinksListModelSchema.index({ userName: 1 })
 LinksListModelSchema.index({ alias: 1 })
+LinksListModelSchema.index({ expiryDate: 1 })
+LinksListModelSchema.index({ createdAt: 1 })
 
 export default mongoose.models.LinksList || mongoose.model('LinksList', LinksListModelSchema);

@@ -81,7 +81,7 @@ export default function Example() {
                                 </RadioGroup>
                             </fieldset>
 
-                            <fieldset aria-label="Country selection" className="w-[115px] mx-auto">
+                            {/* <fieldset aria-label="Country selection" className="w-[115px] mx-auto">
                                 <RadioGroup
                                     value={country}
                                     onChange={setCountry}
@@ -99,7 +99,7 @@ export default function Example() {
                                         </RadioGroup.Option>
                                     ))}
                                 </RadioGroup>
-                            </fieldset>
+                            </fieldset> */}
                         </div>
                     </div>
                     <div className="relative mx-auto mt-10 grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:-mb-14 lg:max-w-none lg:grid-cols-4">
