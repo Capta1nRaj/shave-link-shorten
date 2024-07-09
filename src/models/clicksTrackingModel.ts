@@ -23,7 +23,8 @@ const ClicksTrackingSchema = new mongoose.Schema({
     browser: { type: String, default: "Unknown" },
     os: { type: String, default: "Unknown" },
     device: { type: String, default: "Desktop" },
-    referrer: { type: String, default: "direct" }
+    referrer: { type: String, default: "direct" },
+    isVerified: { type: Boolean, default: true }
 }, { timestamps: true })
 
 ClicksTrackingSchema.index({ userName: 1 })
@@ -34,5 +35,6 @@ ClicksTrackingSchema.index({ cityName: 1 })
 ClicksTrackingSchema.index({ browser: 1 })
 ClicksTrackingSchema.index({ os: 1 })
 ClicksTrackingSchema.index({ device: 1 })
+ClicksTrackingSchema.index({ createdAt: 1 })
 
 export default mongoose.models.clicksTracking || mongoose.model('clicksTracking', ClicksTrackingSchema);
