@@ -3,6 +3,10 @@
 
 import mongoose from "mongoose";
 
+const validateStringOrNumber = (value: string | number) => {
+    return typeof value === 'string' || typeof value === 'number';
+};
+
 const LinksListModelSchema = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     destinationURL: { type: String },
@@ -17,7 +21,8 @@ const LinksListModelSchema = new mongoose.Schema({
     password: { type: String, default: '' },
     toSupport: { type: Boolean, default: false },
     isApp: { type: Boolean, default: false },
-    expiryDate: { type: String, default: "" }
+    expiryDate: { type: String, default: "" },
+    expiryByClicks: { type: mongoose.Schema.Types.Mixed, default: 'no', validate: [validateStringOrNumber, 'expiryByClicks must be a string or number'] },
 }, { timestamps: true });
 
 LinksListModelSchema.index({ userName: 1 })
