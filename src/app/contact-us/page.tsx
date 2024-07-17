@@ -5,11 +5,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import LoadingSceneComponent from '@/components/LoadingSceneComponent';
 
 const inputCSS = `block w-full rounded-md border-0 px-3.5 py-2 text-primary-5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`;
 
 export default function ContactUsPage() {
 
+    const [isLoading, setisLoading] = useState(false);
     const [contactUsFormData, setContactUsFormData] = useState({ firstName: '', lastName: '', companyName: '', email: '', phoneNumber: '', message: '' });
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => { setContactUsFormData({ ...contactUsFormData, [e.target.name]: e.target.value }); };
@@ -21,13 +23,15 @@ export default function ContactUsPage() {
             //! If any required field null, then, throw error meesage
             if (!contactUsFormData.firstName || !contactUsFormData.lastName || !contactUsFormData.email || !contactUsFormData.phoneNumber || !contactUsFormData.message) { toast.error("Please fill in all required fields!"); return; }
 
+            setisLoading(true);
+
             //! Else send data to DB
             const { data: { message, status } } = await axios.post('/api/ContactUsAPI', contactUsFormData);
 
             //! If any field null, throw error meesage
-            if (status !== 200) { toast.error(message); return; }
+            if (status !== 200) { setisLoading(false); toast.error(message); return; }
             //! Else reset form, & show success message
-            resetForm(); toast.success(message)
+            resetForm(); toast.success(message); setisLoading(false);
         } catch (error) {
             console.error(error);
             toast.error("Internal Server Error.");
@@ -42,7 +46,11 @@ export default function ContactUsPage() {
 
     return (
         <>
-            <div className="isolate bg-primary-1 my-20 lg:px-8 px-4 relative">
+            {isLoading &&
+                <LoadingSceneComponent />
+            }
+
+            <div className="isolate bg-primary-1 my-20 lg:px-8 px-4 relative z-0">
 
                 <h2 className={`lg:text-7xl md:text-6xl text-5xl text-center uppercase font-extrabold titleDropShadowCSS text-primary-3 ${raleway.className}`}> contact us </h2>
 

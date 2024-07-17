@@ -13,7 +13,8 @@ export async function POST(request: NextRequest) {
         await connect2MongoDB();
 
         //! Send a confirmation mail to the recipient
-        await sendConfirmationMailToUser(email, firstName + lastName);
+        const userFullName = firstName + " " + lastName;
+        await sendConfirmationMailToUser(email, userFullName);
 
         await new contactUsListModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();
 

@@ -5,7 +5,7 @@ import { raleway } from "@/fonts/Fonts";
 export default async function WhatWeOfferLayout() {
     return (
         <>
-            <section id='features' className="WhatWeOfferLayout-section blurToView bg-primary-2">
+            <section id='features' className="WhatWeOfferLayout-section bg-primary-2">
                 <section className="max-width py-16">
                     <h2 className={`titleCSS ${raleway.className} teeny:block hidden whitespace-nowrap`}>
                         <span className="font-extrabold"> features  </span>

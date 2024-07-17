@@ -22,10 +22,10 @@ export default function IntroLayout() {
             <DashboardPreview1 customCSS="w-full" />
 
             <p className="text-xs font-normal text-center opacity-50 mt-3 mb-8">
-                (UI color schema is inspired by <Link className="underline underline-offset-4 decoration-primary-3 text-primary-3 font-bold" href={'https://shavelinks.com/RumanArif00'} target="_blank">@RumanArif00</Link>)
+                (UI color schema is inspired by <a href={'https://shavel.ink/RumanArif00'} className="underline underline-offset-4 decoration-primary-3 text-primary-3 font-bold" target="_blank">@RumanArif00</a>)
             </p>
 
-            <Link href={'/signUp'} className="blurToView w-fit flex items-center gap-2 mx-auto px-8 py-2 bg-primary-3 uppercase rounded-lg sm:text-2xl text-base buttonTransitionCSS">
+            <Link href={'/signUp'} className="w-fit flex items-center gap-2 mx-auto px-8 py-2 bg-primary-3 uppercase rounded-lg sm:text-2xl text-base buttonTransitionCSS">
                 get started <JoinWaitlistIcon1 customCSS="sm:w-8 w-6 -mt-[6px]" />
             </Link>
         </section>

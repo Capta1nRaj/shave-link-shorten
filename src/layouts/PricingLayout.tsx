@@ -18,7 +18,7 @@ export default function PricingLayout() {
 
     return (
         <>
-            <div className="bg-primary-1 py-16 blurToView" id='pricing'>
+            <div className="bg-primary-1 py-16" id='pricing'>
                 <div className="max-width">
                     <div className={`mx-auto max-w-4xl text-center ${raleway.className}`}>
                         <h2 className={`titleCSS flex items-center justify-center text-primary-4 gap-x-1`}> Pricing </h2>
@@ -94,7 +94,7 @@ export default function PricingLayout() {
                                     className={`${tier.featured
                                         ? 'bg-primary-3 border border-primary-3 text-white shadow-sm hover:bg-primary-1 hover:border-primary-3'
                                         : 'text-primary-3 hover:bg-primary-5 ring-1 ring-inset ring-primary-4 hover:ring-primary-3'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>
-                                    {tier.name === 'Enterprise' ? 'contact us' : (tier.name === 'Free Forever' ? 'get started' : 'coming soon')}
+                                    {tier.name === 'Enterprise' ? 'contact us' : (tier.name === 'Free Forever' ? 'get started' : tier.name === 'Startup' ? 'get started with startup' : 'get started with pro')}
                                 </Link>
                                 <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-primary-4">
                                     {tier.features.map((feature) => (
@@ -108,31 +108,11 @@ export default function PricingLayout() {
                         ))}
                     </div>
 
-                    <Link href={'/pricing'} className={`blurToView animate-bounce ${raleway.className} font-bold md:text-2xl text-base flex mt-10 bg-primary-3 text-primary-4 w-fit mx-auto px-20 py-4 rounded-full drop-shadow-none hover:drop-shadow-[0_0px_5px_rgba(255,255,255,0.25)] border border-primary-3 hover:bg-primary-5 capitalize defaultTransitionCSS`}>
+                    <Link href={'/pricing'} className={`${raleway.className} font-bold md:text-2xl text-base flex mt-10 bg-primary-3 text-primary-4 w-fit mx-auto px-20 py-4 rounded-full drop-shadow-none hover:drop-shadow-[0_0px_5px_rgba(255,255,255,0.25)] border border-primary-3 hover:bg-primary-5 capitalize defaultTransitionCSS`}>
                         compare plans
                     </Link>
                 </div>
             </div>
-
-            <style jsx>{`
-                #pricing div div {
-                  position: relative;
-                  animation: pricingL2R;
-                  animation-timeline: view(50% auto);
-                  animation-fill-mode: forwards;
-                }
-                
-                @keyframes pricingL2R {
-                  0% {
-                    opacity: 0;
-                    left: -250px;
-                  } 
-                  25% {
-                    opacity: 1;
-                    left: 0;
-                  }
-                }
-            `}</style>
         </>
     )
 }
