@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: './',
+  },
+  icons: {
+    icon: '/images/Favicon/favicon-96x96.png',
+    apple: '/images/Favicon/apple-icon.png'
   }
 };
 
