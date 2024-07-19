@@ -1,12 +1,12 @@
 'use client'
 
 import { raleway, roboto } from "@/fonts/Fonts";
-import { CompanyLogo2 } from "@/images/ImagesExport";
 import Link from "next/link";
 import FooterConstants from '@/constants/FooterConstants.json'
 import { SocialMediaConstants } from "@/constants/SocialMediaConstants";
 import { usePathname } from "next/navigation";
 import { PathNamesList } from "@/constants/PathNamesList";
+import { CompanyTextLogo1 } from "@/images/ImagesExport";
 
 export default function FooterLayout() {
 
@@ -20,7 +20,7 @@ export default function FooterLayout() {
 
                         <section className="flex sm:flex-row flex-col justify-between">
                             <div className={`left-side ${roboto.className} font-normal text-primary-4 sm:w-96 w-full flex flex-col justify-center sm:text-left text-center`}>
-                                <CompanyLogo2 customCSS="sm:mx-0 mx-auto mb-2 sm:w-32 w-20" />
+                                <CompanyTextLogo1 customCSS="sm:mx-0 mx-auto mb-2 sm:w-32 w-20" />
                                 At ShaveLinks, we simplify link sharing with our link shortener, advanced analytics, customizable QR codes, and seamless app redirection. Optimize marketing, track performance, and guide users to shared websites effortlessly.
                             </div>
 

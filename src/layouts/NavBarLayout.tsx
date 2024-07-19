@@ -1,6 +1,6 @@
 'use client'
 
-import { CompanyLogo2, LoadingGIF1 } from '@/images/ImagesExport'
+import { CompanyTextLogo1, LoadingGIF1 } from '@/images/ImagesExport'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import NavBarConstants from '@/constants/NavBarConstants.json'
@@ -50,7 +50,7 @@ export default function NavBarLayout() {
                     <section className="max-width py-4 flex justify-between">
 
                         <div className="left-side flex items-center">
-                            <CompanyLogo2 customCSS='sm:w-32 w-20' />
+                            <CompanyTextLogo1 customCSS='sm:w-32 w-20' />
                         </div>
 
                         <div className={`middle-side ${loggedInButtonCSS} gap-6`}>

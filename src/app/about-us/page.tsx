@@ -1,4 +1,4 @@
-import { AkshatBhargavImage1, PriyalRajImage1 } from "@/images/ImagesExport"
+import { PriyalRajImage1 } from "@/images/ImagesExport"
 
 const team = [
     {
@@ -6,13 +6,7 @@ const team = [
         role: 'Full Stack Developer',
         imageUrl: <PriyalRajImage1 customCSS="w-full rounded-2xl object-cover" />,
         location: 'Patna, Bihar',
-    },
-    // {
-    //     name: 'Akshat Bhargav',
-    //     role: 'Intern, Graphic Designer',
-    //     imageUrl: <AkshatBhargavImage1 customCSS="w-full rounded-2xl object-cover" />,
-    //     location: 'New Delhi, Delhi',
-    // }
+    }
 ]
 
 export default function AboutUsPage() {

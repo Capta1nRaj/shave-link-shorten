@@ -7,7 +7,7 @@ import React from 'react';
 const PriyalRajImage1 = ({ customCSS, width, height }: ImageInterface) => {
     return (
         <>
-            <Image className={`${customCSS}`} width={width || 35} height={height || 35} src="/images/TeamMembersPics/PriyalRajImage1.png" alt="PriyalRajImage1" unoptimized />
+            <Image className={`${customCSS}`} width={width || 35} height={height || 35} src="/images/TeamMembersPics/PriyalRajImage1.webp" alt="PriyalRajImage1" unoptimized />
         </>
     );
 };
