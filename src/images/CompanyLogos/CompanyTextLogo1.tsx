@@ -8,7 +8,7 @@ const CompanyTextLogo1 = ({ customCSS, width, height }: ImageInterface) => {
     return (
         <>
             <Link href={'/'}>
-                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/CompanyLogos/CompanyTextLogo1.webp" alt="CompanyTextLogo1" priority unoptimized={true} />
+                <Image className={`${customCSS}`} width={width || 80} height={height || 80} src="/images/CompanyLogos/CompanyTextLogo1.webp" alt="shavelinks text logo" priority unoptimized={true} />
             </Link>
         </>
     );

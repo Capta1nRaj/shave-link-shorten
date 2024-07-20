@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     }
 };
 
-const ShippingAndReturnPolicyPage = () => {
+export default function ShippingAndReturnPolicyPage() {
     return (
         <section className={`${legalMainDivCSS}`}>
             <h1 className={`${legalH1CSS}`}>Shipping and Return Policy</h1>
@@ -66,5 +66,3 @@ const ShippingAndReturnPolicyPage = () => {
         </section>
     );
 };
-
-export default ShippingAndReturnPolicyPage;

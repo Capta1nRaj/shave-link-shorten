@@ -17,10 +17,8 @@ export const metadata: Metadata = {
     }
 };
 
-const SignUpPage = () => (
+export default function SignUpPage() {
     <Suspense>
         <SignUpPageContent />
     </Suspense>
-);
-
-export default SignUpPage;
+};

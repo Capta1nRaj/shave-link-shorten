@@ -26,7 +26,6 @@ export const metadata: Metadata = {
 };
 
 export default function AboutUsPage() {
-
     return (
         <div className="bg-primary-1 pb-10">
             <main className="relative isolate">
