@@ -1,6 +1,22 @@
 import { legalH1CSS, legalMainDivCSS, legalH2CSS, legalPCSS } from '@/CommonCSS'
+import { Metadata } from 'next';
 import Link from 'next/link'
 import React from 'react'
+
+export const metadata: Metadata = {
+    title: "Our Commitment to Protecting Your Data",
+    description: "How ShaveLinks collects, uses, and protects user information. Please read our Privacy Policy to know more about data security and privacy practices.",
+    keywords: "privacy policy, shaveLinks, data protection, information security, cookies, personal data, terms and conditions, contact us",
+    twitter: {
+        card: "summary_large_image"
+    },
+    openGraph: {
+        images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
+    },
+    alternates: {
+        canonical: '/privacy-policy',
+    }
+};
 
 const PrivacyPolicyPage = () => {
     return (

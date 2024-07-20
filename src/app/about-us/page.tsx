@@ -1,4 +1,5 @@
 import { PriyalRajImage1 } from "@/images/ImagesExport"
+import { Metadata } from "next";
 
 const team = [
     {
@@ -8,6 +9,21 @@ const team = [
         location: 'Patna, Bihar',
     }
 ]
+
+export const metadata: Metadata = {
+    title: "Learn More About Our Mission and Team",
+    description: "ShaveLinks is a URL shortener that simplifies your link management with powerful analytics, and boost your business. Meet the innovative team behind it.",
+    keywords: "about shavelinks, team, mission, url shortener, link management, analytics, custom features, priyal raj, full stack developer",
+    twitter: {
+        card: "summary_large_image"
+    },
+    openGraph: {
+        images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
+    },
+    alternates: {
+        canonical: '/about-us',
+    }
+};
 
 export default function AboutUsPage() {
 
@@ -28,7 +44,7 @@ export default function AboutUsPage() {
                 {/* Header section */}
                 <div className="lg:px-8 px-6 pt-10">
                     <div className="mx-auto max-w-2xl text-center">
-                        <h2 className="text-4xl font-bold tracking-tight text-primary-4 sm:text-6xl"> About ShaveLinks </h2>
+                        <h1 className="text-4xl font-bold tracking-tight text-primary-4 sm:text-6xl"> About ShaveLinks </h1>
                         <p className="mt-6 text-lg leading-8 text-primary-4">
                             ShaveLinks is a link shortener tool for effortless sharing. Create concise, custom links, track engagement seamlessly, and simplify your online presence with advanced analytics and customizable QR codes.
                         </p>
@@ -38,7 +54,7 @@ export default function AboutUsPage() {
                 {/* Team section */}
                 <div className="mx-auto mt-10 max-width">
                     <div className="mx-auto max-w-2xl lg:mx-0">
-                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our team</h2>
+                        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"> Our team </h2>
                     </div>
                     <ul role="list" className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 xl:grid-cols-4">
                         {team.map((person) => (

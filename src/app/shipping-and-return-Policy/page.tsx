@@ -1,6 +1,22 @@
 import { legalH1CSS, legalMainDivCSS, legalH2CSS, legalPCSS } from '@/CommonCSS';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+
+export const metadata: Metadata = {
+    title: "Fast and Reliable Shipping Policy",
+    description: "Review ShaveLinks Shipping and Return Policy. Understand our digital service delivery, exchange and cancellation policies, and pricing terms.",
+    keywords: "shipping policy, return policy, shaveLinks, digital services, service access, exchange policy, cancellation policy, pricing policy",
+    twitter: {
+        card: "summary_large_image"
+    },
+    openGraph: {
+        images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
+    },
+    alternates: {
+        canonical: '/shipping-and-return-policy',
+    }
+};
 
 const ShippingAndReturnPolicyPage = () => {
     return (

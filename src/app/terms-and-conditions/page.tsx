@@ -1,6 +1,22 @@
 import { legalH1CSS, legalMainDivCSS, legalH2CSS, legalPCSS } from '@/CommonCSS';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+
+export const metadata: Metadata = {
+    title: "Transparent Terms and Conditions",
+    description: "Review the terms and conditions of using ShaveLinks. Understand our service engagement policies, intellectual property rights, and limitation of liability.",
+    keywords: "terms and conditions, shaveLinks, service engagement, intellectual property, limitation of liability, governing law, contact us",
+    twitter: {
+        card: "summary_large_image"
+    },
+    openGraph: {
+        images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
+    },
+    alternates: {
+        canonical: '/terms-and-conditions',
+    }
+};
 
 const TermsAndConditionsPage = () => {
     return (

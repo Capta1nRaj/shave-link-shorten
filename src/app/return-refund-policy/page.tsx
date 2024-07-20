@@ -1,6 +1,19 @@
 import { legalH1CSS, legalMainDivCSS, legalH2CSS, legalPCSS } from '@/CommonCSS'
+import { Metadata } from 'next';
 import Link from 'next/link'
 import React from 'react'
+
+export const metadata: Metadata = {
+    title: "Return and Refund Policy for Your Convenience",
+    description: "ShaveLinks return and refund policy for our digital services. Learn more about our non-refundable nature, and cancellation policy.",
+    keywords: "return policy, refund policy, shaveLinks, digital services, cancellation policy, service modifications, contact us",
+    openGraph: {
+        images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
+    },
+    alternates: {
+        canonical: '/return-refund-policy',
+    }
+};
 
 const ReturnRefundPolicyPage = () => {
     return (

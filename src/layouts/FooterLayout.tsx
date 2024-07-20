@@ -26,7 +26,7 @@ export default function FooterLayout() {
 
                             <div className="right-side text-lg flex text-left justify-between sm:mt-0 mt-10 gap-x-10">
                                 <div className="box-1 flex flex-col gap-y-2">
-                                    <h2 className="uppercase text-xl text-primary-3"> home </h2>
+                                    <p className="uppercase text-xl text-primary-3"> home </p>
                                     {FooterConstants.slice(1, 5).map((item) => {
                                         return (
                                             <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link}> {item.title} </Link>
@@ -35,7 +35,7 @@ export default function FooterLayout() {
                                 </div>
 
                                 <div className="box-1 flex flex-col gap-y-2">
-                                    <h2 className="uppercase text-xl text-primary-3"> legal </h2>
+                                    <p className="uppercase text-xl text-primary-3"> legal </p>
                                     {FooterConstants.slice(5).map((item) => {
                                         return (
                                             <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link}> {item.title} </Link>
