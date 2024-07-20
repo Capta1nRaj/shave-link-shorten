@@ -56,7 +56,7 @@ export default function NavBarLayout() {
                         <div className={`middle-side ${loggedInButtonCSS} gap-6`}>
                             {NavBarConstants.slice(0, 2).map((item) => {
                                 return (
-                                    <Link key={item.title} className={item.css} href={item.link}> {item.title} </Link>
+                                    <Link key={item.title} className={item.css} href={item.link} title={item.title}> {item.title} </Link>
                                 )
                             })}
                         </div>
@@ -73,7 +73,7 @@ export default function NavBarLayout() {
                                     <div className={`right-side ${loggedInButtonCSS} ${inter.className} gap-6`}>
                                         {NavBarConstants.slice(2, 4).map((item) => {
                                             return (
-                                                <Link key={item.title} className={item.css} href={item.link}> {item.title} </Link>
+                                                <Link key={item.title} className={item.css} href={item.link} title={item.title}> {item.title} </Link>
                                             )
                                         })}
                                     </div>

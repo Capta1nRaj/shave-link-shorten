@@ -29,7 +29,7 @@ export default function FooterLayout() {
                                     <p className="uppercase text-xl text-primary-3"> home </p>
                                     {FooterConstants.slice(1, 5).map((item) => {
                                         return (
-                                            <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link}> {item.title} </Link>
+                                            <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link} title={item.title}> {item.title} </Link>
                                         )
                                     })}
                                 </div>
@@ -38,7 +38,7 @@ export default function FooterLayout() {
                                     <p className="uppercase text-xl text-primary-3"> legal </p>
                                     {FooterConstants.slice(5).map((item) => {
                                         return (
-                                            <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link}> {item.title} </Link>
+                                            <Link key={item.title} className={`${item.css} text-base font-medium`} href={item.link} title={item.title}> {item.title} </Link>
                                         )
                                     })}
                                 </div>
@@ -51,7 +51,7 @@ export default function FooterLayout() {
 
                             <div className="flex items-center gap-x-2">
                                 {SocialMediaConstants.map((item) => (
-                                    <Link key={item.link} href={item.link} target="_blank">
+                                    <Link key={item.link} href={item.link} title={item.title} target="_blank">
                                         {item.image}
                                     </Link>
                                 ))}
