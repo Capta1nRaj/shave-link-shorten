@@ -32,7 +32,7 @@ export default async function sendConfirmationMailToUser(userEmail: string, user
 
     //! Sending the mail to the user
     const receiver = {
-        from: process.env.NODEMAILER_MAIL_FROM + "<" + process.env.NODEMAILER_USERNAME + ">",
+        from: process.env.NODEMAILER_MAIL_FROM,
         to: userEmail,
         subject: "Thanks for contacting ShaveLinks",
         html: replacedHtml,
