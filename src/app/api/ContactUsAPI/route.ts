@@ -1,7 +1,15 @@
 import contactUsListModel from '@/models/contactUsListModel';
-import sendConfirmationMailToUser from '@/utils/Nodemail/NodemailSetup';
 import { connect2MongoDB } from 'connect2mongodb';
 import { NextResponse, type NextRequest } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+import NodemailSetup from '@/utils/NodemailSetup';
+
+//! Fetch contact us email template
+function getEmailTemplate() {
+    const filePath = path.join(process.cwd(), 'src', 'utils', 'NodemailEmailTemplates', './ContactUsEmailTemplate.html');
+    return fs.readFileSync(filePath, 'utf-8');
+}
 
 export async function POST(request: NextRequest) {
     try {
@@ -14,7 +22,12 @@ export async function POST(request: NextRequest) {
 
         //! Send a confirmation mail to the recipient
         const userFullName = firstName + " " + lastName;
-        await sendConfirmationMailToUser(email, userFullName);
+
+        //! Fetch the Email HTML template code
+        const emailHTMLTemplate = getEmailTemplate().replace(/{{username}}/g, userFullName);
+
+        //! Sending mail to user
+        await NodemailSetup({ userEmail: email, emailSubject: "Thanks for contacting ShaveLinks", emailHTMLTemplate });
 
         await new contactUsListModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();
 
