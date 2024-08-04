@@ -4,7 +4,7 @@ export const PricingTiersConstants: PricingInterface[] = [
     {
         name: 'Free Forever',
         id: 'tier-free-forever',
-        href: '/signUp?tier=Free Forever',
+        href: '/signUp?referral=Captain',
         price: { monthly: '$0', annually: '$0', annualEquivalent: '$0' },
         priceInr: { monthly: '₹0', annually: '₹0', annualEquivalent: '₹0' },
         description: 'Perfect for individuals, hobbyists, and beginners.',

@@ -90,12 +90,21 @@ export default function PricingLayout() {
                                     </p>
                                 )}
 
-                                <Link href={`${tier.href}/frequency=${frequency.value}&country=${country.value}`} aria-describedby={tier.id}
-                                    className={`${tier.featured
-                                        ? 'bg-primary-3 border border-primary-3 text-white shadow-sm hover:bg-primary-1 hover:border-primary-3'
-                                        : 'text-primary-3 hover:bg-primary-5 ring-1 ring-inset ring-primary-4 hover:ring-primary-3'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>
-                                    {tier.name === 'Enterprise' ? 'contact us' : (tier.name === 'Free Forever' ? 'get started' : tier.name === 'Startup' ? 'get started with startup' : 'get started with pro')}
-                                </Link>
+                                {tier.name === "Free Forever" ?
+                                    <Link href={`${tier.href}`} aria-describedby={tier.id}
+                                        className={`${tier.featured
+                                            ? 'bg-primary-3 border border-primary-3 text-white shadow-sm hover:bg-primary-1 hover:border-primary-3'
+                                            : 'text-primary-3 hover:bg-primary-5 ring-1 ring-inset ring-primary-4 hover:ring-primary-3'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>
+                                        get started
+                                    </Link>
+                                    :
+                                    <Link href={`${tier.href}&frequency=${frequency.value}&country=${country.value}`} aria-describedby={tier.id}
+                                        className={`${tier.featured
+                                            ? 'bg-primary-3 border border-primary-3 text-white shadow-sm hover:bg-primary-1 hover:border-primary-3'
+                                            : 'text-primary-3 hover:bg-primary-5 ring-1 ring-inset ring-primary-4 hover:ring-primary-3'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>
+                                        {tier.name === 'Enterprise' ? 'contact us' : (tier.name === 'Free Forever' ? 'get started' : tier.name === 'Startup' ? 'get started with startup' : 'get started with pro')}
+                                    </Link>
+                                }
                                 <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-primary-4">
                                     {tier.features.map((feature) => (
                                         <li key={feature} className="flex gap-x-3">
