@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { FetchUserIP } from "@/utils/FetchUserIP";
 import { getWeekNumber, getMonthNumber, getYearNumber } from "@/utils/DateFunctions";
 import userAccountsModel from "@/models/userAccountsModel";
-import userLinksDataModel from "@/models/userLinksDataModel";
+import userAccountDataModel from "@/models/userAccountDataModel";
 import websiteStatsModel from "@/models/websiteStatsModel";
 import fs from 'fs';
 import path from 'path';
@@ -56,7 +56,7 @@ export async function PUT(request: NextRequest) {
 
         // Creting user links data document
         const getUserId = await userAccountsModel.findOne({ userName }).select("_id userFullName userEmail");
-        await new userLinksDataModel({ userName: getUserId._id }).save();
+        await new userAccountDataModel({ userName: getUserId._id }).save();
 
         // Starting billing cycle of user once they signup
         await new userMonthlyStats({ userName: getUserId._id }).save();

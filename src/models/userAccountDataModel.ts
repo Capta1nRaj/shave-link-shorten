@@ -4,7 +4,7 @@
 import mongoose from "mongoose";
 require('./linksListModel')
 
-const userLinksDataModel = new mongoose.Schema({
+const userAccountDataModel = new mongoose.Schema({
     userName: { type: mongoose.Schema.Types.ObjectId, ref: 'userAccounts', required: true },
     totalLinksList: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -18,7 +18,7 @@ const userLinksDataModel = new mongoose.Schema({
     timestamps: true
 });
 
-userLinksDataModel.index({ userName: 1 });
-userLinksDataModel.index({ totalLinksCount: 1 }); // Creating an index on totalLinksCount
+userAccountDataModel.index({ userName: 1 });
+userAccountDataModel.index({ totalLinksCount: 1 }); // Creating an index on totalLinksCount
 
-export default mongoose.models.userLinksData || mongoose.model('userLinksData', userLinksDataModel);
+export default mongoose.models.userAccountData || mongoose.model('userAccountData', userAccountDataModel);
