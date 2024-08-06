@@ -83,7 +83,6 @@ export async function PUT(request: NextRequest) {
         await NodemailSetup({ userEmail: getUserId.userEmail, emailSubject: "Welcome to Shavelinks! Shorten Links, Track Engagement, Boost Your Business", emailHTMLTemplate: signUpEmaillHTMLTemplate });
 
         //! Giving 14 days free Startup trial to new users
-        /*  
         const now = new Date();
         // Calculate the expiry date by adding the duration
         const expiryDateUTC = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
@@ -133,7 +132,6 @@ export async function PUT(request: NextRequest) {
 
         // Sending mail to user
         await NodemailSetup({ userEmail: getUserId.userEmail, emailSubject: "Enjoy a 14-Day Free Trial with Shavelinks! 🚀", emailHTMLTemplate: TrialEmaillHTMLTemplate });
-        */
 
         return NextResponse.json({ status: response.status, message: response.message }, { status: 200 });
     } catch (error) {
