@@ -29,7 +29,7 @@ export const PricingTiersConstants: PricingInterface[] = [
             '5K tracked clicks/mo',
             '1-year analytics retention',
             'Link expiration by clicks',
-            'Custom QR Branding'
+            // 'Custom QR Branding'
         ],
         featured: false,
     },

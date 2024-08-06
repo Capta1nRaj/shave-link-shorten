@@ -29,7 +29,7 @@ const sections = [
             { name: 'Tags', tiers: { "Free Forever": '5', Startup: '20', Professional: '200', Enterprise: 'Custom' } },
             { name: 'Link expiration by date', tiers: { "Free Forever": true, Startup: true, Professional: true, Enterprise: true } },
             { name: 'Link expiration by clicks', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'Custom QR Branding', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
+            // { name: 'Custom QR Branding', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
             { name: 'Password protected links', tiers: { "Free Forever": false, Startup: false, Professional: true, Enterprise: true } },
         ],
     },
