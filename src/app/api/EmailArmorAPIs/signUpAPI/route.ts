@@ -12,6 +12,7 @@ import NodemailSetup from "@/utils/NodemailSetup";
 import paymentsReciptsModel from "@/models/membershipModels/paymentsReciptsModel";
 import premiumMembersModel from "@/models/membershipModels/premiumMembersModel";
 import pricingPlansModel from "@/models/membershipModels/pricingPlansModel";
+import userMonthlyStats from "@/models/userMonthlyStats";
 
 const expireIn365Days = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
 
@@ -53,10 +54,12 @@ export async function PUT(request: NextRequest) {
         // id, userName, signedJWTToken,
         if ([400, 500].includes(response.status)) { return NextResponse.json({ status: response.status, message: response.message }, { status: 200 }); }
 
+        // Creting user links data document
         const getUserId = await userAccountsModel.findOne({ userName }).select("_id userFullName userEmail");
-        await new userLinksDataModel({
-            userName: getUserId._id
-        }).save();
+        await new userLinksDataModel({ userName: getUserId._id }).save();
+
+        // Starting billing cycle of user once they signup
+        await new userMonthlyStats({ userName: getUserId._id }).save();
 
         console.log(getUserId) //* Don't Delete it
 
