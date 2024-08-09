@@ -6,7 +6,6 @@ import NavBarLayout from "@/layouts/NavBarLayout";
 import FooterLayout from "@/layouts/FooterLayout";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AllInOneAnalytics } from "@/analytics/AllInOneAnalytics";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -79,7 +78,6 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <NavBarLayout />
         {children}
         <FooterLayout />
-        <AllInOneAnalytics />
         <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
       </body>
     </html>

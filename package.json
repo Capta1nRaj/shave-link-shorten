@@ -9,7 +9,8 @@
     "lint": "next lint",
     "mainSync": "git checkout main && git pull origin dev && git push && git checkout dev",
     "softResetBranch": "git checkout main && git reset --soft HEAD~2 && git commit -m \"MicrosoftClarity code updated\" && git push --force && git checkout dev && git reset --hard origin/main && git push --force",
-    "devSync": "git checkout dev && git reset --hard origin/main && git push --force && git pull origin main && git push",
+    "devHardReset": "git checkout dev && git reset --hard origin/main && git push --force && git pull origin main && git push",
+    "mainHardReset": "git checkout main && git reset --hard origin/dev && git push --force && git checkout dev",
     "vercelProd": "git checkout main && vercel --force --prod && git checkout dev"
   },
   "dependencies": {
