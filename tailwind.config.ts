@@ -3,13 +3,19 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./src/**/*.{js,ts,jsx,tsx,mdx,json}",
+  ],
   prefix: "",
   theme: {
+    screens: {
+      'teeny': '500px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      'laptop': '1400px',
+      '2xl': '1536px',
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -52,6 +58,13 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        custom: {
+          "dark": '#1D1E2C',
+          "medium": '#24263A',
+          "white": '#FFFFFF',
+          "blue": "#00ABF0",
+          "crimson": "#FF3258"
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -63,7 +63,21 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
   }
+  
+  .defaultTransitionCSS {
+    @apply transition-all ease-in-out duration-500;
+  }
+
+  .max-width {
+    @apply max-w-[1440px] sm:px-10 px-4 mx-auto;
+  }
+}
+
+
+body {
+  background-color: black;
 }
