@@ -3,13 +3,14 @@
 import { CompanyTextLogo1 } from '@/images/ImagesExport';
 import Link from 'next/link';
 import { NavBarConstants } from '@/constants/NavBarConstants';
+import NavBarSessionCheck from '@/components/NavBarSessionCheck';
 
 const loggedInButtonCSS = `flex items-center uppercase font-bold lg:text-base sm:text-lg text-xs`;
 
 export default function NavBarLayout(): JSX.Element {
     return (
         <>
-            <nav className={`NavBarLayout-section bg-custom-medium bg-custom-medium`}>
+            <nav className={`NavBarLayout-section bg-custom-medium`}>
                 <section className="max-width py-4 flex justify-between">
 
                     <div className="left-side flex items-center">
@@ -26,15 +27,7 @@ export default function NavBarLayout(): JSX.Element {
                         })}
                     </div>
 
-                    <div className={`right-side ${loggedInButtonCSS} gap-x-6`}>
-                        {NavBarConstants.slice(2, 4).map((item, index) => {
-                            return (
-                                <Link key={index} className={item.css} href={item.link} title={item.title}>
-                                    {item.title}
-                                </Link>
-                            )
-                        })}
-                    </div>
+                    <NavBarSessionCheck loggedInButtonCSS={loggedInButtonCSS} />
                 </section>
             </nav>
         </>

@@ -122,7 +122,7 @@ export default function PricingLayout() {
                         ))}
                     </div>
 
-                    <Link href={'/pricing'} className={`${raleway.className} font-bold md:text-2xl text-base flex mt-10 bg-custom-blue text-custom-white w-fit mx-auto px-20 py-4 rounded-full drop-shadow-none hover:drop-shadow-[0_0px_5px_rgba(255,255,255,0.25)] border border-custom-blue hover:bg-custom-5 capitalize defaultTransitionCSS`}>
+                    <Link href={'/pricing'} className={`${raleway.className} font-bold md:text-2xl text-base flex mt-10 bg-custom-blue text-custom-white w-fit mx-auto px-20 py-4 rounded-full border-2 border-custom-blue hover:bg-custom-5 capitalize defaultTransitionCSS`}>
                         compare plans
                     </Link>
                 </div>

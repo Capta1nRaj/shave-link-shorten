@@ -17,11 +17,11 @@ export const NavBarConstants = [
     {
         "title": "sign up",
         "link": "/signup",
-        "css": "bg-custom-blue text-custom-dark hover:text-custom-dark hover:bg-custom-white px-8 py-2 rounded-full defaultTransitionCSS"
+        "css": "bg-custom-blue text-custom-white hover:text-custom-dark hover:bg-custom-white px-8 py-2 rounded-full defaultTransitionCSS"
     },
     {
         "title": "dashboard",
-        "link": "",
-        "css": "bg-custom-white px-4 py-2 rounded-full"
+        "link": process.env.NEXT_PUBLIC_DOMAIN_NAME_2 || "http://localhost:3001",
+        "css": "bg-custom-blue text-custom-white hover:text-custom-dark hover:bg-custom-white px-6 py-2 rounded-full defaultTransitionCSS"
     }
 ]
