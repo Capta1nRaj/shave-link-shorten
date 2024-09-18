@@ -1,4 +1,4 @@
-import { ImageInterface } from '@/interfaces/Interfaces';
+import { ImageInterface } from '@/misc/Interfaces';
 import Image from 'next/image';
 import React from 'react';
 

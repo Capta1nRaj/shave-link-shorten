@@ -9,7 +9,7 @@ const loggedInButtonCSS = `flex items-center uppercase font-bold lg:text-base sm
 export default function NavBarLayout(): JSX.Element {
     return (
         <>
-            <nav className={`NavBarLayout-section bg-primary-2 bg-custom-medium`}>
+            <nav className={`NavBarLayout-section bg-custom-medium bg-custom-medium`}>
                 <section className="max-width py-4 flex justify-between">
 
                     <div className="left-side flex items-center">
