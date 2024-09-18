@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { forgotpassword, updatePassword } from "email-armor";
+import { forgotPassword, updatePassword } from "email-armor";
 import { FetchUserIP } from "@/utils/FetchUserIP";
 
 
@@ -14,10 +14,10 @@ export async function POST(request: NextRequest) {
         let response = { message: "", status: 0 };
 
         if (username.includes('@')) {
-            const signInResponse = await forgotpassword(username, '', userAgent, userIP);
+            const signInResponse = await forgotPassword(username, '', userAgent, userIP);
             response = { message: signInResponse.message || "", status: signInResponse.status };
         } else {
-            const signInResponse = await forgotpassword('', username, userAgent, userIP);
+            const signInResponse = await forgotPassword('', username, userAgent, userIP);
             response = { message: signInResponse.message || "", status: signInResponse.status };
         }
 

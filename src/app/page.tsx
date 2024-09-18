@@ -3,6 +3,7 @@ import HeroLayout from "@/layouts/HeroLayout";
 import KeyFeaturesOfShavelinksLayout from "@/layouts/KeyFeaturesOfShavelinksLayout";
 import NavBarLayout from "@/layouts/NavBarLayout";
 import PricingLayout from "@/layouts/PricingLayout";
+import WebsiteStatsLayout from "@/layouts/WebsiteStatsLayout";
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
       <HeroLayout />
       <KeyFeaturesOfShavelinksLayout />
       <PricingLayout />
-      <FooterLayout />
+      <WebsiteStatsLayout />
+      <FooterLayout footerColor="bg-custom-dark" />
     </>
   );
 }

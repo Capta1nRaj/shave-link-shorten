@@ -5,10 +5,10 @@ import { CompanyTextLogo1 } from "@/images/ImagesExport";
 import { raleway, roboto } from "@/misc/Fonts";
 import Image from "next/image";
 
-export default function FooterLayout() {
+export default function FooterLayout({ footerColor }: { footerColor?: string }) {
     return (
         <>
-            <footer className={`FooterLayout-section ${raleway.className} font-extrabold bg-custom-medium`}>
+            <footer className={`FooterLayout-section ${raleway.className} font-extrabold ${footerColor ? footerColor : "bg-custom-medium"}`}>
                 <section className="max-width py-14">
 
                     <section className="flex sm:flex-row flex-col justify-between">

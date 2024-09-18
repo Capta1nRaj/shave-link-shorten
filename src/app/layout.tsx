@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { montserrat } from '@/misc/Fonts'
+import { Toaster } from "sonner";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}`),
@@ -58,7 +60,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}`} />
+      <Toaster position="top-right" expand={true} richColors />
       <body className={`${montserrat.className}`}>
+
+        <noscript>
+          <iframe src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER}`}
+            height="0" width="0" style={{ display: "none", visibility: "hidden" }}>
+          </iframe>
+        </noscript>
+
         {children}
       </body>
     </html>
