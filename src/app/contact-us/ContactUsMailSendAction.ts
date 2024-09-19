@@ -1,3 +1,31 @@
+'use server'
+
+import NodemailSetup from "@/utils/NodemailSetup";
+
+interface ContactUsMailSendActionInterface {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
+export async function ContactUsMailSendAction(data: ContactUsMailSendActionInterface) {
+    const { firstName, lastName, email } = data;
+
+    if (!firstName || !lastName || !email) { return { message: "Please fill in all required fields!.", status: 500 } }
+
+    //! Send a confirmation mail to the recipient
+    const userFullName = firstName + " " + lastName;
+
+    //! Fetch the Email HTML template code
+    const emailHTMLTemplate = emailTemplate.replace(/{{username}}/g, userFullName);
+
+    //! Sending mail to user
+    await NodemailSetup({ userEmail: email, emailSubject: "Thanks for contacting ShaveLinks", emailHTMLTemplate });
+
+    return { message: "Mail sent successfully.", status: 200 }
+}
+
+const emailTemplate = `
 <div style="width: 100%; margin: auto; font-size: 14px;">
   <span style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; width: 0"></span>
   <div style="background-color: #FFFFFF; padding-top: 15px; padding-bottom: 15px">
@@ -49,3 +77,4 @@
               </div>
           </div>
       </div>
+      `

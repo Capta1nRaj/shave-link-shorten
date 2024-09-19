@@ -1,6 +1,5 @@
 'use client'
 
-import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { SaveUserDataAction } from './SaveUserDataAction';
@@ -8,6 +7,7 @@ import LoadingSceneComponent from '@/components/LoadingSceneComponent';
 import { montserrat, raleway } from '@/misc/Fonts';
 import NavBarLayout from '@/layouts/NavBarLayout';
 import FooterLayout from '@/layouts/FooterLayout';
+import { ContactUsMailSendAction } from './ContactUsMailSendAction';
 
 const inputCSS = `${montserrat.className} font-semibold block w-full rounded-md border-0 px-3.5 py-2 text-custom-5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`;
 
@@ -41,7 +41,7 @@ export default function ContactUsPageContent() {
                 setisLoading(false);
             }, 1000);
 
-            await axios.post('/api/ContactUsMailSendAPI', contactUsFormData)
+            await ContactUsMailSendAction(contactUsFormData);
         } catch (error) {
             console.error(error);
             toast.error("Internal Server Error.");
