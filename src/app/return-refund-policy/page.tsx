@@ -6,9 +6,9 @@ import Link from 'next/link'
 import React from 'react'
 
 export const metadata: Metadata = {
-    title: "Return and Refund Policy for Your Convenience",
-    description: "ShaveLinks return and refund policy for our digital services. Learn more about our non-refundable nature, and cancellation policy.",
-    keywords: "return policy, refund policy, shaveLinks, digital services, cancellation policy, service modifications, contact us",
+    title: "Return & Refund Policy Details",
+    description: "Learn about ShaveLinks return and refund policy for digital services, including guidelines on cancellations and non-refundable services.",
+    keywords: "refund policy, returns, digital services, cancellation guidelines, service terms, refund eligibility, non-refundable services, policy details, customer rights",
     openGraph: {
         images: 'https://shave-links-production.s3.ap-south-1.amazonaws.com/root-images/OpenGraphImage.png',
     },

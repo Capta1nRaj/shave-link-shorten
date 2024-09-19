@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `https://shavelinks.com/pricing`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
         { url: `https://shavelinks.com/shipping-and-return-Policy`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
         { url: `https://shavelinks.com/signup`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
-        { url: `https://shavelinks.com/forgotpassword`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
+        { url: `https://shavelinks.com/forgot-password`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
         { url: `https://shavelinks.com/terms-and-conditions`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
         { url: `https://shavelinks.com/return-refund-policy`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },
         { url: `https://shavelinks.com/contact-us`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9, },

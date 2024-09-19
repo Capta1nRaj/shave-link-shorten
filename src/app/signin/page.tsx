@@ -4,8 +4,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: "Sign In to Your Account",
-    description: "Sign in to ShaveLinks to access your dashboard, track engagement, shorten links, and boost your business with personalized settings and content.",
-    keywords: "sign in, ShaveLinks, user login, access account, dashboard",
+    description: "Sign in to ShaveLinks to access your dashboard, track engagement, shorten links, and boost your business with personalized settings.",
+    keywords: "sign in, user login, dashboard access, engagement tracking, personalized settings, account management, secure login, business tools, link analytics",
     twitter: {
         card: "summary_large_image"
     },

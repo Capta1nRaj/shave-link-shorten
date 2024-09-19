@@ -6,9 +6,9 @@ import Link from 'next/link';
 import React from 'react';
 
 export const metadata: Metadata = {
-    title: "Transparent Terms and Conditions",
-    description: "Review the terms and conditions of using ShaveLinks. Understand our service engagement policies, intellectual property rights, and limitation of liability.",
-    keywords: "terms and conditions, shaveLinks, service engagement, intellectual property, limitation of liability, governing law, contact us",
+    title: "Transparent Terms & Conditions",
+    description: "Review ShaveLinks terms and conditions. Learn about our service policies, intellectual property rights, and limitation of liability.",
+    keywords: "terms and conditions, service policies, intellectual property, liability limitations, user agreement, policy overview, legal terms, usage guidelines, service rules",
     twitter: {
         card: "summary_large_image"
     },

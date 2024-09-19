@@ -7,11 +7,11 @@ import { GoogleTagManager } from "@next/third-parties/google";
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}`),
   title: {
-    default: "ShaveLinks URL Shortener - Shorten Links, Boost Engagement",
+    default: "ShaveLinks Link Shortener - Shorten Links & Boost Engagement",
     template: "ShaveLinks - %s"
   },
-  description: "Streamline your online presence with ShaveLinks: a powerful URL shortener with free analytics, custom features, and more to boost your business.",
-  keywords: "shavelinks, url shortener, link management, analytics, custom features, free, social media, engagement, business growth",
+  description: "The ultimate URL shortener offering link shortener services, free analytics, custom features, and more to streamline and boost your online presence.",
+  keywords: "shavelinks, link short, link short bitly, link shortener, url shortener, whatsapp link short, youtube link short, bitly link short, link short and earn, amazon link short",
   twitter: {
     card: "summary_large_image"
   },

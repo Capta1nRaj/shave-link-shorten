@@ -95,7 +95,7 @@ const SignInPageContent = () => {
                                     <input className={inputCSS} type="password" placeholder="••••••••" value={formData.userpassword} onChange={handleChange('userpassword')} />
                                 </div>
                                 <div className="flex items-center justify-end text-custom-white">
-                                    <Link href="/forgotpassword" className="text-sm font-medium hover:underline">Forgot password?</Link>
+                                    <Link href="/forgot-password" className="text-sm font-medium hover:underline">Forgot password?</Link>
                                 </div>
 
                                 {message &&

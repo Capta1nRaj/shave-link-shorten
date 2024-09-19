@@ -7,8 +7,8 @@ import React from 'react'
 
 export const metadata: Metadata = {
     title: "Our Commitment to Protecting Your Data",
-    description: "How ShaveLinks collects, uses, and protects user information. Please read our Privacy Policy to know more about data security and privacy practices.",
-    keywords: "privacy policy, shaveLinks, data protection, information security, cookies, personal data, terms and conditions, contact us",
+    description: "How ShaveLinks collects, uses, and protects user information. Read our Privacy Policy to know more about data security and privacy practices.",
+    keywords: "privacy policy, data security, information use, user privacy, data collection, cookies policy, data protection, personal information, security practices",
     twitter: {
         card: "summary_large_image"
     },

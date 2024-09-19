@@ -2,7 +2,7 @@ export const PathNamesList = [
     '/',
     '/signin',
     '/signup',
-    '/forgotpassword',
+    '/forgot-password',
     '/about-us',
     '/contact-us',
     '/pricing',

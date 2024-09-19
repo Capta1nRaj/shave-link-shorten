@@ -13,9 +13,9 @@ const team = [
 ]
 
 export const metadata: Metadata = {
-    title: "Learn More About Our Mission and Team",
+    title: "Learn More About Our Mission & Team",
     description: "ShaveLinks is a URL shortener that simplifies your link management with powerful analytics, and boost your business. Meet the innovative team behind it.",
-    keywords: "about shavelinks, team, mission, url shortener, link management, analytics, custom features, priyal raj, full stack developer",
+    keywords: "about us, team, mission, innovation, link management, analytics tools, digital solutions, company values, business growth, priyal raj",
     twitter: {
         card: "summary_large_image"
     },

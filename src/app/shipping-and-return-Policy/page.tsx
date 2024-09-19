@@ -7,8 +7,8 @@ import React from 'react';
 
 export const metadata: Metadata = {
     title: "Fast and Reliable Shipping Policy",
-    description: "Review ShaveLinks Shipping and Return Policy. Understand our digital service delivery, exchange and cancellation policies, and pricing terms.",
-    keywords: "shipping policy, return policy, shaveLinks, digital services, service access, exchange policy, cancellation policy, pricing policy",
+    description: "Review ShaveLinks shipping policy. Understand our digital service delivery, exchange policies, cancellations, and pricing terms.",
+    keywords: "shipping policy, digital delivery, exchange terms, service access, cancellation policy, delivery guidelines, pricing terms, digital products, service availability",
     twitter: {
         card: "summary_large_image"
     },
