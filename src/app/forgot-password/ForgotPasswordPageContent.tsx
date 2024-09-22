@@ -50,7 +50,7 @@ const ForgotPasswordPageContent = () => {
         try {
             setisLoading(true);
 
-            const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/forgotpassword`, formData);
+            const { data: { status, message } } = await axios.post(`/api/EmailArmorAPIs/forgotPassword`, formData);
 
             if (status === 201) { setotpScene(true); }
 
@@ -73,7 +73,7 @@ const ForgotPasswordPageContent = () => {
         try {
             setisLoading(true);
 
-            const { data: { status, message } } = await axios.put(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/forgotpassword`, { username: formData.username, userOTP, userNewPassword });
+            const { data: { status, message } } = await axios.put(`/api/EmailArmorAPIs/forgotPassword`, { username: formData.username, userOTP, userNewPassword });
 
             if (status === 201) { setTimeout(() => { router.push('/signin'); }, 1000); }
 

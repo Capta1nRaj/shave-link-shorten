@@ -7,7 +7,7 @@
     "build": "npx email-armor init && next build",
     "start": "next start",
     "lint": "next lint",
-    "devSync": "git checkout dev && git reset --hard origin/main && git push --force && git pull origin main && git push",
+    "devSync": "git checkout dev && git pull origin main && git push && git checkout dev",
     "mainSync": "git checkout main && git pull origin dev && git push && git checkout dev",
     "devSoftReset": "git checkout dev && git reset --soft HEAD~4 && git commit -m \"expiryDate & expiredOn models update\" && git push --force",
     "mainSoftReset": "git checkout main && git reset --soft HEAD~2 && git commit -m \"email-armor updated\" && git push --force && git checkout dev && git reset --hard origin/main && git push --force",
