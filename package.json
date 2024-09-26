@@ -14,7 +14,8 @@
     "devHardReset": "git checkout dev && git reset --hard origin/main && git push --force && git pull origin main && git push",
     "mainHardReset": "git checkout main && git reset --hard origin/dev && git push --force && git checkout dev",
     "devVercel": "git checkout dev && vercel --force && git checkout dev",
-    "mainVercel": "git checkout main && vercel --force --prod && git checkout dev"
+    "mainVercel": "git checkout main && vercel --force --prod && git checkout dev",
+    "bothSync": "npm run devVercel && npm run mainVercel"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.8",
