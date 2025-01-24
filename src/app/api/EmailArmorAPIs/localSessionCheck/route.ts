@@ -1,27 +1,25 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { headers } from 'next/headers'
 import { localSessionCheck } from "email-armor";
 import { DeleteCookie } from "@/utils/DeleteCookie";
+import { cookies } from "next/headers";
 
 export async function GET(request: NextRequest) {
     try {
         const userAgent = request.headers.get('user-agent');
         if (!userAgent) { return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
-        //! Fetching headers for verification
-        const headersList = headers();
-        const username = headersList.get('userName');
-        const jwtToken = headersList.get('token');
+        const userNameCookie = cookies().get('userName');
+        const jwtToken = cookies().get('token');
 
-        if (!username || !jwtToken) { await DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
+        if (!userNameCookie || !jwtToken) { await DeleteCookie(); return NextResponse.json({ message: "Internal Server Error.", status: 500 }, { status: 200 }); }
 
-        const response = await localSessionCheck(username, jwtToken, userAgent);
+        const response = await localSessionCheck(userNameCookie.value, jwtToken.value, userAgent);
 
-        const { status, message, userName } = response;
+        const { status, message } = response;
 
         if (status === 400) { await DeleteCookie(); }
 
-        return NextResponse.json({ status, message, userName }, { status: 200 });
+        return NextResponse.json({ status, message, userName: userNameCookie.value }, { status: 200 });
     } catch (error) {
         console.error(error);
         await DeleteCookie();

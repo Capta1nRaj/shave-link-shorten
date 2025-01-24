@@ -50,7 +50,7 @@ export default function FooterLayout({ footerColor }: { footerColor?: string }) 
                             ))}
                         </div>
 
-                        <p className="font-normal text-center text-xs text-white"> © 2024 <span className="text-custom-blue font-semibold">ShaveLinks</span>. All rights reserved. </p>
+                        <p className="font-normal text-center text-xs text-white"> © {new Date().getFullYear()} <span className="text-custom-blue font-semibold">ShaveLinks</span>. All rights reserved. </p>
 
                     </section>
 

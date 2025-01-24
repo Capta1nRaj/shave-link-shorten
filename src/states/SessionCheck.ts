@@ -1,4 +1,3 @@
-import { GetCookiesList } from '@/utils/GetCookiesList';
 import axios from 'axios';
 import { create } from 'zustand';
 
@@ -22,17 +21,8 @@ export const SessionCheck = create<SessionState & SessionActions>((set) => ({
     //! Check session function
     checkSession: async () => {
         try {
-            //! Fetching cookies list
-            const cookies = GetCookiesList();
-
             //! Sending cookies data as headers to backend
-            const { data: { status, userName } } = await axios.get('/api/EmailArmorAPIs/localSessionCheck', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    userName: cookies.userName,
-                    token: cookies.token,
-                },
-            });
+            const { data: { status, userName } } = await axios.get('/api/EmailArmorAPIs/localSessionCheck');
 
             const isLoggedIn = status === 202;
 

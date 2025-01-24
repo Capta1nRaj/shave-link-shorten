@@ -40,7 +40,7 @@ const KeyFeaturesOfShavelinks = () => {
     ];
 
     return (
-        <section className="py-16 bg-custom-medium text-custom-white">
+        <section className="py-16 bg-custom-medium text-custom-white" id="features">
             <section className="max-width">
                 <div className="text-center mb-12">
                     <h2 className={`${customTitleCSS}`}> Why Choose <span className='text-custom-blue'>ShaveLinks?</span> </h2>

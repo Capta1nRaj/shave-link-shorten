@@ -56,9 +56,7 @@ export default function ContactUsPageContent() {
 
     return (
         <>
-            {isLoading &&
-                <LoadingSceneComponent />
-            }
+            {isLoading && <LoadingSceneComponent />}
 
             <NavBarLayout />
             <div className="isolate bg-custom-dark lg:px-8 px-4 relative z-0 py-20 text-white">

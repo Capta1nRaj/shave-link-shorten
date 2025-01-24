@@ -22,7 +22,7 @@ export default function PricingLayout() {
                 <div className="max-width">
 
                     <div className={`mx-auto max-w-4xl text-center ${raleway.className}`}>
-                        <h2 className={`text-7xl font-bold flex items-center justify-center text-custom-white gap-x-1`}> Our Pricing </h2>
+                        <h2 className={`text-7xl font-bold flex items-center justify-center text-custom-white gap-x-1`}> Flexible Pricing </h2>
 
                         <div className={`font-bold tracking-tight text-white sm:text-5xl teeny:text-4xl text-2xl`}>
                             <p className={`flex items-center justify-center gap-x-2`}>

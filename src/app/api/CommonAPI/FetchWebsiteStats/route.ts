@@ -4,9 +4,6 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function GET() {
     try {
-
-        console.log("4422")
-
         //! Connecting to MongoDB
         await connect2MongoDB();
 

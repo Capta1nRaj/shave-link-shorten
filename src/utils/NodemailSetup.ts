@@ -32,7 +32,7 @@ export default async function NodemailSetup(data: NodemailerInterface) {
 
     try {
         const result = await auth.sendMail(receiver);
-        console.log('%c Email sent successfully', 'background: #222; color: #bada55');
+        console.info('%c Email sent successfully', 'background: #222; color: #bada55');
         return result;
     } catch (error) {
         console.error('Error sending email:', error);
