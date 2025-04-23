@@ -7,15 +7,13 @@
     "build": "npx email-armor init && next build",
     "start": "next start",
     "lint": "next lint",
-    "devSync": "git checkout dev && git pull origin main && git push && git checkout dev",
+    "devSync": "git checkout dev && git pull origin main && git push --force && git pull origin main && git push",
     "mainSync": "git checkout main && git pull origin dev && git push && git checkout dev",
-    "devSoftReset": "git checkout dev && git reset --soft HEAD~4 && git commit -m \"expiryDate & expiredOn models update\" && git push --force",
-    "mainSoftReset": "git checkout main && git reset --soft HEAD~2 && git commit -m \"email-armor updated\" && git push --force && git checkout dev && git reset --hard origin/main && git push --force",
     "devHardReset": "git checkout dev && git reset --hard origin/main && git push --force && git pull origin main && git push",
     "mainHardReset": "git checkout main && git reset --hard origin/dev && git push --force && git checkout dev",
-    "devVercel": "git checkout dev && vercel --force && git checkout dev",
-    "mainVercel": "git checkout main && vercel --force --prod && git checkout dev",
-    "bothSync": "npm run devVercel && npm run mainVercel"
+    "devVercel": "git checkout dev && npm run build && vercel --force && git checkout dev",
+    "mainVercel": "git checkout main && npm run build && vercel --force --prod && git checkout dev",
+    "bothServerSync": "npm run mainHardReset && npm run devVercel && npm run mainVercel"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.8",
