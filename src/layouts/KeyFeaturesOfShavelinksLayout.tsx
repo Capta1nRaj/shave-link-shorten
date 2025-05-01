@@ -1,5 +1,4 @@
-import { ArrowPathIcon, LightBulbIcon } from '@heroicons/react/16/solid';
-import { ChartBarIcon, ClockIcon, QrCodeIcon, ShieldCheckIcon } from 'lucide-react';
+import { TimerReset, ChartNoAxesCombined, QrCodeIcon, ShieldCheckIcon, Link2, TrendingUpDown } from 'lucide-react';
 import React from 'react';
 
 const customTitleCSS = `md:text-6xl sm:text-5xl text-3xl text-center uppercase font-extrabold lg:leading-7xl md:leading-6xl sm:leading-5xl leading-3xl uppercase`;
@@ -8,7 +7,7 @@ const KeyFeaturesOfShavelinks = () => {
 
     const features = [
         {
-            icon: <ChartBarIcon className="h-16 w-16 text-custom-icon-color" />,
+            icon: <ChartNoAxesCombined className="h-16 w-16 text-custom-icon-color" />,
             title: 'Link Shortening & Analytics',
             description: 'Shorten links and get detailed analytics to track performance efficiently.',
         },
@@ -18,12 +17,12 @@ const KeyFeaturesOfShavelinks = () => {
             description: 'Create, customize, and track QR codes for your links easily.',
         },
         {
-            icon: <LightBulbIcon className="h-16 w-16 text-custom-icon-color" />,
+            icon: <Link2 className="h-16 w-16 text-custom-icon-color" />,
             title: 'UTM Builder',
             description: 'Add custom URL parameters for comprehensive campaign tracking.',
         },
         {
-            icon: <ClockIcon className="h-16 w-16 text-custom-icon-color" />,
+            icon: <TimerReset className="h-16 w-16 text-custom-icon-color" />,
             title: 'Custom Link Expiration',
             description: 'Set link expiration by date or clicks for precise control.',
         },
@@ -33,7 +32,7 @@ const KeyFeaturesOfShavelinks = () => {
             description: 'Secure links with password protection for enhanced privacy.',
         },
         {
-            icon: <ArrowPathIcon className="h-16 w-16 text-custom-icon-color" />,
+            icon: <TrendingUpDown className="h-16 w-16 text-custom-icon-color" />,
             title: 'Seamless App Redirection',
             description: 'Guide users smoothly to targeted apps with seamless redirection.',
         },

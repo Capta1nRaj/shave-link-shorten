@@ -165,7 +165,7 @@ export default function PricingPageContent() {
                                                 )}
 
                                             </div>
-                                            <Link href={`${tier.href}&frequency=${frequency.value}&country=${country.value}`} aria-describedby={tier.id}
+                                            <Link href={`${tier.href}/${frequency.value}/${country.value}`} aria-describedby={tier.id}
                                                 className={`${tier.featured
                                                     ? 'bg-custom-blue border border-custom-blue text-white shadow-sm hover:bg-custom-dark hover:border-custom-blue'
                                                     : 'text-custom-blue hover:bg-custom-5 ring-1 ring-inset ring-custom-white hover:ring-custom-blue'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>

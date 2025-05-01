@@ -1,6 +1,6 @@
 'use client'
 
-import { FetchWebsiteStats } from "@/server/FetchWebsiteStats";
+import { useIntervalSync } from '@/hooks/useIntervalSync';
 import React, { useState, useEffect, useRef } from 'react';
 
 export default function WebsiteStatsLayout() {
@@ -16,7 +16,8 @@ export default function WebsiteStatsLayout() {
   //! Fetch the stats data when the component mounts
   useEffect(() => {
     async function fetchData() {
-      const { usersCount, linksCreatedCount, linksTrackedCount } = await FetchWebsiteStats();
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/CommonAPI/FetchWebsiteStats`, { next: { revalidate: 86400 } });
+      const { usersCount, linksCreatedCount, linksTrackedCount } = await response.json();
       setStats({ usersCount, linksCreatedCount, linksTrackedCount });
     }
     fetchData();
@@ -101,14 +102,26 @@ export default function WebsiteStatsLayout() {
     { name: 'Links Generated', value: linksCreatedCount },
   ];
 
+  //! Sync the clicks tracking model every 5/30 seconds
+  useIntervalSync({
+    url: `${process.env.NEXT_PUBLIC_DOMAIN_NAME_3}/api/syncClicksTrackingModel`,
+    initialInterval: 5000,
+    fastInterval: 5000,
+    slowInterval: 30000,
+    onError: (error) => {
+      console.error("Error syncing clicks tracking model:", error);
+    }
+  });
+
   return (
     <div className="bg-custom-medium py-16" ref={statsRef}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
 
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-custom-white sm:text-4xl">
-              <span className="text-custom-blue underline underline-offset-4 capitalize">trusted</span> by creators worldwide
+            <h2 className="text-3xl font-bold tracking-tight text-custom-white sm:text-4xl flex flex-col gap-2">
+              <span>Join <span className="text-custom-blue">Thousands</span> Of</span>
+              <span>Successful <span className="text-custom-blue">Businesses</span></span>
             </h2>
             <p className="mt-4 text-lg leading-8 text-custom-white">
               {/* Working on it, to grow the numbers. */}

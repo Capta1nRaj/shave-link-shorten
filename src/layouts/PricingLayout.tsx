@@ -22,16 +22,13 @@ export default function PricingLayout() {
                 <div className="max-width">
 
                     <div className={`mx-auto max-w-4xl text-center ${raleway.className}`}>
-                        <h2 className={`text-7xl font-bold flex items-center justify-center text-custom-white gap-x-1`}> Flexible Pricing </h2>
-
-                        <div className={`font-bold tracking-tight text-white sm:text-5xl teeny:text-4xl text-2xl`}>
-                            <p className={`flex items-center justify-center gap-x-2`}>
-                                Find Your <span className='underline underline-offset-4 text-custom-blue whitespace-nowrap tracking-[0.8px]'>Perfect Plan</span> Today
-                            </p>
-                        </div>
+                        <h2 className={`text-7xl font-bold flex flex-col items-center justify-center text-custom-white gap-y-2`}>
+                            <span>Pick A <span className="text-custom-blue">Plan</span>  </span>
+                            <span>Get Ahead Of <span className="text-custom-blue">Others</span>  </span>
+                        </h2>
 
                         <p className={`mt-2 flex justify-center items-center text-xl gap-x-1 font-normal text-custom-white`}>
-                            Choose a plan that suits your business needs.
+                            Start <span className="text-custom-crimson">free</span>, grow powerful. Choose what works for your business.
                         </p>
                     </div>
 
@@ -103,7 +100,7 @@ export default function PricingLayout() {
                                         get started
                                     </Link>
                                     :
-                                    <Link href={`${tier.href}&frequency=${frequency.value}&country=${country.value}`} aria-describedby={tier.id}
+                                    <Link href={`${tier.href}/${frequency.value}/${country.value}`} aria-describedby={tier.id}
                                         className={`${tier.featured
                                             ? 'bg-custom-blue border border-custom-blue text-white shadow-sm hover:bg-custom-dark hover:border-custom-blue'
                                             : 'text-custom-blue hover:bg-custom-5 ring-1 ring-inset ring-custom-white hover:ring-custom-blue'} mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 defaultTransitionCSS capitalize`}>
