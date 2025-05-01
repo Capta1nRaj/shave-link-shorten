@@ -3,25 +3,13 @@
 import { useIntervalSync } from '@/hooks/useIntervalSync';
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function WebsiteStatsLayout() {
-  //! State to hold the statistics data
-  const [stats, setStats] = useState({ usersCount: 0, linksCreatedCount: 0, linksTrackedCount: 0 });
+export default function WebsiteStatsLayout({ usersCount, linksCreatedCount, linksTrackedCount }: { usersCount: number, linksCreatedCount: number, linksTrackedCount: number }) {
 
   //! State to determine if the stats section is in view
   const [inView, setInView] = useState(false);
 
   //! Reference to the stats section
   const statsRef = useRef(null);
-
-  //! Fetch the stats data when the component mounts
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/CommonAPI/FetchWebsiteStats`, { next: { revalidate: 86400 } });
-      const { usersCount, linksCreatedCount, linksTrackedCount } = await response.json();
-      setStats({ usersCount, linksCreatedCount, linksTrackedCount });
-    }
-    fetchData();
-  }, []);
 
   //! Use Intersection Observer to detect when the stats section comes into view
   useEffect(() => {
@@ -91,15 +79,15 @@ export default function WebsiteStatsLayout() {
   }
 
   //! Use the custom hook to get animated values
-  const usersCount = useCountAnimation(stats.usersCount);
-  const linksCreatedCount = useCountAnimation(stats.linksCreatedCount);
-  const linksTrackedCount = useCountAnimation(stats.linksTrackedCount);
+  const animatedUsersCount = useCountAnimation(usersCount);
+  const animatedLinksCreatedCount = useCountAnimation(linksCreatedCount);
+  const animatedLinksTrackedCount = useCountAnimation(linksTrackedCount);
 
   //! Prepare the stats to display
   const statsToDisplay = [
-    { name: 'Users', value: usersCount },
-    { name: 'Tracked Clicks', value: linksTrackedCount },
-    { name: 'Links Generated', value: linksCreatedCount },
+    { name: 'Users', value: animatedUsersCount },
+    { name: 'Tracked Clicks', value: animatedLinksTrackedCount },
+    { name: 'Links Generated', value: animatedLinksCreatedCount },
   ];
 
   //! Sync the clicks tracking model every 5/30 seconds

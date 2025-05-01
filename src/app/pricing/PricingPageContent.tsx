@@ -60,9 +60,9 @@ export default function PricingPageContent() {
                 <div className="flow-root bg-custom-dark pb-16 pt-24 sm:pt-32 lg:pb-0">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="relative z-10">
-                            <h1 className="mx-auto max-w-4xl text-center sm:text-5xl text-4xl font-bold tracking-tight text-custom-white">
-                                <p> Transparent Fees </p>
-                                <p className='sm:mt-4 mt-0'> Total Flexibility </p>
+                            <h1 className="mx-auto max-w-4xl text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-custom-white">
+                                <p> Pick A <span className="text-custom-blue">Plan</span> </p>
+                                <p className='sm:mt-4 mt-2'> Get <span className="text-custom-blue">Ahead</span> Of Others </p>
                             </h1>
                             <div className="mt-8 flex justify-center">
                                 <fieldset aria-label="Payment frequency">

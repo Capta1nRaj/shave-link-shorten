@@ -14,13 +14,7 @@ type FormData = {
     userpassword: string;
 };
 
-//! Reuse CSS
-const labelCSS = `block mb-2 text-sm font-medium text-white`;
-const inputCSS = `bg-gray-50 border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:border-custom-blue border-2`;
-const buttonCSS = `w-full text-custom-white font-bold rounded-lg text-sm px-5 py-2.5 text-center bg-green-400/50 hover:bg-green-500 defaultTransitionCSS`;
-
 const SignInPageContent = () => {
-
     const router = useRouter();
 
     const { isValidated, isLoggedIn } = SessionCheck();
@@ -37,29 +31,42 @@ const SignInPageContent = () => {
     };
 
     const [message, setmessage] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState("Searching for your digital footprint... 🔍");
+    const [status, setstatus] = useState<number | null>(null);
+
+    useEffect(() => { if (isValidated) { if (isLoggedIn) { window.location.href = process.env.NEXT_PUBLIC_DOMAIN_NAME_2 || "http://localhost:3001"; } else { setLoading(false); } } }, [isLoggedIn, isValidated])
 
     //! Sign In user API call
     const signInUserFunction = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
 
         try {
+            setstatus(null);
+            setIsSubmitting(true);
+            setLoadingMessage("Validating your credentials... 🔐");
+
             // Send sign-in request to the server
             const { data: { status, message } } = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/EmailArmorAPIs/signInAPI`, formData);
 
-            setmessage(message); // Set message for user feedback
+            setmessage(message);
+            setstatus(status);
 
             // Redirect if login is successful (status 202)
-            if (status === 202) { router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`); }
+            if (status === 202) {
+                setLoadingMessage("Welcome back! Preparing your dashboard... ✨");
+                router.push(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_2}/links`);
+            }
 
         } catch (error) {
-            console.error(error); // Log error for debugging
-            setmessage("Internal Server Error."); // Show error message to user
+            console.error(error);
+            setmessage("Internal Server Error.");
+            setstatus(500);
+        } finally {
+            setIsSubmitting(false);
         }
     };
-
-    // Toggle loading scene based on validation
-    const [loading, setLoading] = useState(true);
-    useEffect(() => { if (isValidated) { if (isLoggedIn) { window.location.href = process.env.NEXT_PUBLIC_DOMAIN_NAME_2 || "http://localhost:3001"; } else { setLoading(false); } } }, [isLoggedIn, isValidated])
 
     //! Only for development purpose
     useEffect(() => {
@@ -77,37 +84,90 @@ const SignInPageContent = () => {
             {/* Initial loading screen */}
             {loading && <LoadingSceneComponent />}
 
+            {/* Loading Overlay */}
+            {isSubmitting && (
+                <div className="fixed inset-0 bg-custom-dark/80 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="w-12 h-12 border-[3px] border-t-custom-crimson border-r-custom-blue border-b-custom-crimson border-l-custom-blue rounded-full animate-spin mx-auto"></div>
+                        <p className="mt-4 text-custom-white font-medium text-lg">{loadingMessage}</p>
+                    </div>
+                </div>
+            )}
+
             {/* Initial Scene */}
-            <section className="bg-gray-900">
-                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-custom-white">
-                                Sign in to your account
-                            </h1>
-                            <form className="space-y-4 md:space-y-6" onSubmit={signInUserFunction}>
-                                <div>
-                                    <label htmlFor="name" className={labelCSS}>Email/Username</label>
-                                    <input className={`${inputCSS} active:!ring-custom-blue`} type="text" placeholder="Username" value={formData.username} onChange={handleChange('username')} />
-                                </div>
-                                <div>
-                                    <label htmlFor="name" className={labelCSS}>Password</label>
-                                    <input className={inputCSS} type="password" placeholder="••••••••" value={formData.userpassword} onChange={handleChange('userpassword')} />
-                                </div>
-                                <div className="flex items-center justify-end text-custom-white">
-                                    <Link href="/forgot-password" className="text-sm font-medium hover:underline">Forgot password?</Link>
+            <section className="bg-custom-dark min-h-screen flex items-center justify-center px-4 py-12">
+                <div className="w-full max-w-md">
+                    {/* Card Container */}
+                    <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden">
+                        {/* Gradient Top Border */}
+                        <div className="h-1 bg-gradient-to-r from-custom-blue via-custom-crimson to-custom-blue"></div>
+
+                        <div className="p-8">
+                            {/* Header Section */}
+                            <div className="text-center mb-8">
+                                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-custom-white">
+                                    Welcome <span className="text-custom-blue">Back</span>
+                                </h1>
+                                <p className="mt-3 text-sm text-custom-white/70">
+                                    Let&apos;s continue your success story
+                                </p>
+                            </div>
+
+                            <form className="space-y-5" onSubmit={signInUserFunction}>
+                                <div className="space-y-2">
+                                    <label htmlFor="username" className="block text-sm font-medium text-custom-white/90">Email/Username</label>
+                                    <input
+                                        className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600/50 text-custom-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom-blue focus:border-transparent transition-all duration-200"
+                                        type="text"
+                                        placeholder="Enter your email or username"
+                                        value={formData.username}
+                                        onChange={handleChange('username')}
+                                    />
                                 </div>
 
-                                {message &&
-                                    <div className={`text-red-500 font-bold text-center`}>{message}</div>
-                                }
+                                <div className="space-y-2">
+                                    <label htmlFor="password" className="block text-sm font-medium text-custom-white/90">Password</label>
+                                    <input
+                                        className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600/50 text-custom-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-custom-blue focus:border-transparent transition-all duration-200"
+                                        type="password"
+                                        placeholder="••••••••"
+                                        value={formData.userpassword}
+                                        onChange={handleChange('userpassword')}
+                                    />
+                                </div>
 
-                                <button type="submit" className={`${buttonCSS}`}>
-                                    SIGN IN
+                                <div className="flex items-center justify-end">
+                                    <Link href="/forgot-password" className="text-sm font-medium text-custom-blue hover:text-custom-blue/90 transition-colors duration-200">
+                                        Forgot password?
+                                    </Link>
+                                </div>
+
+                                {status && status !== 202 && (
+                                    <div className="p-3 rounded-lg text-center text-sm font-medium bg-red-500 text-white">
+                                        {message}
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className={`w-full py-3 px-4 rounded-lg bg-custom-blue text-white font-semibold 
+                                        ${isSubmitting
+                                            ? 'opacity-50 cursor-not-allowed'
+                                            : 'hover:bg-custom-blue/90 focus:outline-none focus:ring-2 focus:ring-custom-blue focus:ring-offset-2 focus:ring-offset-gray-800'
+                                        } transition-all duration-200`}
+                                >
+                                    {isSubmitting ? 'Signing In...' : 'Sign In'}
                                 </button>
 
-                                <p className="text-sm font-light tracking-tight text-custom-white">
-                                    Don`t have an account yet? <Link href="/signup" className="font-medium hover:underline">Sign up</Link>
+                                <p className="text-center text-sm text-custom-white/70">
+                                    Don&apos;t have an account?{' '}
+                                    <Link
+                                        href="/signup"
+                                        className={`font-medium text-custom-blue hover:text-custom-blue/90 transition-colors duration-200 ${isSubmitting ? 'pointer-events-none opacity-50' : ''}`}
+                                    >
+                                        Sign Up
+                                    </Link>
                                 </p>
                             </form>
                         </div>
@@ -116,7 +176,7 @@ const SignInPageContent = () => {
             </section>
             <FooterLayout />
         </>
-    )
+    );
 }
 
-export default SignInPageContent
+export default SignInPageContent;

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import SignInPageContent from './SignInPageContent';
 import { Metadata } from 'next';
 
@@ -18,9 +18,7 @@ export const metadata: Metadata = {
 };
 
 const SignInPage = () => (
-    <Suspense>
-        <SignInPageContent />
-    </Suspense>
+    <SignInPageContent />
 );
 
 export default SignInPage;

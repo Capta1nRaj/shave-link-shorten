@@ -20,8 +20,6 @@ export const metadata: Metadata = {
 
 export default async function PricingPage() {
     return (
-        <div>
-            <PricingPageContent />
-        </div>
+        <PricingPageContent />
     )
 }

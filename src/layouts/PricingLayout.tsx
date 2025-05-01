@@ -22,13 +22,13 @@ export default function PricingLayout() {
                 <div className="max-width">
 
                     <div className={`mx-auto max-w-4xl text-center ${raleway.className}`}>
-                        <h2 className={`text-7xl font-bold flex flex-col items-center justify-center text-custom-white gap-y-2`}>
-                            <span>Pick A <span className="text-custom-blue">Plan</span>  </span>
-                            <span>Get Ahead Of <span className="text-custom-blue">Others</span>  </span>
+                        <h2 className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold flex flex-col items-center justify-center text-custom-white gap-y-2`}>
+                            <p> Start <span className="text-custom-blue">Free</span>, Scale <span className="text-custom-blue">Smart</span> </p>
+                            <p> Grow With <span className="text-custom-blue">Confidence</span> </p>
                         </h2>
 
-                        <p className={`mt-2 flex justify-center items-center text-xl gap-x-1 font-normal text-custom-white`}>
-                            Start <span className="text-custom-crimson">free</span>, grow powerful. Choose what works for your business.
+                        <p className={`mt-2 text-center text-base sm:text-lg md:text-xl font-normal text-custom-white`}>
+                            Start <span className="text-custom-crimson underline underline-offset-2">free</span>, grow powerful. Choose what works for your business.
                         </p>
                     </div>
 
