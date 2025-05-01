@@ -7,8 +7,19 @@ import WebsiteStatsLayout from "@/layouts/WebsiteStatsLayout";
 
 export default async function Home() {
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/CommonAPI/FetchWebsiteStats`, { next: { revalidate: 86400 } });
-  const { usersCount, linksCreatedCount, linksTrackedCount } = await response.json();
+  let usersCount = 0;
+  let linksCreatedCount = 0;
+  let linksTrackedCount = 0;
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/CommonAPI/FetchWebsiteStats`, { next: { revalidate: 86400 } });
+    const { usersCount: fetchedUsers, linksCreatedCount: fetchedLinks, linksTrackedCount: fetchedTracked } = await response.json();
+    usersCount = fetchedUsers || 0;
+    linksCreatedCount = fetchedLinks || 0;
+    linksTrackedCount = fetchedTracked || 0;
+  } catch (error) {
+    console.error(error);
+  }
 
   return (
     <>
