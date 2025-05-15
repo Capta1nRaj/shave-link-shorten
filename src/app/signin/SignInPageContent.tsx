@@ -109,7 +109,7 @@ const SignInPageContent = () => {
                                     Welcome <span className="text-custom-blue">Back</span>
                                 </h1>
                                 <p className="mt-3 text-sm text-custom-white/70">
-                                    Let&apos;s continue your success story
+                                    Let&apos;s check your success metrics 📊
                                 </p>
                             </div>
 

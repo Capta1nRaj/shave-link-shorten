@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
@@ -46,6 +46,70 @@ const sections = [
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
+}
+
+function useCountAnimation(endValue: string) {
+    const [displayValue, setDisplayValue] = useState(endValue);
+    const prevValueRef = useRef(endValue);
+
+    useEffect(() => {
+        if (prevValueRef.current === endValue) return;
+
+        const startValue = parseFloat(prevValueRef.current.replace(/[^0-9.-]+/g, ''));
+        const endValueNum = parseFloat(endValue.replace(/[^0-9.-]+/g, ''));
+        const prefix = endValue.match(/^[^0-9]*/)?.[0] || '';
+        const suffix = endValue.match(/[^0-9]*$/)?.[0] || '';
+
+        const duration = 1000; // Animation duration in ms
+        const startTime = performance.now();
+
+        function animate(currentTime: number) {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+
+            // Easing function for smooth animation
+            const easeProgress = progress < 0.5
+                ? 4 * progress * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+            const currentValue = startValue + (endValueNum - startValue) * easeProgress;
+            setDisplayValue(`${prefix}${Math.round(currentValue)}${suffix}`);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                setDisplayValue(endValue);
+                prevValueRef.current = endValue;
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }, [endValue]);
+
+    return displayValue;
+}
+
+interface AnimatedPriceProps {
+    value: string;
+    isFeatured: boolean;
+    showMonth: boolean;
+}
+
+function AnimatedPrice({ value, isFeatured, showMonth }: AnimatedPriceProps) {
+    const animatedValue = useCountAnimation(value);
+
+    return (
+        <section className="top flex items-center gap-x-2">
+            <p className={classNames(isFeatured ? 'text-custom-5' : 'text-custom-white', 'text-4xl font-bold tracking-tight')}>
+                {animatedValue}
+            </p>
+            {showMonth && (
+                <span className={`text-sm font-semibold leading-6 ${!isFeatured ? "text-custom-white" : "text-custom-5"}`}>
+                    /month
+                </span>
+            )}
+        </section>
+    );
 }
 
 export default function PricingPageContent() {
@@ -134,32 +198,21 @@ export default function PricingPageContent() {
                                         </h3>
                                         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-stretch">
                                             <div className="mt-2 flex flex-col">
-
-                                                <section className="top flex items-center gap-x-2">
-
-                                                    <p className={classNames(tier.featured ? 'text-custom-5' : 'text-custom-white', 'text-4xl font-bold tracking-tight')}>
-                                                        {country.value === 'in'
-                                                            ? (frequency.value === 'annually' ? tier.priceInr!.annualEquivalent : tier.priceInr!.monthly)
-                                                            : (frequency.value === 'annually' ? tier.price.annualEquivalent : tier.price.monthly)
-                                                        }
-                                                    </p>
-
-                                                    <span className={`text-sm font-semibold leading-6 ${index !== 2 ? "text-custom-white" : "text-custom-5"}`}>
-                                                        {index !== 3 &&
-                                                            <>
-                                                                /month
-                                                            </>
-                                                        }
-                                                    </span>
-
-                                                </section>
+                                                <AnimatedPrice
+                                                    value={country.value === 'in'
+                                                        ? (frequency.value === 'annually' ? tier.priceInr!.annualEquivalent : tier.priceInr!.monthly)
+                                                        : (frequency.value === 'annually' ? tier.price.annualEquivalent : tier.price.monthly)
+                                                    }
+                                                    isFeatured={tier.featured}
+                                                    showMonth={index !== 3}
+                                                />
 
                                                 {index === 0 ? (
-                                                    <p className='mt-2 h-5 capitalize text-custom-white'>free forever</p>
+                                                    <p className='mt-2 text-sm text-custom-white/80'>free forever</p>
                                                 ) : index === 3 ? (
-                                                    <p className='mt-2 h-5 capitalize'></p>
+                                                    <p className='mt-2'></p>
                                                 ) : (
-                                                    <p className={`text-sm text-custom-white capitalize mt-2 ${index !== 2 ? "text-custom-white" : "text-custom-5"}`}>
+                                                    <p className={`mt-2 text-sm ${index === 2 ? 'text-custom-5' : 'text-custom-white/80'}`}>
                                                         {frequency.value === 'annually' ? 'billed yearly' : 'billed monthly'}
                                                     </p>
                                                 )}

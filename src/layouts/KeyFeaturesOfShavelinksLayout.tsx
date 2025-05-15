@@ -1,7 +1,7 @@
 import { TimerReset, ChartNoAxesCombined, QrCodeIcon, ShieldCheckIcon, Link2, TrendingUpDown } from 'lucide-react';
 import React from 'react';
 
-const customTitleCSS = `md:text-6xl sm:text-5xl text-3xl text-center uppercase font-extrabold lg:leading-7xl md:leading-6xl sm:leading-5xl leading-3xl uppercase`;
+const customTitleCSS = `md:text-7xl sm:text-6xl text-4xl text-center font-black lg:leading-7xl md:leading-6xl sm:leading-5xl leading-3xl tracking-tight`;
 
 const KeyFeaturesOfShavelinks = () => {
 
@@ -39,23 +39,58 @@ const KeyFeaturesOfShavelinks = () => {
     ];
 
     return (
-        <section className="py-16 bg-custom-medium text-custom-white" id="features">
-            <section className="max-width">
-                <div className="text-center mb-12">
-                    <h2 className={`${customTitleCSS}`}> Why Choose <span className='text-custom-blue'>ShaveLinks?</span> </h2>
-                    <p className="text-lg text-custom-subtitle-color max-w-2xl mx-auto">
+        <section className="py-32 relative overflow-hidden bg-custom-medium text-custom-white" id="features">
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,171,240,0.03),transparent_50%)]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,171,240,0.03),transparent_50%)]"></div>
+
+            <section className="max-width relative">
+                <div className="text-center mb-20">
+                    <div className="inline-flex items-center gap-2 mb-4 px-6 py-2 bg-custom-blue/10 rounded-full border border-custom-blue/20">
+                        <span className="w-2 h-2 bg-custom-blue rounded-full animate-pulse"></span>
+                        <span className="text-custom-blue font-semibold">FEATURES</span>
+                    </div>
+                    <h2 className={`${customTitleCSS} mb-8`}>
+                        Why Choose <span className="relative">
+                            <span className="text-custom-blue">ShaveLinks</span>
+                        </span>
+                    </h2>
+                    <p className="text-xl text-custom-white/80 max-w-3xl mx-auto leading-relaxed">
                         Your All-in-One Solution to Empower and Grow Your Business
                     </p>
                 </div>
 
                 <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mx-auto">
                     {features.map((feature, index) => (
-                        <div key={index} className="flex flex-col items-center px-4 py-8 rounded-lg shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] cursor-default bg-custom-dark">
-                            <div className="mb-4 flex items-center justify-center w-20 h-20 bg-custom-icon-bg rounded-full">
+                        <div
+                            key={index}
+                            className="group relative flex flex-col items-start p-8 rounded-2xl
+                                     bg-custom-dark/80 backdrop-blur-sm border border-custom-blue/10
+                                     transition-all duration-500 hover:translate-y-[-5px] hover:bg-custom-dark
+                                     hover:border-custom-blue/30 hover:shadow-[0_0_30px_rgba(0,171,240,0.1)]"
+                        >
+                            {/* Decorative corner accent */}
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-custom-blue/5 rounded-bl-[100px] 
+                                          transition-all duration-500 group-hover:bg-custom-blue/10"></div>
+
+                            <div className="relative mb-6 p-4 bg-custom-blue/5 rounded-xl 
+                                          group-hover:bg-custom-blue/10 transition-all duration-500">
                                 {feature.icon}
                             </div>
-                            <h3 className="text-custom-card-heading-size font-semibold mb-2 lg:text-2xl text-lg text-custom-blue">{feature.title}</h3>
-                            <p className="text-center text-custom-card-text-color">{feature.description}</p>
+
+                            <h3 className="text-2xl font-bold mb-4 text-custom-white group-hover:text-custom-blue 
+                                         transition-colors duration-300">
+                                {feature.title}
+                            </h3>
+
+                            <p className="text-custom-white/70 group-hover:text-custom-white/90 
+                                       transition-colors duration-300 leading-relaxed">
+                                {feature.description}
+                            </p>
+
+                            {/* Hover effect line */}
+                            <div className="absolute bottom-0 left-0 w-0 h-1 bg-custom-blue 
+                                          transition-all duration-500 group-hover:w-full"></div>
                         </div>
                     ))}
                 </div>

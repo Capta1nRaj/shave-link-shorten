@@ -46,7 +46,7 @@ export default function ReturnRefundPolicyPage() {
 
                         <section className="bg-gray-800/30 rounded-2xl p-6 backdrop-blur-sm border border-gray-700/50">
                             <h2 className="text-2xl font-semibold text-custom-blue mb-4">Eligibility for Refunds</h2>
-                            <p className="text-custom-white/90 leading-relaxed">
+                            <div className="text-custom-white/90 leading-relaxed">
                                 Refunds may be issued in the following circumstances:
                                 <ul className="list-disc list-inside mt-2 space-y-2">
                                     <li>Service not delivered as promised</li>
@@ -54,12 +54,12 @@ export default function ReturnRefundPolicyPage() {
                                     <li>Duplicate charges or billing errors</li>
                                     <li>Service cancellation within the cooling-off period</li>
                                 </ul>
-                            </p>
+                            </div>
                         </section>
 
                         <section className="bg-gray-800/30 rounded-2xl p-6 backdrop-blur-sm border border-gray-700/50">
                             <h2 className="text-2xl font-semibold text-custom-blue mb-4">Refund Process</h2>
-                            <p className="text-custom-white/90 leading-relaxed">
+                            <div className="text-custom-white/90 leading-relaxed">
                                 To request a refund:
                                 <ol className="list-decimal list-inside mt-2 space-y-2">
                                     <li>Contact our support team within 7 days of purchase</li>
@@ -67,19 +67,19 @@ export default function ReturnRefundPolicyPage() {
                                     <li>Allow 5-7 business days for review</li>
                                     <li>If approved, refund will be processed to original payment method</li>
                                 </ol>
-                            </p>
+                            </div>
                         </section>
 
                         <section className="bg-gray-800/30 rounded-2xl p-6 backdrop-blur-sm border border-gray-700/50">
                             <h2 className="text-2xl font-semibold text-custom-blue mb-4">Non-Refundable Items</h2>
-                            <p className="text-custom-white/90 leading-relaxed">
+                            <div className="text-custom-white/90 leading-relaxed">
                                 The following are not eligible for refunds:
                                 <ul className="list-disc list-inside mt-2 space-y-2">
                                     <li>Services already used or consumed</li>
                                     <li>Custom or personalized services</li>
                                     <li>Services purchased during promotional periods</li>
                                 </ul>
-                            </p>
+                            </div>
                         </section>
 
                         <section className="bg-gray-800/30 rounded-2xl p-6 backdrop-blur-sm border border-gray-700/50">

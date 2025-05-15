@@ -1,5 +1,3 @@
-'use client'
-
 import { CompanyTextLogo1 } from '@/images/ImagesExport';
 import Link from 'next/link';
 import { NavBarConstants } from '@/constants/NavBarConstants';
