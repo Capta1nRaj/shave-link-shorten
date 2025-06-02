@@ -21,12 +21,15 @@ export default async function Home() {
     console.error(error);
   }
 
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_NAME_1}/api/CommonAPI/FetchPricingData`, { next: { tags: ['pricingTag'] } });
+  const { pricingData } = await res.json();
+
   return (
     <>
       <NavBarLayout />
       <HeroLayout />
       <KeyFeaturesOfShavelinksLayout />
-      <PricingLayout />
+      <PricingLayout pricingData={pricingData} />
       <WebsiteStatsLayout usersCount={usersCount} linksCreatedCount={linksCreatedCount} linksTrackedCount={linksTrackedCount} />
       <FooterLayout footerColor="bg-custom-dark" />
     </>

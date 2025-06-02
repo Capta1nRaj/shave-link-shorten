@@ -6,43 +6,57 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { CountriesListConstants } from '@/constants/PricingConstantsFiles/CountriesListConstants'
 import { PricingFrequenciesListConstants } from '@/constants/PricingConstantsFiles/PricingFrequenciesListConstants'
-import { PricingTiersConstants } from '@/constants/PricingConstantsFiles/PricingTiersConstants'
 import { FrequencyInterface, CountryInterface } from '@/misc/Interfaces'
 import NavBarLayout from '@/layouts/NavBarLayout'
 import FooterLayout from '@/layouts/FooterLayout'
 
-const sections = [
-    {
-        name: 'Common Features',
-        features: [
-            { name: 'Monthly Links', tiers: { "Free Forever": '50/mo', Startup: '200/mo', Professional: '5000/mo', Enterprise: 'Custom' } },
-            { name: 'Link clicks', tiers: { "Free Forever": "Unlimited", Startup: "Unlimited", Professional: "Unlimited", Enterprise: "Custom" } },
-            { name: 'Tracked Clicks', tiers: { "Free Forever": '2000/mo', Startup: '5000/mo', Professional: '75,000/mo', Enterprise: 'Custom' } },
-            { name: 'Analytics Retention', tiers: { "Free Forever": '30 days', Startup: '1 year', Professional: '2 years', Enterprise: 'Custom' } },
-            { name: 'Link redirects', tiers: { "Free Forever": "Unlimited", Startup: "Unlimited", Professional: "Unlimited", Enterprise: "Unlimited" } },
-            { name: 'Comments', tiers: { "Free Forever": "Unlimited", Startup: "Unlimited", Professional: "Unlimited", Enterprise: "Unlimited" } },
-            { name: 'UTM Builder', tiers: { "Free Forever": true, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'App Redirect', tiers: { "Free Forever": true, Startup: true, Professional: true, Enterprise: true } },
-        ],
-    },
-    {
-        name: 'Advance Features',
-        features: [
-            { name: 'Tags', tiers: { "Free Forever": '5', Startup: '20', Professional: '200', Enterprise: 'Custom' } },
-            { name: 'Link expiration by date', tiers: { "Free Forever": true, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'Link expiration by clicks', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'Custom QR Branding', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'Password protected links', tiers: { "Free Forever": false, Startup: false, Professional: true, Enterprise: true } },
-        ],
-    },
-    {
-        name: 'Support',
-        features: [
-            { name: 'Discord chat support', tiers: { "Free Forever": false, Startup: true, Professional: true, Enterprise: true } },
-            { name: 'Instant* support F2F', tiers: { "Free Forever": false, Startup: false, Professional: true, Enterprise: true } },
-        ],
-    }
-]
+interface Price {
+    inr: number;
+    usd: number;
+}
+
+interface PriceStructure {
+    monthly: Price;
+    annually: Price;
+}
+
+interface Tier {
+    name: string;
+    id: string;
+    href: string;
+    featured: boolean;
+    description: string;
+    price: PriceStructure;
+    isDiscountActive: boolean;
+    discountPrice: PriceStructure;
+    discountActiveUntil: string | null;
+    mainFeatures: string[];
+}
+
+interface FeatureTiers {
+    [key: string]: string | boolean;
+}
+
+interface Feature {
+    name: string;
+    tiers: FeatureTiers;
+}
+
+interface Section {
+    name: string;
+    features: Feature[];
+}
+
+interface PricingPlans {
+    _id: string;
+    tiers: Tier[];
+    sections: Section[];
+    updatedAt: string;
+}
+
+type PricingPageContentProps = {
+    pricingPlans: PricingPlans;
+};
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -93,17 +107,21 @@ interface AnimatedPriceProps {
     value: string;
     isFeatured: boolean;
     showMonth: boolean;
+    isRegularPriceDisplay?: boolean;
 }
 
-function AnimatedPrice({ value, isFeatured, showMonth }: AnimatedPriceProps) {
+function AnimatedPrice({ value, isFeatured, showMonth, isRegularPriceDisplay }: AnimatedPriceProps) {
     const animatedValue = useCountAnimation(value);
 
     return (
         <section className="top flex items-center gap-x-2">
-            <p className={classNames(isFeatured ? 'text-custom-5' : 'text-custom-white', 'text-4xl font-bold tracking-tight')}>
+            <p className={classNames(
+                isRegularPriceDisplay ? 'text-sm line-through' : 'text-4xl font-bold tracking-tight',
+                isFeatured ? (isRegularPriceDisplay ? 'text-custom-5/60' : 'text-custom-5') : (isRegularPriceDisplay ? 'text-custom-white/60' : 'text-custom-white')
+            )}>
                 {animatedValue}
             </p>
-            {showMonth && (
+            {showMonth && !isRegularPriceDisplay && (
                 <span className={`text-sm font-semibold leading-6 ${!isFeatured ? "text-custom-white" : "text-custom-5"}`}>
                     /month
                 </span>
@@ -112,10 +130,59 @@ function AnimatedPrice({ value, isFeatured, showMonth }: AnimatedPriceProps) {
     );
 }
 
-export default function PricingPageContent() {
-
+export default function PricingPageContent({ pricingPlans }: PricingPageContentProps) {
     const [frequency, setFrequency] = useState<FrequencyInterface>(PricingFrequenciesListConstants[0])
     const [country, setCountry] = useState<CountryInterface>(CountriesListConstants[0])
+
+    const renderPriceDisplay = (tier: Tier, currentFrequency: FrequencyInterface, currentCountry: CountryInterface, isFeatured: boolean, index: number) => {
+        const now = new Date();
+        const discountActive = tier.isDiscountActive && (!tier.discountActiveUntil || new Date(tier.discountActiveUntil) > now);
+
+        if (tier.name === 'Enterprise') {
+            return (
+                <AnimatedPrice
+                    value="Custom"
+                    isFeatured={isFeatured}
+                    showMonth={false}
+                    isRegularPriceDisplay={false}
+                />
+            );
+        }
+
+        let regularPriceValue = '';
+        let discountedPriceValue = '';
+
+        if (currentCountry.value === 'in') {
+            if (currentFrequency.value === 'annually') {
+                regularPriceValue = `₹${tier.price.annually.inr}`;
+                discountedPriceValue = tier.discountPrice.annually.inr ? `₹${tier.discountPrice.annually.inr}` : '';
+            } else {
+                regularPriceValue = `₹${tier.price.monthly.inr}`;
+                discountedPriceValue = tier.discountPrice.monthly.inr ? `₹${tier.discountPrice.monthly.inr}` : '';
+            }
+        } else {
+            if (currentFrequency.value === 'annually') {
+                regularPriceValue = `$${tier.price.annually.usd}`;
+                discountedPriceValue = tier.discountPrice.annually.usd ? `$${tier.discountPrice.annually.usd}` : '';
+            } else {
+                regularPriceValue = `$${tier.price.monthly.usd}`;
+                discountedPriceValue = tier.discountPrice.monthly.usd ? `$${tier.discountPrice.monthly.usd}` : '';
+            }
+        }
+
+        if (discountActive && discountedPriceValue) {
+            return (
+                <div className="flex items-baseline gap-x-1">
+                    <AnimatedPrice value={regularPriceValue} isFeatured={isFeatured} showMonth={false} isRegularPriceDisplay={true} />
+                    <AnimatedPrice value={discountedPriceValue} isFeatured={isFeatured} showMonth={index !== 3} isRegularPriceDisplay={false} />
+                </div>
+            );
+        } else {
+            return (
+                <AnimatedPrice value={regularPriceValue} isFeatured={isFeatured} showMonth={index !== 3} isRegularPriceDisplay={false} />
+            );
+        }
+    };
 
     return (
         <>
@@ -176,7 +243,7 @@ export default function PricingPageContent() {
                                 className="hidden lg:absolute lg:inset-x-px lg:bottom-0 lg:top-4 lg:block lg:rounded-t-2xl lg:bg-gray-800/80 lg:ring-1 lg:ring-white/10"
                                 aria-hidden="true"
                             />
-                            {PricingTiersConstants.map((tier, index) => (
+                            {(pricingPlans?.tiers ?? []).map((tier: Tier, index: number) => (
                                 <div
                                     key={tier.id}
                                     className={classNames(
@@ -191,21 +258,23 @@ export default function PricingPageContent() {
                                             id={tier.id}
                                             className={classNames(
                                                 tier.featured ? 'text-custom-5' : 'text-custom-white',
-                                                'text-sm font-semibold leading-6',
+                                                'text-sm font-semibold leading-6 flex items-center',
                                             )}
                                         >
                                             {tier.name}
+                                            {/* Limited Offer badge next to tier name if discount is active */}
+                                            {(() => {
+                                                const now = new Date();
+                                                const discountActive = tier.isDiscountActive && (!tier.discountActiveUntil || new Date(tier.discountActiveUntil) > now);
+                                                if (discountActive) {
+                                                    return <span className="ml-2 px-2 py-0.5 rounded bg-custom-crimson text-white text-xs font-bold">Limited Offer</span>;
+                                                }
+                                                return null;
+                                            })()}
                                         </h3>
                                         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-stretch">
                                             <div className="mt-2 flex flex-col">
-                                                <AnimatedPrice
-                                                    value={country.value === 'in'
-                                                        ? (frequency.value === 'annually' ? tier.priceInr!.annualEquivalent : tier.priceInr!.monthly)
-                                                        : (frequency.value === 'annually' ? tier.price.annualEquivalent : tier.price.monthly)
-                                                    }
-                                                    isFeatured={tier.featured}
-                                                    showMonth={index !== 3}
-                                                />
+                                                {renderPriceDisplay(tier, frequency, country, tier.featured, index)}
 
                                                 {index === 0 ? (
                                                     <p className='mt-2 text-sm text-custom-white/80'>free forever</p>
@@ -234,7 +303,7 @@ export default function PricingPageContent() {
                                                     '-my-2 divide-y border-t text-sm leading-6 lg:border-t-0',
                                                 )}>
 
-                                                {tier.features.map((mainFeature) => (
+                                                {(tier.mainFeatures ?? []).map((mainFeature: string) => (
                                                     <li key={mainFeature} className="flex gap-x-3 py-2">
                                                         <CheckIcon
                                                             className={classNames(
@@ -268,7 +337,7 @@ export default function PricingPageContent() {
                             </h2>
 
                             <div className="mx-auto max-w-2xl space-y-16">
-                                {PricingTiersConstants.map((tier) => (
+                                {(pricingPlans?.tiers ?? []).map((tier: Tier) => (
                                     <div key={tier.id} className="border-t border-custom-5">
                                         <div className={classNames(
                                             tier.featured ? 'border-custom-blue w-full' : 'border-transparent',
@@ -282,7 +351,7 @@ export default function PricingPageContent() {
                                         </div>
 
                                         <div className="mt-10 space-y-10">
-                                            {sections.map((section) => (
+                                            {(pricingPlans?.sections ?? []).map((section: Section) => (
                                                 <div key={section.name}>
                                                     <h4 className="text-xl font-semibold leading-6 text-custom-blue">{section.name}</h4>
                                                     <div className="relative mt-6">
@@ -293,7 +362,7 @@ export default function PricingPageContent() {
                                                             tier.featured ? 'ring-2 ring-custom-blue' : 'ring-1 ring-gray-900/10',
                                                             'relative rounded-lg bg-white shadow-sm sm:rounded-none sm:bg-transparent sm:shadow-none sm:ring-0')}>
                                                             <dl className="divide-y divide-gray-200 text-sm leading-6">
-                                                                {section.features.map((feature) => (
+                                                                {(section.features ?? []).map((feature: Feature) => (
                                                                     <div key={feature.name}
                                                                         className="flex items-center justify-between px-4 py-3 sm:grid sm:grid-cols-2 sm:px-0">
                                                                         <dt className="pr-4 text-custom-5">{feature.name}</dt>
@@ -347,7 +416,7 @@ export default function PricingPageContent() {
                             </h2>
 
                             <div className="grid grid-cols-5 gap-x-8 border-t border-custom-5 before:block">
-                                {PricingTiersConstants.map((tier) => (
+                                {(pricingPlans?.tiers ?? []).map((tier: Tier) => (
                                     <div key={tier.id} aria-hidden="true" className="-mt-px">
                                         <div
                                             className={classNames(
@@ -367,7 +436,7 @@ export default function PricingPageContent() {
                             </div>
 
                             <div className="-mt-6 space-y-16">
-                                {sections.map((section) => (
+                                {(pricingPlans?.sections ?? []).map((section: Section) => (
                                     <div key={section.name}>
                                         <h3 className="text-xl font-semibold leading-6 text-custom-blue">{section.name}</h3>
                                         <div className="relative -mx-8 mt-10">
@@ -385,7 +454,7 @@ export default function PricingPageContent() {
                                                         <th scope="col">
                                                             <span className="sr-only">Feature</span>
                                                         </th>
-                                                        {PricingTiersConstants.map((tier) => (
+                                                        {(pricingPlans?.tiers ?? []).map((tier: Tier) => (
                                                             <th key={tier.id} scope="col">
                                                                 <span className="sr-only">{tier.name} tier</span>
                                                             </th>
@@ -393,18 +462,18 @@ export default function PricingPageContent() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {section.features.map((feature, featureIdx) => (
+                                                    {(section.features ?? []).map((feature: Feature, featureIdx: number) => (
                                                         <tr key={feature.name}>
                                                             <th
                                                                 scope="row"
                                                                 className="w-1/5 py-3 pr-4 text-left text-sm font-semibold leading-6 text-custom-5"
                                                             >
                                                                 {feature.name}
-                                                                {featureIdx !== section.features.length - 1 ? (
+                                                                {featureIdx !== (section.features ?? []).length - 1 ? (
                                                                     <div className="absolute inset-x-8 mt-3 h-px bg-gray-200" />
                                                                 ) : null}
                                                             </th>
-                                                            {PricingTiersConstants.map((tier) => (
+                                                            {(pricingPlans?.tiers ?? []).map((tier: Tier) => (
                                                                 <td key={tier.id} className="relative w-1/5 px-4 py-0 text-center">
                                                                     <span className="relative h-full w-full py-3">
                                                                         {typeof feature.tiers[tier.name as keyof typeof feature.tiers] === 'string' ? (
@@ -441,7 +510,7 @@ export default function PricingPageContent() {
                                                 className="pointer-events-none absolute inset-x-8 inset-y-0 grid grid-cols-5 gap-x-8 before:block"
                                                 aria-hidden="true"
                                             >
-                                                {PricingTiersConstants.map((tier) => (
+                                                {(pricingPlans?.tiers ?? []).map((tier: Tier) => (
                                                     <div
                                                         key={tier.id}
                                                         className={classNames(

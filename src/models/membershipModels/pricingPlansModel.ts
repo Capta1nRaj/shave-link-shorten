@@ -24,14 +24,26 @@ const TierSchema = new mongoose.Schema(
             required: true,
         },
         price: {
-            monthly: { type: Number, required: true },
-            annually: { type: Number, required: true },
+            monthly: {
+                inr: { type: Number, default: 0 },
+                usd: { type: Number, default: 0 }
+            },
+            annually: {
+                inr: { type: Number, default: 0 },
+                usd: { type: Number, default: 0 }
+            }
         },
 
         // Discount pricing
         discountPrice: {
-            monthly: { type: Number, default: 0 },
-            annually: { type: Number, default: 0 },
+            monthly: {
+                inr: { type: Number, default: 0 },
+                usd: { type: Number, default: 0 }
+            },
+            annually: {
+                inr: { type: Number, default: 0 },
+                usd: { type: Number, default: 0 }
+            }
         },
         isDiscountActive: { type: Boolean, default: false },
         // The date until which discount is valid

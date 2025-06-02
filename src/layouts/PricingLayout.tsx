@@ -5,11 +5,10 @@ import { useState, useEffect, useRef } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
-import { PricingTiersConstants } from '@/constants/PricingConstantsFiles/PricingTiersConstants'
 import { PricingFrequenciesListConstants } from '@/constants/PricingConstantsFiles/PricingFrequenciesListConstants'
 import { CountriesListConstants } from '@/constants/PricingConstantsFiles/CountriesListConstants'
 import { raleway } from '@/misc/Fonts'
-import { FrequencyInterface, CountryInterface } from '@/misc/Interfaces'
+import { FrequencyInterface, CountryInterface, PricingPlans, Tier } from '@/misc/Interfaces'
 
 function useCountAnimation(endValue: string) {
     const [displayValue, setDisplayValue] = useState(endValue);
@@ -58,6 +57,10 @@ interface AnimatedPriceProps {
     suffix: string;
 }
 
+interface PricingLayoutProps {
+    pricingData: PricingPlans | null;
+}
+
 function AnimatedPrice({ value, showSuffix, suffix }: AnimatedPriceProps) {
     const animatedValue = useCountAnimation(value);
 
@@ -75,7 +78,7 @@ function AnimatedPrice({ value, showSuffix, suffix }: AnimatedPriceProps) {
     );
 }
 
-export default function PricingLayout() {
+export default function PricingLayout({ pricingData }: PricingLayoutProps) {
     const [frequency, setFrequency] = useState<FrequencyInterface>(PricingFrequenciesListConstants[1])
     const [country, setCountry] = useState<CountryInterface>(CountriesListConstants[0])
 
@@ -134,7 +137,7 @@ export default function PricingLayout() {
                     </div>
 
                     <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
-                        {PricingTiersConstants.map((tier, index) => (
+                        {(pricingData?.tiers ?? []).map((tier: Tier, index: number) => (
                             <div key={tier.id}
                                 className={`group relative rounded-3xl p-8 bg-custom-dark/80 backdrop-blur-sm border border-custom-blue/10
                                           transition-all duration-500 hover:translate-y-[-5px] hover:bg-custom-dark
@@ -147,8 +150,8 @@ export default function PricingLayout() {
                                 <AnimatedPrice
                                     value={tier.name === 'Enterprise' ? 'Custom' : (
                                         country.value === 'in'
-                                            ? (frequency.value === 'annually' ? tier.priceInr!.annualEquivalent : tier.priceInr!.monthly)
-                                            : (frequency.value === 'annually' ? tier.price.annualEquivalent : tier.price.monthly)
+                                            ? (frequency.value === 'annually' ? `₹${tier.price.annually.inr}` : `₹${tier.price.monthly.inr}`)
+                                            : (frequency.value === 'annually' ? `$${tier.price.annually.usd}` : `$${tier.price.monthly.usd}`)
                                     )}
                                     showSuffix={index !== 3}
                                     suffix={frequency.priceSuffix}
@@ -187,7 +190,7 @@ export default function PricingLayout() {
                                     </Link>
                                 }
                                 <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-custom-white/80">
-                                    {tier.features.map((feature) => (
+                                    {(tier.mainFeatures ?? []).map((feature: string) => (
                                         <li key={feature} className="flex gap-x-3 group-hover:text-custom-white transition-colors duration-300">
                                             <CheckIcon className="h-6 w-5 flex-none text-custom-blue" aria-hidden="true" />
                                             {feature}

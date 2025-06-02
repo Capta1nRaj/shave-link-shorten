@@ -31,7 +31,6 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-    const data = await request.json();
-    console.info(data);
+    await request.json();
     return NextResponse.json({ message: "Just A POST call in FetchWebsiteStats.", status: 200 }, { status: 200 });
 }

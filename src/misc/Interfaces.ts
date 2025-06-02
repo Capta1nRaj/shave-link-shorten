@@ -30,3 +30,49 @@ export type CountryInterface = {
     label: string;
     flag: string;
 }
+
+// Add and export interfaces from PricingPageContent.tsx
+
+export interface Price {
+    inr: number;
+    usd: number;
+}
+
+export interface PriceStructure {
+    monthly: Price;
+    annually: Price;
+}
+
+export interface Tier {
+    name: string;
+    id: string;
+    href: string;
+    featured: boolean;
+    description: string;
+    price: PriceStructure;
+    isDiscountActive: boolean;
+    discountPrice: PriceStructure;
+    discountActiveUntil: string | null;
+    mainFeatures: string[];
+}
+
+export interface FeatureTiers {
+    [key: string]: string | boolean;
+}
+
+export interface Feature {
+    name: string;
+    tiers: FeatureTiers;
+}
+
+export interface Section {
+    name: string;
+    features: Feature[];
+}
+
+export interface PricingPlans {
+    _id: string;
+    tiers: Tier[];
+    sections: Section[];
+    updatedAt: string;
+}
