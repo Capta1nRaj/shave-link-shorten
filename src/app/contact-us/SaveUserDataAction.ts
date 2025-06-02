@@ -1,6 +1,6 @@
 'use server'
 
-import contactUsListModel from '@/models/contactUsListModel';
+import contactUsModel from '@/models/contactUsModel';
 import { connect2MongoDB } from 'connect2mongodb';
 
 interface SaveUserDataActionInterface {
@@ -22,7 +22,7 @@ export async function SaveUserDataAction(contactUsFormData: SaveUserDataActionIn
         await connect2MongoDB();
 
         //! Saving data to DB
-        await new contactUsListModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();
+        await new contactUsModel({ firstName, lastName, companyName, email, phoneNumber, message }).save();
 
         return { message: "We will be in touch with you shortly.", status: 200 };
     } catch (error) {
