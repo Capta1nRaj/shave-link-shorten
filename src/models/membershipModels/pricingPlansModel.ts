@@ -1,75 +1,83 @@
-//! Client & Admin side model
-//* This model is used to store the pricing plans data
-
 import mongoose from "mongoose";
 
-const PricingPlansSchema = new mongoose.Schema({
-    membershipType: {
-        type: String,
-        required: true
-    },
-    pricing: {
-        monthly: {
-            INR: {
-                type: mongoose.Schema.Types.Mixed,
-                required: true
-            },
-            USD: {
-                type: mongoose.Schema.Types.Mixed,
-                required: true
-            }
+// Schema for the pricing tiers (Basic, Basic Plus, Premium)
+const TierSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
         },
-        annually: {
-            INR: {
-                type: mongoose.Schema.Types.Mixed,
-                required: true
-            },
-            USD: {
-                type: mongoose.Schema.Types.Mixed,
-                required: true
-            }
+        id: {
+            type: String,
+            required: true,
+        },
+        href: {
+            type: String,
+            required: true,
+        },
+        featured: {
+            type: Boolean,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        price: {
+            monthly: { type: Number, required: true },
+            annually: { type: Number, required: true },
+        },
+
+        // Discount pricing
+        discountPrice: {
+            monthly: { type: Number, default: 0 },
+            annually: { type: Number, default: 0 },
+        },
+        isDiscountActive: { type: Boolean, default: false },
+        // The date until which discount is valid
+        discountActiveUntil: { type: Date }, // e.g. "2025-12-31"
+
+        mainFeatures: {
+            type: [String],
+            required: true,
+        },
+    },
+    { _id: false }
+);
+
+// Schema for the features in each section
+const FeatureSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        tiers: {
+            "Free Forever": mongoose.Schema.Types.Mixed,
+            "Startup": mongoose.Schema.Types.Mixed,
+            "Professional": mongoose.Schema.Types.Mixed,
+            "Enterprise": mongoose.Schema.Types.Mixed
         }
     },
-    monthlyLinks: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
-    },
-    trackedClicks: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
-    },
-    analyticsRetention: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
-    },
-    tags: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
-    },
-    linkExpirationByDate: {
-        type: Boolean,
-        required: true
-    },
-    linkExpirationByClicks: {
-        type: Boolean,
-        required: true
-    },
-    customQRBranding: {
-        type: Boolean,
-        required: true
-    },
-    passwordProtectedLinks: {
-        type: Boolean,
-        required: true
-    },
-    discordChatSupport: {
-        type: Boolean,
-        required: true
-    },
-    instantMeetSupport: {
-        type: Boolean,
-        required: true
-    }
-});
+    { _id: false }
+);
 
-export default mongoose.models.PricingPlans || mongoose.model("PricingPlans", PricingPlansSchema);
+// Schema for the sections containing features
+const SectionSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true },
+        features: [FeatureSchema],
+    },
+    { _id: false }
+);
+
+// Main schema for the subscription plans list
+const pricingPlansSchema = new mongoose.Schema(
+    {
+        tiers: [TierSchema],
+        sections: [SectionSchema],
+    },
+    { timestamps: true }
+);
+
+export default mongoose.models.pricingPlans || mongoose.model("pricingPlans", pricingPlansSchema);

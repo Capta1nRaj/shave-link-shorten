@@ -7,6 +7,63 @@ import userAccountsModel from "@/models/userAccountsModel";
 import NodemailSetup from "@/utils/NodemailSetup";
 import { connect2MongoDB } from "connect2mongodb";
 
+// Helper functions to parse feature values
+const parseNumberValue = (value: string | number | boolean): number => {
+    if (typeof value === 'number') return value;
+    if (typeof value === 'boolean') return value ? 1 : 0;
+    // Extract number from strings like "200/mo" or "5000/mo"
+    const match = value.toString().match(/\d+/);
+    return match ? parseInt(match[0]) : 0;
+};
+
+const parseBooleanValue = (value: string | number | boolean): boolean => {
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'number') return value > 0;
+    // Convert string values to boolean
+    const lowerValue = value.toString().toLowerCase();
+    return lowerValue === 'true' || lowerValue === 'yes' || lowerValue === '1' || lowerValue === 'unlimited';
+};
+
+// Define interfaces for the pricing plans model
+interface Tier {
+    name: string;
+    id: string;
+    href: string;
+    featured: boolean;
+    description: string;
+    price: {
+        monthly: number;
+        annually: number;
+    };
+    discountPrice: {
+        monthly: number;
+        annually: number;
+    };
+    isDiscountActive: boolean;
+    discountActiveUntil?: Date;
+    mainFeatures: string[];
+}
+
+interface Feature {
+    name: string;
+    tiers: {
+        "Free Forever": string | number | boolean;
+        "Startup": string | number | boolean;
+        "Professional": string | number | boolean;
+        "Enterprise": string | number | boolean;
+    };
+}
+
+interface Section {
+    name: string;
+    features: Feature[];
+}
+
+interface PricingPlan {
+    tiers: Tier[];
+    sections: Section[];
+}
+
 export async function giving14DaysFreeTrial(userName: string) {
 
     await connect2MongoDB();
@@ -23,7 +80,16 @@ export async function giving14DaysFreeTrial(userName: string) {
     const userData = await userAccountsModel.findOneAndUpdate({ userName }, { userRole: "Startup" }).select('_id userFullName userEmail');
 
     // Find plan details
-    const findPlanDetails = await pricingPlansModel.findOne({ membershipType: "Startup" });
+    const findPlanDetails = await pricingPlansModel.findOne({ "tiers.name": "Startup" }) as PricingPlan;
+
+    // Helper function to get feature value
+    const getFeatureValue = (featureName: string, parseFn: (value: string | number | boolean) => number | boolean) => {
+        const section = findPlanDetails.sections.find((section: Section) =>
+            section.features.some((feature: Feature) => feature.name === featureName)
+        );
+        const feature = section?.features.find((feature: Feature) => feature.name === featureName);
+        return parseFn(feature?.tiers.Startup ?? 0);
+    };
 
     // Add plan details in membership model
     const membershipID = await new premiumMembersModel({
@@ -31,16 +97,16 @@ export async function giving14DaysFreeTrial(userName: string) {
         frequency: "Trial",
         membershipType: "Startup",
         membershipPrice: 0,
-        monthlyLinks: findPlanDetails.monthlyLinks,
-        trackedClicks: findPlanDetails.trackedClicks,
-        analyticsRetention: findPlanDetails.analyticsRetention,
-        tags: findPlanDetails.tags,
-        linkExpirationByDate: findPlanDetails.linkExpirationByDate,
-        linkExpirationByClicks: findPlanDetails.linkExpirationByClicks,
-        customQRBranding: findPlanDetails.customQRBranding,
-        passwordProtectedLinks: findPlanDetails.passwordProtectedLinks,
-        discordChatSupport: findPlanDetails.discordChatSupport,
-        instantMeetSupport: findPlanDetails.instantMeetSupport,
+        monthlyLinks: getFeatureValue("Monthly Links", parseNumberValue),
+        trackedClicks: getFeatureValue("Tracked Clicks", parseNumberValue),
+        analyticsRetention: getFeatureValue("Analytics Retention", parseNumberValue),
+        tags: getFeatureValue("Tags", parseNumberValue),
+        linkExpirationByDate: getFeatureValue("Link Expiration by Date", parseNumberValue),
+        linkExpirationByClicks: getFeatureValue("Link Expiration by Clicks", parseNumberValue),
+        customQRBranding: getFeatureValue("Custom QR Branding", parseBooleanValue),
+        passwordProtectedLinks: getFeatureValue("Password Protected Links", parseBooleanValue),
+        discordChatSupport: getFeatureValue("Discord Chat Support", parseBooleanValue),
+        instantMeetSupport: getFeatureValue("Instant Meet Support", parseBooleanValue),
         expiryDate: expiryDateIST,
     }).save();
 
