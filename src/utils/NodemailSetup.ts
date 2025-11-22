@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 
 //! Nodemailer auth settings
 const auth = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtpout.secureserver.net",
     secure: true,
     port: 465,
     auth: {
