@@ -29,7 +29,7 @@
     "jsdom": "^25.0.0",
     "lucide-react": "^0.441.0",
     "mongoose": "^8.6.3",
-    "next": "14.2.11",
+    "next": "14.2.35",
     "nodemailer": "^6.9.15",
     "react": "^18",
     "react-dom": "^18",
